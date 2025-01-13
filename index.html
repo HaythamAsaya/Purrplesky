@@ -9,7 +9,7 @@
 
 =========================
 Purrple by Haytham Asaya
-V 4.3
+V 4.4
 =========================
 
 -->
@@ -121,13 +121,13 @@ V 4.3
 <!-- html -->
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Purrple is looking for a human friend. Help Purrple thrive and grow on our blue planet.</li><li>The game will save your progress automatically, come back at any time but don't be long!</li><li>Purrple's level indicator is on the top left corner of the screen.</li><li>Purrple's energy indicator has a thunder icon. Generate power and earn points by using the "W" command or by clicking on Purrple. Watch out for draining your resources when generating power!</li></ul><i>Last but not least, you can customize the layout with your favorite colors. Good Luck!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Purrple Evolutions</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">Lv.00 - Purrple Baby<br>Lv.20 - Purrple Puff<br>Lv.50 - Purrple Ruff<br>Lv.70 - Purrple Junior<br>Lv.80 - Purrple Super</div></details>Developed by: <br> <a href="mailto:haytham.asaya@gmail.com"> Haytham.Asaya@gmail.com</a>
-        <p style="font-size:X-small;">V 4.3</p><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
+    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();generateAndApplyRandomColors();"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Purrple is looking for a human friend. Help Purrple thrive and grow on our blue planet.</li><li>The game will save your progress automatically, come back at any time but don't be long!</li><li>Purrple's level indicator is on the top left corner of the screen.</li><li>Purrple's energy indicator has a thunder icon. Generate power and earn points by using the "W" command or by clicking on Purrple. Watch out for draining your resources when generating power!</li></ul><i>Last but not least, you can customize the layout with your favorite colors. Good Luck!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Purrple Evolutions</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">Lv.00 - Purrple Baby<br>Lv.20 - Purrple Puff<br>Lv.50 - Purrple Ruff<br>Lv.70 - Purrple Junior<br>Lv.80 - Purrple Super</div></details>Developed by: <br> <a href="mailto:haytham.asaya@gmail.com"> Haytham.Asaya@gmail.com</a>
+        <p style="font-size:X-small;">V 4.4</p><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
 	<line class="st0" x1="0" y1="20.5" x2="61" y2="20.5"/>
 	<line class="st0" x1="0" y1="38.5" x2="61" y2="38.5"/></g></svg></div></summary></details>
-    <div class="profile"><p class="username">Username</p><div class="lv-charge"><p style="margin:0 0 -2px 0; position: relative">Lv. <span class="level">0</span><span class="lv-plus">➕</span></p><span class="level-feed" style="font-size: smaller"></span></div></div><div class="logo"><div style="cursor:pointer" onclick="localStorage['bg_color'] = 'pink';localStorage['color'] = '#311238';window.location.reload(true);"><div class="cloud-one"><svg viewBox="0 0 129.7 57.8">
+    <div class="profile"><p class="username">Username</p><div class="lv-charge"><p style="margin:0 0 -2px 0; position: relative">Lv. <span class="level">0</span><span class="lv-plus">➕</span></p><span class="level-feed" style="font-size: smaller"></span></div></div><div class="logo"><div style="cursor:pointer" onclick="generateAndApplyRandomColors()"><div class="cloud-one"><svg viewBox="0 0 129.7 57.8">
     <style type="text/css">.st{fill:#FFFFFF;}</style><path class="st" d="M129.7,57.8c0-1.9-0.1-3.8-0.1-5.7c0-4.5-2-8.1-5.2-11.1c-2.7-2.5-5.7-4.2-9.4-4.4c-3.3-0.2-6.6-0.3-9.9-0.4
         c-1.6-0.1-3.3,0-5,0c0-1.3,0-2.3,0-3.4c-0.1-2.8-0.3-5.5-1.6-8.1c-1.8-3.7-4.3-6.5-8.6-7.1c-2.6-0.4-5.1-0.1-7.6,0.7 c-2.5,0.8-4.4,2.4-6.6,3.8c-0.3,0.2-0.6,0.4-1,0.6c-0.3-0.8-0.6-1.4-0.8-2c-1.3-3.3-2.6-6.6-4.8-9.5c-8-10.7-21.8-14.2-33.9-8.7 c-10.3,4.7-16.8,15.6-16,26.3c0.2,2.4,0.5,4.7,0.8,7.2c-1.9,0.2-3.7,0.3-5.5,0.7c-7,1.4-11.8,5.5-13.8,12.4C0,52-0.1,54.9,0.1,57.8 H129.7z"/></svg></div>
         <div class="cloud-two"><svg viewBox="0 0 129.7 57.8"><style type="text/css"></style><path class="st" d="M129.7,57.8c0-1.9-0.1-3.8-0.1-5.7c0-4.5-2-8.1-5.2-11.1c-2.7-2.5-5.7-4.2-9.4-4.4c-3.3-0.2-6.6-0.3-9.9-0.4 c-1.6-0.1-3.3,0-5,0c0-1.3,0-2.3,0-3.4c-0.1-2.8-0.3-5.5-1.6-8.1c-1.8-3.7-4.3-6.5-8.6-7.1c-2.6-0.4-5.1-0.1-7.6,0.7c-2.5,0.8-4.4,2.4-6.6,3.8c-0.3,0.2-0.6,0.4-1,0.6c-0.3-0.8-0.6-1.4-0.8-2c-1.3-3.3-2.6-6.6-4.8-9.5c-8-10.7-21.8-14.2-33.9-8.7 c-10.3,4.7-16.8,15.6-16,26.3c0.2,2.4,0.5,4.7,0.8,7.2c-1.9,0.2-3.7,0.3-5.5,0.7c-7,1.4-11.8,5.5-13.8,12.4C0,52-0.1,54.9,0.1,57.8 H129.7z"/></svg></div></div></div>
@@ -213,6 +213,28 @@ V 4.3
 
 
 function scroller(){pconsole.scrollTo(0, pconsole.scrollHeight);}
+
+
+// generate random colors for layout
+function generateAndApplyRandomColors() {
+  const randomColor = () => `#${Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0')}`;
+  const luminance = (color) => {
+    const [r, g, b] = color.match(/\w\w/g).map(c => parseInt(c, 16) / 255).map(c => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  };
+  let bg, fg;
+  do {
+    bg = randomColor();
+    fg = randomColor();
+  } while ((Math.max(luminance(bg), luminance(fg)) + 0.05) / (Math.min(luminance(bg), luminance(fg)) + 0.05) < 4.5);
+  
+  // Save colors to localStorage
+  localStorage['bg_color'] = bg;
+  localStorage['color'] = fg;
+
+  // Reload the page to apply colors
+  window.location.reload(true);
+}
 
 
     //touch control
