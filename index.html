@@ -255,19 +255,19 @@ function generateAndApplyRandomColors() {
             if(localStorage['power'] >= 2){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar1'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 2;}
-        pconsole.innerHTML += '<br>Nom Nom Nom<br>';;localStorage['bar4'] = Number(localStorage['bar4']) + 2000000} 
+        pconsole.innerHTML += '<br>Nom Nom Nom<br>';} 
         else {pconsole.innerHTML += '<br>Not enough power. You need 2 charges to give Purrple food. Generate power by using the "W" command or by clicking on Purrple.<br>';}}}
           function water(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar2'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 1;}
-        pconsole.innerHTML += '<br>Slurp Slurp<br>';;localStorage['bar4'] = Number(localStorage['bar4']) + 1500000}
+        pconsole.innerHTML += '<br>Slurp Slurp<br>';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to give Purrple water. Generate power by using the "W" command or by clicking on Purrple.<br>';}}}
           function hygiene(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar3'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 1;}
-        pconsole.innerHTML += '<br>Lovely!<br>';localStorage['bar4'] = Number(localStorage['bar4']) + 1000000}
+        pconsole.innerHTML += '<br>Lovely!<br>';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to clean Purrple. Generate power by using the "W" command or by clicking on Purrple.<br>';}}}
           function mood(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
@@ -280,7 +280,7 @@ function generateAndApplyRandomColors() {
             if(localStorage['power'] >= 30){
               if(round === 1){
               emojiAction();
-          localStorage['score'] = Number(localStorage['score']) + 1000;;localStorage['bar4'] = Number(localStorage['bar4']) + 3000000;
+          localStorage['score'] = Number(localStorage['score']) + 1000;
           localStorage['power'] = localStorage['power'] - 30;
           bamglow();plusflash();pconsole.innerHTML += '<br>Leveled up!<br>'} 
           else{localStorage['power'] = localStorage['power'] - 30;pconsole.innerHTML += '<br>Missed!<br>';localStorage['bar4'] = Number(localStorage['bar4']) - 6000000}}
