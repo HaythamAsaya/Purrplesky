@@ -243,9 +243,9 @@ function generateAndApplyRandomColors() {
       function power(){ if(!localStorage['gameover']){
           localStorage['power'] = parseFloat(Number(localStorage['power']) + 0.5).toFixed(1);
           localStorage['bar1'] = Number(localStorage['bar1']) - 500000;
-          localStorage['bar2'] = Number(localStorage['bar2']) - 790000;
-          localStorage['bar3'] = Number(localStorage['bar3']) - 90000;
-          localStorage['bar4'] = Number(localStorage['bar4']) - 550000;
+          localStorage['bar2'] = Number(localStorage['bar2']) - 800000;
+          localStorage['bar3'] = Number(localStorage['bar3']) - 100000;
+          localStorage['bar4'] = Number(localStorage['bar4']) - 600000;
           let magicAnswers = ["Yes!","Make power!","Better not stop","Cash","Almost","Don’t give up","It is certain","Working hard","Most likely","More!","GOOD","Outlook good","Power!","Try again","Signs point to yes","Very much","Without a doubt","Click! Click!","Yes, definitely","You may rely on it","Awesome!","One more time","Better keep it up","Can\'t stop","Focus and try again","Yeah","Absolutely","Of course","Wild!","My sources say yes","CLICK!!!","Let\'s go!","Click! Click! Click!","No stopping us","By all means","I am happy","Definitely","Yeah!","Hell, yes!","Beautiful!"];let randAnswer = Math.floor( Math.random() *40)
       pconsole.innerHTML += '<br>- ' + magicAnswers[randAnswer] + '<br>';pluspower();localStorage['score']++;plusflash();
       if(pconsole.innerHTML.length > 3000){
@@ -283,7 +283,7 @@ function generateAndApplyRandomColors() {
           localStorage['score'] = Number(localStorage['score']) + 1000;
           localStorage['power'] = localStorage['power'] - 30;
           bamglow();plusflash();pconsole.innerHTML += '<br>Leveled up!<br>'} 
-          else{localStorage['power'] = localStorage['power'] - 30;pconsole.innerHTML += '<br>Missed!<br>'}}
+          else{localStorage['power'] = localStorage['power'] - 30;pconsole.innerHTML += '<br>Missed!<br>';localStorage['bar4'] = Number(localStorage['bar4']) - 5000000;}}
         else {pconsole.innerHTML += '<br>Not enough power. You need 30 charges to try levelling up. Generate power by using the "W" command or by clicking on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Please try again! Reset Purrple Sky from the main menu.<br>';}else {pconsole.innerHTML += '<br>Purrple Super is already maxed out!<br>';}}
 
 
