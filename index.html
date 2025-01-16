@@ -287,11 +287,11 @@ function generateAndApplyRandomColors() {
 
 
       cat.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
-      document.querySelector('.food-box').addEventListener("click", ()=>{if(localStorage['username']&&!localStorage['gameover']){food();scroller()}}) 
-      document.querySelector('.water-box').addEventListener("click", ()=>{if(localStorage['username']&&!localStorage['gameover']){water();scroller()}}) 
-      document.querySelector('.hygiene-box').addEventListener("click", ()=>{if(localStorage['username']&&!localStorage['gameover']){hygiene();scroller()}}) 
-      document.querySelector('.mood-box').addEventListener("click", ()=>{if(localStorage['username']&&!localStorage['gameover']){mood();scroller()}}) 
-      document.querySelector('.profile').addEventListener("click", ()=>{if(localStorage['username']&&!localStorage['gameover']){cash();scroller()}})
+      document.querySelector('.food-box').addEventListener("click", ()=>{if(localStorage['username']){food();scroller()}}) 
+      document.querySelector('.water-box').addEventListener("click", ()=>{if(localStorage['username']){water();scroller()}}) 
+      document.querySelector('.hygiene-box').addEventListener("click", ()=>{if(localStorage['username']){hygiene();scroller()}}) 
+      document.querySelector('.mood-box').addEventListener("click", ()=>{if(localStorage['username']){mood();scroller()}}) 
+      document.querySelector('.profile').addEventListener("click", ()=>{if(localStorage['username']){cash();scroller()}})
 
 // localstorage
 if(!localStorage['username']) {
