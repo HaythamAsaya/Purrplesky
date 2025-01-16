@@ -239,7 +239,8 @@ function generateAndApplyRandomColors() {
 
     //touch control
 
-    function power(){
+    
+      function power(){ if(level.innerHTML < 100 &&!localStorage['gameover']){
           localStorage['power'] = parseFloat(Number(localStorage['power']) + 0.5).toFixed(1);
           localStorage['bar1'] = Number(localStorage['bar1']) - 500000;
           localStorage['bar2'] = Number(localStorage['bar2']) - 790000;
@@ -248,33 +249,33 @@ function generateAndApplyRandomColors() {
           let magicAnswers = ["Yes!","Make power!","Better not stop","Cash","Almost","Don’t give up","It is certain","Working hard","Most likely","More!","GOOD","Outlook good","Power!","Try again","Signs point to yes","Very much","Without a doubt","Click! Click!","Yes, definitely","You may rely on it","Awesome!","One more time","Better keep it up","Can\'t stop","Focus and try again","Yeah","Absolutely","Of course","Wild!","My sources say yes","CLICK!!!","Let\'s go!","Click! Click! Click!","No stopping us","By all means","I am happy","Definitely","Yeah!","Hell, yes!","Beautiful!"];let randAnswer = Math.floor( Math.random() *40)
       pconsole.innerHTML += '<br>- ' + magicAnswers[randAnswer] + '<br>';pluspower();localStorage['score']++;plusflash();
       if(pconsole.innerHTML.length > 3000){
-          pconsole.innerHTML= '⚡Shazam!';emojiAction();bamglow();localStorage['score']++;plusflash();}}
+          pconsole.innerHTML= '⚡Shazam!';emojiAction();bamglow();localStorage['score']++;plusflash();}}}
 
-          function food(){
+          function food(){if(level.innerHTML < 100 &&!localStorage['gameover']){
             if(localStorage['power'] >= 2){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar1'] = new Date().getTime();
-          if(!localStorage['gameover']){localStorage['power'] = localStorage['power'] - 2;}
+          if(level.innerHTML <= 100){localStorage['power'] = localStorage['power'] - 2;}
         pconsole.innerHTML += '<br>Nom Nom Nom<br>';} 
-        else {pconsole.innerHTML += '<br>Not enough power. You need 2 charges to give Purrple food. Generate power by using the "W" command or by clicking on Purrple.<br>';}}
-          function water(){
+        else {pconsole.innerHTML += '<br>Not enough power. You need 2 charges to give Purrple food. Generate power by using the "W" command or by clicking on Purrple.<br>';}}}
+          function water(){if(level.innerHTML < 100 &&!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar2'] = new Date().getTime();
-          if(!localStorage['gameover']){localStorage['power'] = localStorage['power'] - 1;}
+          if(level.innerHTML <= 100){localStorage['power'] = localStorage['power'] - 1;}
         pconsole.innerHTML += '<br>Slurp Slurp<br>';}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to give Purrple water. Generate power by using the "W" command or by clicking on Purrple.<br>';}}
-          function hygiene(){
+        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to give Purrple water. Generate power by using the "W" command or by clicking on Purrple.<br>';}}}
+          function hygiene(){if(level.innerHTML < 100 &&!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar3'] = new Date().getTime();
-          if(!localStorage['gameover']){localStorage['power'] = localStorage['power'] - 1;}
+          if(level.innerHTML <= 100){localStorage['power'] = localStorage['power'] - 1;}
         pconsole.innerHTML += '<br>Lovely!<br>';}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to clean Purrple. Generate power by using the "W" command or by clicking on Purrple.<br>';}}
-          function mood(){
+        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to clean Purrple. Generate power by using the "W" command or by clicking on Purrple.<br>';}}}
+          function mood(){if(level.innerHTML < 100 &&!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar4'] = new Date().getTime();
-          if(!localStorage['gameover']){localStorage['power'] = localStorage['power'] - 1;}
+          if(level.innerHTML <= 100){localStorage['power'] = localStorage['power'] - 1;}
         pconsole.innerHTML += '<br>Purrr<br>';}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to play with Purrple. Generate power by using the "W" command or by clicking on Purrple.<br>';}}
-          function cash(){if(!localStorage['gameover']){
+        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to play with Purrple. Generate power by using the "W" command or by clicking on Purrple.<br>';}}}
+          function cash(){if(level.innerHTML < 100 &&!localStorage['gameover']){if(level.innerHTML <= 100){
             let round = Math.floor(Math.random()*2)
             if(localStorage['power'] >= 30){
               if(round === 1){
@@ -283,7 +284,7 @@ function generateAndApplyRandomColors() {
           localStorage['power'] = localStorage['power'] - 30;
           bamglow();plusflash();pconsole.innerHTML += '<br>Leveled up!<br>'} 
           else{localStorage['power'] = localStorage['power'] - 30;pconsole.innerHTML += '<br>Missed!<br>'}}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 30 charges to try levelling up. Generate power by using the "W" command or by clicking on Purrple.<br>';}}else {pconsole.innerHTML += '<br>Purrple Super is already maxed out!<br>';}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 30 charges to try levelling up. Generate power by using the "W" command or by clicking on Purrple.<br>';}}else {pconsole.innerHTML += '<br>Purrple Super is already maxed out!<br>';}}}
 
 
       cat.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
@@ -292,7 +293,7 @@ function generateAndApplyRandomColors() {
       document.querySelector('.hygiene-box').addEventListener("click", ()=>{if(localStorage['username']){hygiene();scroller()}}) 
       document.querySelector('.mood-box').addEventListener("click", ()=>{if(localStorage['username']){mood();scroller()}}) 
       document.querySelector('.profile').addEventListener("click", ()=>{if(localStorage['username']){cash();scroller()}})
-
+              
 // localstorage
 if(!localStorage['username']) {
             pconsole.innerHTML += 'Hello! Welcome to Purrple Sky 🤖 I am your console at your command.';input.value += "username: ";
