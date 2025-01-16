@@ -284,7 +284,7 @@ function generateAndApplyRandomColors() {
           localStorage['power'] = localStorage['power'] - 30;
           bamglow();plusflash();pconsole.innerHTML += '<br>Leveled up!<br>'} 
           else{localStorage['power'] = localStorage['power'] - 30;pconsole.innerHTML += '<br>Missed!<br>'}}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 30 charges to try levelling up. Generate power by using the "W" command or by clicking on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Dead!<br>';}else {pconsole.innerHTML += '<br>Purrple Super is already maxed out!<br>';}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 30 charges to try levelling up. Generate power by using the "W" command or by clicking on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Please try again! Reset Purrple Sky from the main menu.<br>';}else {pconsole.innerHTML += '<br>Purrple Super is already maxed out!<br>';}}
 
 
       cat.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
@@ -589,7 +589,7 @@ const emojiSad = ()=>{
         '- <i>USERNAME:</i><br>Use this command followed by your name to change your username.<br>'+
         '- <i>BACKGROUND:</i><br>Use this command followed by a color name or value to change the background color. Background color change costs 1 charge.<br>' + 
         '- <i>COLOR:</i><br>Use this command followed by a color name or value to change the foreground color. Color change costs 1 charge.<br>'+
-        '<br>P.s. If you experiment with colors and something goes wrong, try click on the clouds in the Purrple Sky on top of the page.<br><br>Read more on how to play in the menu on the top right corner.<br><br>Scroll up in the console if you can\'t see the full list.<br>';
+        '<br>P.s. If you experiment with colors and something goes wrong, try click on the clouds in the Purrple Sky on top of the page.<br><br>Read more on how to play in the main menu.<br><br>Scroll up in the console if you can\'t see the full list.<br>';
       } else if (regex_username.test(input.value.trim())){
         let new_username = input.value.replace(regex_username, '');
         if(new_username.trim().length > 10){
