@@ -274,7 +274,7 @@ function generateAndApplyRandomColors() {
           if(!localStorage['gameover']){localStorage['power'] = localStorage['power'] - 1;}
         pconsole.innerHTML += '<br>Purrr<br>';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to play with Purrple. Generate power by using the "W" command or by clicking on Purrple.<br>';}}
-          function cash(){
+          function cash(){if(!localStorage['gameover']){
             let round = Math.floor(Math.random()*2)
             if(localStorage['power'] >= 30){
               if(round === 1){
@@ -283,7 +283,7 @@ function generateAndApplyRandomColors() {
           localStorage['power'] = localStorage['power'] - 30;
           bamglow();plusflash();pconsole.innerHTML += '<br>Leveled up!<br>'} 
           else{localStorage['power'] = localStorage['power'] - 30;pconsole.innerHTML += '<br>Missed!<br>'}}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 30 charges to try levelling up. Generate power by using the "W" command or by clicking on Purrple.<br>';}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 30 charges to try levelling up. Generate power by using the "W" command or by clicking on Purrple.<br>';}}else {pconsole.innerHTML += '<br>Purrple Super is already maxed out!<br>';}}
 
 
       cat.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
@@ -334,7 +334,7 @@ if(!localStorage['username']) {
         var time = (new Date().getTime() - localStorage.getItem('start')) / 20000000;
         localStorage['level'] = time;
         level.innerHTML = Math.round(Number(localStorage['level']) + Number(localStorage['score'] / 1000));
-        let number = parseFloat(Number(localStorage['level']) + Number(localStorage['score']) / 1000).toFixed(10);
+        let number = parseFloat(Number(localStorage['level']) + Number(localStorage['score']) / 1000).toFixed(8);
         let getDecimalVal = number.toString().indexOf(".");
         let decimalPart = number.toString().substring(getDecimalVal+1);
         levelFeed.innerHTML = decimalPart;}}
@@ -343,9 +343,10 @@ if(!localStorage['username']) {
     const engine = setInterval(leveler
     ,1000)
 
-        function leveler(){
-          if(level.innerHTML >= 100){
-pconsole.innerHTML += '<br><br>WELL DONE, '+ localStorage.getItem('username') +'! 💫<br>Purrple is strong and is out there exploring the universe!';
+    function leveler(){
+
+    if(level.innerHTML >= 100){
+      pconsole.innerHTML += '<br><br>WELL DONE, '+ localStorage.getItem('username') +'! 💫<br>Purrple is strong and is out there exploring the universe!';
 scroller();
 bamglow();
 clearInterval(engine);
@@ -357,10 +358,11 @@ bar2.style.width = '100%';
 bar3.style.width = '100%';
 bar4.style.width = '100%';
           } 
+
           if(localStorage['username']) {
 cat.style.opacity = 1;
-            if (level.innerHTML < 100){
-        wallet.innerHTML = parseFloat(Number(localStorage['power'])).toFixed(1);
+if (level.innerHTML < 100){
+  wallet.innerHTML = parseFloat(Number(localStorage['power'])).toFixed(1);
         var bar1_minus = (new Date().getTime() - localStorage.getItem('bar1'));
         let critical;  if(bar1_percentage <= 20 || bar2_percentage <= 20 || bar3_percentage <= 20 || bar4_percentage <= 20 ){critical=200000}else{critical=0};
         var bar1_percentage = (100 - (bar1_minus / (1200000 + critical)));
