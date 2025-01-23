@@ -9,7 +9,7 @@
 
 =========================
 Purrple by Haytham Asaya
-V 4.7
+V 4.8
 =========================
 
 -->
@@ -121,8 +121,8 @@ V 4.7
 <!-- html -->
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Purrple is looking for a human friend. Help Purrple thrive and grow on our blue planet.</li><li>The game will save your progress automatically, come back at any time but don't be long!</li><li>Purrple's level indicator is on the top left corner of the screen.</li><li>Purrple's energy indicator has a thunder icon. Generate power and earn points by using the "W" command or by clicking on Purrple. Watch out for draining your resources when generating power!</li></ul><i>Last but not least, you can customize the layout with your favorite colors. Good Luck!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Purrple Evolutions</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">Lv.00 - Purrple Baby<br>Lv.20 - Purrple Puff<br>Lv.50 - Purrple Ruff<br>Lv.70 - Purrple Junior<br>Lv.80 - Purrple Super</div></details>Developed by: <br> <a href="mailto:haytham.asaya@gmail.com"> Haytham.Asaya@gmail.com</a>
-        <p style="font-size:X-small;">V 4.7</p><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
+    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Purrple is looking for a human friend. Help Purrple thrive and grow on our blue planet.</li><li>The game will save your progress automatically, come back at any time but don't be long!</li><li>Purrple's level indicator is on the top left corner of the screen.</li><li>Purrple's energy indicator has a thunder icon. Generate power and earn points by using the "W" command or by tapping on Purrple. Watch out for draining your resources when generating power!</li></ul><i>Last but not least, you can customize the layout with your favorite colors. Good Luck!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Purrple Evolutions</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">Lv.00 - Purrple Baby<br>Lv.20 - Purrple Puff<br>Lv.50 - Purrple Ruff<br>Lv.70 - Purrple Junior<br>Lv.80 - Purrple Super</div></details>Developed by: <br> <a href="mailto:haytham.asaya@gmail.com"> Haytham.Asaya@gmail.com</a>
+        <p style="font-size:X-small;">V 4.8</p><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
 	<line class="st0" x1="0" y1="20.5" x2="61" y2="20.5"/>
@@ -246,7 +246,7 @@ function generateAndApplyRandomColors() {
           localStorage['bar2'] = Number(localStorage['bar2']) - 800000;
           localStorage['bar3'] = Number(localStorage['bar3']) - 100000;
           localStorage['bar4'] = Number(localStorage['bar4']) - 600000;
-          let magicAnswers = ["Yes!","Make power!","Better not stop","Cash","Almost","Don’t give up","It is certain","Working hard","Most likely","More!","GOOD","Outlook good","Power!","Try again","Signs point to yes","Very much","Without a doubt","Click! Click!","Yes, definitely","You may rely on it","Awesome!","One more time","Better keep it up","Can\'t stop","Focus and try again","Yeah","Absolutely","Of course","Wild!","My sources say yes","CLICK!!!","Let\'s go!","Click! Click! Click!","No stopping us","By all means","I am happy","Definitely","Yeah!","Hell, yes!","Beautiful!"];let randAnswer = Math.floor( Math.random() *40)
+          let magicAnswers = ["Yes!","Make power!","Better not stop","Cash","Almost","Don’t give up","It is certain","Working hard","Most likely","More!","GOOD","Outlook good","Power!","Try again","Signs point to yes","Very much","Without a doubt","Click! Click!", "Tap! Tap!","Yes, definitely","You may rely on it","Awesome!","One more time","Better keep it up","Can\'t stop","Focus and try again","Yeah","Absolutely","Of course","Wild!","My sources say yes","TAP!!!","Let\'s go!","Click! Click! Click!", "Tap! Tap! Tap!","No stopping us","By all means","I am happy","Definitely","Yeah!","Hell, yes!","Beautiful!"];let randAnswer = Math.floor( Math.random() *40)
       pconsole.innerHTML += '<br>- ' + magicAnswers[randAnswer] + '<br>';pluspower();localStorage['score']++;plusflash();
       if(pconsole.innerHTML.length > 3000){
           pconsole.innerHTML= '⚡Shazam!';emojiAction();bamglow();localStorage['score']++;plusflash();}}}
@@ -256,25 +256,25 @@ function generateAndApplyRandomColors() {
           localStorage['bar1'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 2;}
         pconsole.innerHTML += '<br>Nom Nom Nom<br>';} 
-        else {pconsole.innerHTML += '<br>Not enough power. You need 2 charges to give Purrple food. Generate power by using the "W" command or by clicking on Purrple.<br>';}}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 2 charges to give Purrple food. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function water(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar2'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 1;}
         pconsole.innerHTML += '<br>Slurp Slurp<br>';}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to give Purrple water. Generate power by using the "W" command or by clicking on Purrple.<br>';}}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to give Purrple water. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function hygiene(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar3'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 1;}
         pconsole.innerHTML += '<br>Lovely!<br>';}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to clean Purrple. Generate power by using the "W" command or by clicking on Purrple.<br>';}}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to clean Purrple. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function mood(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar4'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 1;}
         pconsole.innerHTML += '<br>Purrr<br>';}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to play with Purrple. Generate power by using the "W" command or by clicking on Purrple.<br>';}}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to play with Purrple. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function cash(){if(!localStorage['gameover']&&!localStorage['winner']){
             let round = Math.floor(Math.random()*2)
             if(localStorage['power'] >= 30){
@@ -284,7 +284,7 @@ function generateAndApplyRandomColors() {
           localStorage['power'] = localStorage['power'] - 30;
           bamglow();plusflash();pconsole.innerHTML += '<br>Leveled up!<br>'} 
           else{localStorage['power'] = localStorage['power'] - 30;pconsole.innerHTML += '<br>Missed!<br>';localStorage['bar4'] = Number(localStorage['bar4']) - 6000000}}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 30 charges to try levelling up. Generate power by using the "W" command or by clicking on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Please try again! Reset Purrple Sky from the main menu.<br>';}else {pconsole.innerHTML += '<br>Purrple Super is already maxed out!<br>';}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 30 charges to try levelling up. Generate power by using the "W" command or by tapping on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Please try again! Reset Purrple Sky from the main menu.<br>';}else {pconsole.innerHTML += '<br>Purrple Super is already maxed out!<br>';}}
 
 
       cat.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
@@ -579,17 +579,17 @@ const emojiSad = ()=>{
       }else if (regex_mood.test(input.value.trim()) && localStorage['username']){
         mood()
       }else if (regex_help.test(input.value.trim()) && localStorage['username']){
-        pconsole.innerHTML += '<br>- <i>W</i><br>Use this command to generate POWER! Or click on Purrple.<br>' + 
-        '- <i>FOOD</i><br>Use this command to feed Purrple, or click on the food bar. Food costs 2 charges.<br>'+
-        '- <i>WATER</i><br>Use this command to give water to Purrple, or click on the water bar. Water costs 1 charge.<br>'+
-        '- <i>CLEAN</i><br>Use this command to clean Purrple, or click on the hygiene bar. Cleaning costs 1 charge.<br>'+
-        '- <i>PLAY</i><br>Use this command to play with Purrple, or click on the mood bar. Playing costs 1 charge.<br>'+
-        '- <i>CASH</i><br>Use this command to flip a level up coin, it is a hit or miss, or click on Lv. on the top left corner of the screen. Cashing costs 30 charges.<br>'+
+        pconsole.innerHTML += '<br>- <i>W</i><br>Use this command to generate POWER! Or tap on Purrple.<br>' + 
+        '- <i>FOOD</i><br>Use this command to feed Purrple, or tap on the food bar. Food costs 2 charges.<br>'+
+        '- <i>WATER</i><br>Use this command to give water to Purrple, or tap on the water bar. Water costs 1 charge.<br>'+
+        '- <i>CLEAN</i><br>Use this command to clean Purrple, or tap on the hygiene bar. Cleaning costs 1 charge.<br>'+
+        '- <i>PLAY</i><br>Use this command to play with Purrple, or tap on the mood bar. Playing costs 1 charge.<br>'+
+        '- <i>CASH</i><br>Use this command to flip a level up coin, it is a hit or miss, or tap on Lv. on the top left corner of the screen. Cashing costs 30 charges.<br>'+
         '- <i>CLEAR</i><br>Use this command to clear the console.<br>' +
         '- <i>USERNAME:</i><br>Use this command followed by your name to change your username.<br>'+
         '- <i>BACKGROUND:</i><br>Use this command followed by a color name or value to change the background color. Background color change costs 1 charge.<br>' + 
         '- <i>COLOR:</i><br>Use this command followed by a color name or value to change the foreground color. Color change costs 1 charge.<br>'+
-        '<br>P.s. If you experiment with colors and something goes wrong, try click on the clouds in the Purrple Sky on top of the page.<br><br>Read more on how to play in the main menu.<br><br>Scroll up in the console if you can\'t see the full list.<br>';
+        '<br>P.s. If you experiment with colors and something goes wrong, try tapping on the clouds in the Purrple Sky on top of the page.<br><br>Read more on how to play in the main menu.<br><br>Scroll up in the console if you can\'t see the full list.<br>';
       } else if (regex_username.test(input.value.trim())){
         let new_username = input.value.replace(regex_username, '');
         if(new_username.trim().length > 10){
