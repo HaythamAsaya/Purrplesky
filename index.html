@@ -369,6 +369,8 @@ if(!localStorage['username']) {
 scroller();
 bamglow();
 clearInterval(engine);
+const glowinfin = setInterval(bamglow
+    ,1000)
 localStorage.setItem('winner', 1);
 // input.style.display = 'none'; enter.style.display = 'none';
 wallet.innerHTML = "SUPER";
