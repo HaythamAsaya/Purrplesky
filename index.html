@@ -235,20 +235,27 @@ function scroller(){pconsole.scrollTo(0, pconsole.scrollHeight);}
 
 // generate random colors for layout
 function generateAndApplyRandomColors() {
-  const randomColor = () => `#${Math.floor(Math.random() * 0xffffff).toString(16).padStart(6, '0')}`;
+  const randomColor = () => {
+    const c = () => Math.floor(Math.random() * 180 + 30).toString(16).padStart(2, '0');
+    return `#${c()}${c()}${c()}`;
+  };
+
   const luminance = (color) => {
-    const [r, g, b] = color.match(/\w\w/g).map(c => parseInt(c, 16) / 255).map(c => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+    const [r, g, b] = color.match(/\w\w/g)
+      .map(c => parseInt(c, 16) / 255)
+      .map(c => c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   };
+
   let bg, fg;
   do {
     bg = randomColor();
     fg = randomColor();
   } while ((Math.max(luminance(bg), luminance(fg)) + 0.05) / (Math.min(luminance(bg), luminance(fg)) + 0.05) < 4.5);
-  
-  // Save colors to localStorage
+
   localStorage['bg_color'] = bg;
   localStorage['color'] = fg;
+
 
   // Reload the page to apply colors
   window.location.reload(true);
