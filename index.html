@@ -264,6 +264,9 @@ function generateAndApplyRandomColors() {
 
     //touch control
 
+    let magicAnswers = ["Yes!","Make power!","Better not stop","Cash","Almost","Don’t give up","It is certain","Working hard","Most likely","More!","GOOD","Outlook good","Power!","Try again","Signs point to yes","Very much","Without a doubt","Click! Click!", "Tap! Tap!","Yes, definitely","You may rely on it","Awesome!","One more time","Better keep it up","Can\'t stop","Focus and try again","Yeah","Absolutely","Of course","Wild!","My sources say yes","TAP!!!","Let\'s go!","Click! Click! Click!", "Tap! Tap! Tap!","No stopping us","By all means","I am happy","Definitely","Yeah!","Hell, yes!","Beautiful!","Nah!","Go home!","Stop it","Watch out","Maybe","Let go","It is tricky","Working too hard","Most likely, not","More?","MEH","Outlook not so good","Power!!!","Try again later","Signs point to no","Very much not","No way","Click", "Tap","Definitely not","You may not rely on it","Amazing!","One last time","Better take it easy","Can\'t stop now","Let\'s go","No","Absolutely not","Of course!","Splendid!","My sources say no","YEY!!!","Let\'s take it easy!","Clicking?", "Tapping?","No stopping us now","Beck yeah","I am happy for you","Definitely not","No!","Hell, yeah!","Magnificent!"];
+    
+    
     
       function power(){ if(!localStorage['gameover']){
           localStorage['power'] = parseFloat(Number(localStorage['power']) + 0.5).toFixed(1);
@@ -271,8 +274,8 @@ function generateAndApplyRandomColors() {
           localStorage['bar2'] = Number(localStorage['bar2']) - 800000;
           localStorage['bar3'] = Number(localStorage['bar3']) - 100000;
           localStorage['bar4'] = Number(localStorage['bar4']) - 600000;
-          let magicAnswers = ["Yes!","Make power!","Better not stop","Cash","Almost","Don’t give up","It is certain","Working hard","Most likely","More!","GOOD","Outlook good","Power!","Try again","Signs point to yes","Very much","Without a doubt","Click! Click!", "Tap! Tap!","Yes, definitely","You may rely on it","Awesome!","One more time","Better keep it up","Can\'t stop","Focus and try again","Yeah","Absolutely","Of course","Wild!","My sources say yes","TAP!!!","Let\'s go!","Click! Click! Click!", "Tap! Tap! Tap!","No stopping us","By all means","I am happy","Definitely","Yeah!","Hell, yes!","Beautiful!","Nah!","Go home!","Stop it","Watch out","Maybe","Let go","It is tricky","Working too hard","Most likely, not","More?","MEH","Outlook not so good","Power!!!","Try again later","Signs point to no","Very much not","No way","Click", "Tap","Definitely not","You may not rely on it","Amazing!","One last time","Better take it easy","Can\'t stop now","Let\'s go","No","Absolutely not","Of course!","Splendid!","My sources say no","YEY!!!","Let\'s take it easy!","Clicking?", "Tapping?","No stopping us now","Beck yeah","I am happy for you","Definitely not","No!","Hell, yeah!","Magnificent!"];let randAnswer = Math.floor( Math.random() *84)
-      pconsole.innerHTML += '<br>- ' + magicAnswers[randAnswer];pluspower();localStorage['score']++;plusflash();
+          pluspower();localStorage['score']++;plusflash();let randAnswer = Math.floor( Math.random() *84)
+      pconsole.innerHTML += '<br>- ' + magicAnswers[randAnswer];
       if(pconsole.innerHTML.length > 3000){
           pconsole.innerHTML= '🫧 Housekeeping!';emojiAction();bamglow();localStorage['score']++;plusflash();}}}
 
@@ -632,7 +635,7 @@ const emojiSad = ()=>{
       }}else if (input.value.trim().toLowerCase() === "reset" || input.value.trim().toLowerCase() === "clear" || input.value.trim().toLowerCase() === "restart"){
         let cleanAnswers = ["Fresh!","Clean console!","Clear as the sky ...","Voila!","All's gone!"]; let randAnswer = Math.floor(Math.random()*5)
         pconsole.innerHTML = cleanAnswers[randAnswer] + '<br>';
-      } else if (localStorage['username']) {pconsole.innerHTML += '';if(pconsole.innerHTML.length > 3000){
+      } else if (localStorage['username']) {let randAnswer = Math.floor( Math.random() *84); pconsole.innerHTML += '<br>- ' + magicAnswers[randAnswer];if(pconsole.innerHTML.length > 3000){
           pconsole.innerHTML= '⚡Shazam!';emojiAction();bamglow()}} 
           else {pconsole.innerHTML += '<br>Type "username:" followed by your name.<br>';}
 
