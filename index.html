@@ -263,57 +263,78 @@ function generateAndApplyRandomColors() {
 
 
     //touch control
-// Keep this at the top of your script
 let lastMessage = "";
 
 function generateFortune() {
-    const level = parseInt(localStorage.getItem('level')) || 0;
-    const power = parseFloat(localStorage.getItem('power')) || 0; // Use parseFloat for decimals
+    // 1. DATA FETCHING FROM UI
+    // We use .innerText to get the text, and parseFloat/parseInt to turn them into numbers
+    const currentLevel = parseInt(level.innerText) || 0;
+    const currentPower = parseFloat(wallet.innerText) || 0;
+    const player = username.innerText || "Human";
+
     const getVal = (bar) => bar.style.width ? parseFloat(bar.style.width) : 100;
-    
     const stats = { food: getVal(bar1), water: getVal(bar2), clean: getVal(bar3), mood: getVal(bar4) };
-    let evo = level >= 80 ? "Purrple Super" : level >= 70 ? "Purrple Ruff+" : level >= 50 ? "Purrple Ruff" : level >= 20 ? "Purrple Go+" : "Purrple Go";
+
+    // 2. EVOLUTION LOGIC (Corrected)
+    let evo = "Purrple Go";
+    if (currentLevel >= 80) evo = "Purrple Super";
+    else if (currentLevel >= 70) evo = "Purrple Ruff+";
+    else if (currentLevel >= 50) evo = "Purrple Ruff";
+    else if (currentLevel >= 20) evo = "Purrple Go+";
 
     let reels = { hook: "", obs: "", bridge: "", payoff: "" };
     const pick = (list) => list[Math.floor(Math.random() * list.length)];
 
-    // --- 1. PRIORITY NAGGING ---
+    // 3. PRIORITY NAGGING
     if (stats.food <= 20 || stats.water <= 20 || stats.clean <= 20 || stats.mood <= 20) {
         const nagHooks = ["⚠️ [ALERT]", "🚨 [STAY ALIVE]", "🆘 [CRITICAL]", "🛑 [STOP]"];
         reels.hook = pick(nagHooks);
-        if (stats.food <= 20) { reels.obs = "Stomach.exe has stopped working"; reels.payoff = "Type 'FOOD' immediately."; }
-        else if (stats.water <= 20) { reels.obs = "My systems are parched"; reels.payoff = "I need 'WATER' now."; }
-        else if (stats.clean <= 20) { reels.obs = "The grime is becoming sentient"; reels.payoff = "Please 'CLEAN' me."; }
-        else { reels.obs = "My mood is hitting absolute zero"; reels.payoff = "Let's 'PLAY' or I'm done."; }
+        if (stats.food <= 20) { reels.obs = `${player}, I'm starving`; reels.payoff = "Type 'FOOD' immediately."; }
+        else if (stats.water <= 20) { reels.obs = "My systems are parched"; reels.payoff = "I need 'WATER', quick."; }
+        else if (stats.clean <= 20) { reels.obs = "The grime is taking over"; reels.payoff = "Please 'CLEAN' me."; }
+        else { reels.obs = `It's lonely here, ${player}`; reels.payoff = "Let's 'PLAY' for a bit."; }
     } 
-    // --- 2. THE DYNAMIC SLOT MACHINE ---
+    // 4. THE UI-DRIVEN SLOT MACHINE
     else {
-        const hooks = [`✨ [${evo}]`, "Yo!", "Wait,", "Scanning...", "Status:", "System:", "Update:", "Heads up,", "Whoa,", "Actually,", "Alert:", "Data:", "Vibe Check:", "Notice:", "Target:"];
-        const obs = ["the Purrple Sky is glowing", "your click-speed is insane", "the logic-stream is pure", "Level " + level + " is stabilizing", "your energy is radiating", "the mainframe is humming", "the pixels are vibrating", "your aura is gold", "the simulation is steady", "your thumb is a weapon", "the power-grid is peaking", "destiny is calling", "the next evolution is close", "the code is singing", "your progress is visible"];
-        const bridges = ["and it feels like magic", "which is totally wild", "and I'm here for it", "so don't you dare stop", "making everything better", "and the server is melting", "which is strictly legendary", "and reality is warping", "beyond all expectations", "in the best way possible", "and the vibes are elite", "breaking all the records", "and it's super weird", "faster than light speed", "and I'm honestly shocked"];
+        const hooks = [`✨ [${evo}]`, "Yo!", "Wait,", "Scanning...", "Status:", "Update:", "Heads up,", "Actually,", "Notice:", `Hey ${player},` ];
+        
+        const obs = [
+            "the Purrple Sky is glowing", 
+            "your click-speed is insane", 
+            `Level ${currentLevel} is stabilizing`, 
+            "the mainframe is humming", 
+            "your aura is pure gold", 
+            "the simulation is steady", 
+            "the power-grid is peaking", 
+            "the code is singing", 
+            "your progress is legendary",
+            `the data looks good for ${player}`
+        ];
+        
+        const bridges = ["and it feels like magic", "which is totally wild", "and I'm here for it", "so don't you dare stop", "making everything better", "and the server is melting", "which is strictly legendary", "beyond all expectations", "in the best way possible", "and the vibes are elite"];
+        
+        // --- SMART PAYOFFS ---
+        let possiblePayoffs = ["keep the rhythm!", "let's go higher.", "I love this vibe.", "keep pushing.", "we are winning.", "absolute cinema.", `don't stop, ${player}!`];
 
-        // --- SMART PAYOFF FILTERING ---
-        let possiblePayoffs = ["keep the rhythm!", "let's go higher.", "I love this vibe.", "what's next?", "keep pushing.", "stay hydrated too.", "we are winning.", "unreal energy.", "absolute cinema."];
-
-        if (power < 10) {
+        if (currentPower < 10) {
             possiblePayoffs.push("spam 'W' for juice!", "tap me for more energy!", "we need more charges.");
         } 
-        if (power >= 30) {
+        if (currentPower >= 30) {
             possiblePayoffs.push("ready for a 'CASH' flip?", "time to evolve?", "let's gamble on a level-up.");
         }
 
         reels.hook = pick(hooks);
         reels.obs = pick(obs);
         reels.bridge = pick(bridges);
-        reels.payoff = pick(possiblePayoffs); // Only picks payoffs that make sense!
+        reels.payoff = pick(possiblePayoffs);
     }
 
-    // --- 3. FINAL RENDER & ANTI-REPEAT ---
+    // 5. FINAL RENDER & ANTI-REPEAT
     const glitchChance = Math.random();
     let finalMessage = "";
 
     if (glitchChance < 0.08) {
-        const glitches = [`LVL ${level} OVERLOAD!`, `EVO BREACH: ${evo}`, "I CAN SEE THE CODE!", "01110111 01101001 01101110"];
+        const glitches = [`LVL ${currentLevel} OVERLOAD!`, `EVO BREACH: ${evo}`, `GHOST DETECTED: ${player}`, "01010111 01001001 01001110"];
         finalMessage = `<span style="color: #00ff00; font-weight: bold;">${pick(glitches)}</span>`;
     } else {
         finalMessage = `${reels.hook} ${reels.obs} ${reels.bridge}... ${reels.payoff}`;
