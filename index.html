@@ -263,8 +263,67 @@ function generateAndApplyRandomColors() {
 
 
     //touch control
+// Keep this at the top of your script
+let lastMessage = "";
 
-    let magicAnswers = ["Yes!","Make power!","Better not stop","Cash","Almost","Don’t give up","It is certain","Working hard","Most likely","More!","GOOD","Outlook good","Power!","Try again","Signs point to yes","Very much","Without a doubt","Click! Click!", "Tap! Tap!","Yes, definitely","You may rely on it","Awesome!","One more time","Better keep it up","Can\'t stop","Focus and try again","Yeah","Absolutely","Of course","Wild!","My sources say yes","TAP!!!","Let\'s go!","Click! Click! Click!", "Tap! Tap! Tap!","No stopping us","By all means","I am happy","Definitely","Yeah!","Hell, yes!","Beautiful!","Nah!","Go home!","Stop it","Watch out","Maybe","Let go","It is tricky","Working too hard","Most likely, not","More?","MEH","Outlook not so good","Power!!!","Try again later","Signs point to no","Very much not","No way","Click", "Tap","Definitely not","You may not rely on it","Amazing!","One last time","Better take it easy","Can\'t stop now","Let\'s go","No","Absolutely not","Of course!","Splendid!","My sources say no","YEY!!!","Let\'s take it easy!","Clicking?", "Tapping?","No stopping us now","Beck yeah","I am happy for you","Definitely not","No!","Hell, yeah!","Magnificent!"];
+function generateFortune() {
+    const level = parseInt(localStorage.getItem('level')) || 0;
+    const power = parseFloat(localStorage.getItem('power')) || 0; // Use parseFloat for decimals
+    const getVal = (bar) => bar.style.width ? parseFloat(bar.style.width) : 100;
+    
+    const stats = { food: getVal(bar1), water: getVal(bar2), clean: getVal(bar3), mood: getVal(bar4) };
+    let evo = level >= 80 ? "Purrple Super" : level >= 70 ? "Purrple Ruff+" : level >= 50 ? "Purrple Ruff" : level >= 20 ? "Purrple Go+" : "Purrple Go";
+
+    let reels = { hook: "", obs: "", bridge: "", payoff: "" };
+    const pick = (list) => list[Math.floor(Math.random() * list.length)];
+
+    // --- 1. PRIORITY NAGGING ---
+    if (stats.food <= 20 || stats.water <= 20 || stats.clean <= 20 || stats.mood <= 20) {
+        const nagHooks = ["⚠️ [ALERT]", "🚨 [STAY ALIVE]", "🆘 [CRITICAL]", "🛑 [STOP]"];
+        reels.hook = pick(nagHooks);
+        if (stats.food <= 20) { reels.obs = "Stomach.exe has stopped working"; reels.payoff = "Type 'FOOD' immediately."; }
+        else if (stats.water <= 20) { reels.obs = "My systems are parched"; reels.payoff = "I need 'WATER' now."; }
+        else if (stats.clean <= 20) { reels.obs = "The grime is becoming sentient"; reels.payoff = "Please 'CLEAN' me."; }
+        else { reels.obs = "My mood is hitting absolute zero"; reels.payoff = "Let's 'PLAY' or I'm done."; }
+    } 
+    // --- 2. THE DYNAMIC SLOT MACHINE ---
+    else {
+        const hooks = [`✨ [${evo}]`, "Yo!", "Wait,", "Scanning...", "Status:", "System:", "Update:", "Heads up,", "Whoa,", "Actually,", "Alert:", "Data:", "Vibe Check:", "Notice:", "Target:"];
+        const obs = ["the Purrple Sky is glowing", "your click-speed is insane", "the logic-stream is pure", "Level " + level + " is stabilizing", "your energy is radiating", "the mainframe is humming", "the pixels are vibrating", "your aura is gold", "the simulation is steady", "your thumb is a weapon", "the power-grid is peaking", "destiny is calling", "the next evolution is close", "the code is singing", "your progress is visible"];
+        const bridges = ["and it feels like magic", "which is totally wild", "and I'm here for it", "so don't you dare stop", "making everything better", "and the server is melting", "which is strictly legendary", "and reality is warping", "beyond all expectations", "in the best way possible", "and the vibes are elite", "breaking all the records", "and it's super weird", "faster than light speed", "and I'm honestly shocked"];
+
+        // --- SMART PAYOFF FILTERING ---
+        let possiblePayoffs = ["keep the rhythm!", "let's go higher.", "I love this vibe.", "what's next?", "keep pushing.", "stay hydrated too.", "we are winning.", "unreal energy.", "absolute cinema."];
+
+        if (power < 10) {
+            possiblePayoffs.push("spam 'W' for juice!", "tap me for more energy!", "we need more charges.");
+        } 
+        if (power >= 30) {
+            possiblePayoffs.push("ready for a 'CASH' flip?", "time to evolve?", "let's gamble on a level-up.");
+        }
+
+        reels.hook = pick(hooks);
+        reels.obs = pick(obs);
+        reels.bridge = pick(bridges);
+        reels.payoff = pick(possiblePayoffs); // Only picks payoffs that make sense!
+    }
+
+    // --- 3. FINAL RENDER & ANTI-REPEAT ---
+    const glitchChance = Math.random();
+    let finalMessage = "";
+
+    if (glitchChance < 0.08) {
+        const glitches = [`LVL ${level} OVERLOAD!`, `EVO BREACH: ${evo}`, "I CAN SEE THE CODE!", "01110111 01101001 01101110"];
+        finalMessage = `<span style="color: #00ff00; font-weight: bold;">${pick(glitches)}</span>`;
+    } else {
+        finalMessage = `${reels.hook} ${reels.obs} ${reels.bridge}... ${reels.payoff}`;
+    }
+
+    if (finalMessage === lastMessage) return generateFortune();
+    lastMessage = finalMessage;
+
+    pconsole.innerHTML += '<br>- ' + finalMessage;
+}
     
     
     
@@ -274,8 +333,7 @@ function generateAndApplyRandomColors() {
           localStorage['bar2'] = Number(localStorage['bar2']) - 800000;
           localStorage['bar3'] = Number(localStorage['bar3']) - 100000;
           localStorage['bar4'] = Number(localStorage['bar4']) - 600000;
-          pluspower();localStorage['score']++;plusflash();let randAnswer = Math.floor( Math.random() *84)
-      pconsole.innerHTML += '<br>- ' + magicAnswers[randAnswer];
+          pluspower();localStorage['score']++;plusflash();generateFortune();
       if(pconsole.innerHTML.length > 3000){
           pconsole.innerHTML= '🫧 Housekeeping!';emojiAction();bamglow();localStorage['score']++;plusflash();}}}
 
@@ -420,57 +478,11 @@ if (level.innerHTML < 100){
 
     if(bar1_percentage <= 20 || bar2_percentage <= 20 || bar3_percentage <= 20 || bar4_percentage <= 20){emojiSad();
                 
-                    let permission = Notification.permission;
-                    var title = "Purrple Sky";
-            var icon = "/icon.png"
-            var body = "Purrple needs care!";
 
-            if(permission === "granted") {
-            showNotification();
-            } else {Notification.requestPermission().then(permission => {
-            navigator.serviceWorker.register('sw.js');});}
-            function showNotification() {
-            if(document.visibilityState === "visible" || localStorage['notify'] === '1') {
-                return;
-            }
-            if (navigator.userAgent.match(/Android/i)
-         || navigator.userAgent.match(/webOS/i)
-         || navigator.userAgent.match(/iPhone/i)
-         || navigator.userAgent.match(/iPad/i)
-         || navigator.userAgent.match(/iPod/i)
-         || navigator.userAgent.match(/BlackBerry/i)
-         || navigator.userAgent.match(/Windows Phone/i)) {
-            navigator.serviceWorker.ready.then(function(registration) {
-                registration.showNotification(title, { body, icon });
-                navigator.serviceWorker.addEventListener(
-  "notificationclick",
-  (event) => {
-    event.notification.close();
-    event.waitUntil(
-    clients
-      .matchAll({
-        type: "window",
-      })
-      .then((clientList) => {
-        for (const client of clientList) {
-          if (client.url === "/" && "focus" in client) return client.focus();
-        }
-        if (clients.openWindow) return clients.openWindow("/");
-      })
-  );})
 
-            });} else {
-                let notification = new Notification(title, { body, icon });
-            notification.onclick = () => { 
-                    notification.close();
-                    window.parent.focus();
-            }}
-            localStorage['notify'] = 1;
-            }
+           
 
     }}
-
-    if(bar1_percentage > 20 && bar2_percentage > 20 && bar3_percentage > 20 && bar4_percentage > 20){localStorage['notify'] = 0;}
 
 
 const levelValue = level.innerHTML
@@ -551,7 +563,7 @@ var delay = 3000;
   lastClick = Date.now();
                 let cat_emoji = document.querySelector('#cat-emoji')
                 let catEmoji = ["😀","😁","😇","😋","😊","😍","😎","🤩","💗","💝","💖","💓","💕","✨","❤","⭐"];
-        let randEmoji = Math.floor( Math.random() *16);
+        let randEmoji = Math.floor( Math.random() *catEmoji.length);
         cat_emoji.innerHTML = catEmoji[randEmoji];
         cat_emoji.style.top="0%";
     setTimeout(()=> { cat_emoji.style.top="-5%";cat_emoji.style.opacity = "0";}, 2000)
@@ -559,7 +571,7 @@ var delay = 3000;
 }
 const emojiSad = ()=>{ 
     let cat_emoji = document.querySelector('#cat-emoji')
-    let catEmoji = ["👀","💔","💩","💨","😕","😔","😓","😒","😟","😢","😥","😩","😪","😭","😵","🙁","🚨"];let randEmoji = Math.floor( Math.random() *17);
+    let catEmoji = ["👀","💔","💩","💨","😕","😔","😓","😒","😟","😢","😥","😩","😪","😭","😵","🙁","🚨"];let randEmoji = Math.floor( Math.random() *catEmoji.length);
         cat_emoji.innerHTML = catEmoji[randEmoji];
 } 
 
@@ -635,7 +647,7 @@ const emojiSad = ()=>{
       }}else if (input.value.trim().toLowerCase() === "reset" || input.value.trim().toLowerCase() === "clear" || input.value.trim().toLowerCase() === "restart"){
         let cleanAnswers = ["Fresh!","Clean console!","Clear as the sky ...","Voila!","All's gone!"]; let randAnswer = Math.floor(Math.random()*5)
         pconsole.innerHTML = cleanAnswers[randAnswer] + '<br>';
-      } else if (localStorage['username']) {let randAnswer = Math.floor( Math.random() *84); pconsole.innerHTML += '<br>- ' + magicAnswers[randAnswer];if(pconsole.innerHTML.length > 3000){
+      } else if (localStorage['username']) {generateFortune();if(pconsole.innerHTML.length > 3000){
           pconsole.innerHTML= '⚡Shazam!';emojiAction();bamglow()}} 
           else {pconsole.innerHTML += '<br>Type "username:" followed by your name.<br>';}
 
