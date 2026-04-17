@@ -573,20 +573,29 @@ if(!localStorage['username']) {
         localStorage.setItem('notify', 0);
     }
     
+    function autoLevelUp() {
+  let currentLevel = Number(localStorage.getItem('level')) || 0;
+  currentLevel += 100 / 10000000; // 100ms tick worth of progress
+  localStorage.setItem('level', currentLevel);
+
+  function randomBits(length = 6) {
+  let str = '';
+  for (let i = 0; i < length; i++) {
+    str += Math.random() < 0.5 ? '0' : '1';
+  }
+  return str;
+}
+
+levelFeed.innerHTML = randomBits(9);
+}
     const levelCounter = setInterval(() => {
       if(localStorage['username']) {
         if (level.innerHTML < 100 && localStorage['gameover']){
         level.innerHTML = Math.round(Number(localStorage['level']) + Number(localStorage['score'] / 1000));
           return
-        } else {
-          // increase division number to make auto levelling slower
-        var time = (new Date().getTime() - localStorage.getItem('start')) / 30000000;
-        localStorage['level'] = time;
+        } else { 
         level.innerHTML = Math.round(Number(localStorage['level']) + Number(localStorage['score'] / 1000));
-        let number = parseFloat(Number(localStorage['level']) + Number(localStorage['score']) / 1000).toFixed(8);
-        let getDecimalVal = number.toString().indexOf(".");
-        let decimalPart = number.toString().substring(getDecimalVal+1);
-        levelFeed.innerHTML = decimalPart;}}
+        }}
     }, 100);
     
     const engine = setInterval(leveler
@@ -602,6 +611,7 @@ const glowinfin = setInterval(() => {
   bamglow();
   generateFortune();
   scroller();
+  autoLevelUp();
 }, 1000);
 localStorage.setItem('winner', 1);
 // input.style.display = 'none'; enter.style.display = 'none';
@@ -640,7 +650,8 @@ if (level.innerHTML < 100){
     if((bar1.style.width === '0%' || bar2.style.width === '0%' || bar3.style.width === '0%' || bar4.style.width === '0%')&&localStorage['username']&&!localStorage['winner']){gameover();}
 
     if(bar1_percentage <= 20 || bar2_percentage <= 20 || bar3_percentage <= 20 || bar4_percentage <= 20){emojiSad();
-    } if(bar1_percentage >= 80 && bar2_percentage >= 80 && bar3_percentage >= 80 && bar4_percentage >= 80) {generateFortune();scroller()}
+    } if(bar1_percentage >= 80 && bar2_percentage >= 80 && bar3_percentage >= 80 && bar4_percentage >= 80) {autoLevelUp();} else { 
+        levelFeed.innerHTML = 'Resource saver';}
 }
     
 
