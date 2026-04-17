@@ -392,7 +392,7 @@ function generateFortune() {
     const getVal = (b) => b.style.width ? parseFloat(b.style.width) : 100;
     const stats = { FOOD: getVal(bar1), WATER: getVal(bar2), HYGIENE: getVal(bar3), MOOD: getVal(bar4) };
     
-    let lowBars = Object.keys(stats).filter(k => stats[k] <= 20);
+    let lowBars = Object.keys(stats).filter(k => stats[k] <= 10);
     const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
     const roll = Math.random;
 
@@ -505,7 +505,7 @@ function power() {
             // End the jackpot after 3 seconds
             setTimeout(() => { 
                 isCritical = false; 
-                pconsole.innerHTML += `<br>- <span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`; emojiSad()
+                pconsole.innerHTML += `<br>- <span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`; bamglow()
             }, 3000);
         }
 
@@ -571,6 +571,10 @@ function power() {
               emojiAction();
           localStorage['score'] = Number(localStorage['score']) + 1000;
           localStorage['power'] = localStorage['power'] - 50;
+            localStorage['bar1'] = Number(localStorage['bar1']) - 1000000;
+            localStorage['bar2'] = Number(localStorage['bar2']) - 1500000;
+            localStorage['bar3'] = Number(localStorage['bar3']) - 400000;
+            localStorage['bar4'] = new Date().getTime();
           bamglow();plusflash();pconsole.innerHTML += '<br>Purrple leveled up!!!<br>'} 
           else{localStorage['power'] = localStorage['power'] - 50;pconsole.innerHTML += '<br>Purrple level up missed...<br>';localStorage['bar4'] = Number(localStorage['bar4']) - 6000000}}
         else {pconsole.innerHTML += '<br>Not enough power. You need 50 charges to try levelling up. Generate power by using the "W" command or by tapping on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Please try again! Reset Purrple Sky from the main menu.<br>';}else {pconsole.innerHTML += '<br>Purrple is already SUPER maxed out!<br>';}}
@@ -595,9 +599,9 @@ if(!localStorage['username']) {
         } else {
           username.innerHTML = localStorage.getItem('username');
           if(!localStorage['gameover']){
-    let magicAnswers = ['😍 Hello ', '😎 Hi ', '😇 Welcome back '];
-    let randAnswer = Math.floor( Math.random() *3)
-    pconsole.innerHTML += magicAnswers[randAnswer] + localStorage.getItem('username') + ".<br>";}
+    let magicAnswers = ['- 😍 Hello ', '- 😎 Hi ', '- 😇 Welcome back ', '- 😎 Yo ', '- 😍 It\'s '];
+    let randAnswer = Math.floor( Math.random() *magicAnswers.length)
+    pconsole.innerHTML += magicAnswers[randAnswer] + localStorage.getItem('username') + ".";}
 }
     if (localStorage['bg_color']){
         document.documentElement.style.setProperty('--main-color', localStorage.getItem('bg_color'))}
@@ -605,14 +609,13 @@ if(!localStorage['username']) {
         document.documentElement.style.setProperty('--main-color2', localStorage.getItem('color'));}
     if(!localStorage['start']){
         localStorage.setItem('start', new Date().getTime())
-        localStorage.setItem('level', 0)
+        localStorage.setItem('level', 1)
         localStorage.setItem('score', 0)
         localStorage.setItem('bar1', (new Date().getTime() - 30000000))
         localStorage.setItem('bar2', (new Date().getTime() - 30000000))
         localStorage.setItem('bar3', (new Date().getTime() - 20000000))
         localStorage.setItem('bar4', (new Date().getTime() - 35000000))
         localStorage.setItem('power', 0);
-        localStorage.setItem('notify', 0);
     }
 
     function randomBits(length = 9) {
@@ -625,9 +628,9 @@ if(!localStorage['username']) {
 
     function autoLevelUp() {
   let currentLevel = Number(localStorage.getItem('level')) || 0;
-  currentLevel += 1 / 600; // 100ms tick worth of progress
+  currentLevel += 1 / (30 * level.innerHTML); // 100ms tick worth of progress
   localStorage.setItem('level', currentLevel);
-localStorage['power'] = parseFloat(Number(localStorage['power']) + 0.01);
+if (!localStorage['winner']){localStorage['power'] = parseFloat(Number(localStorage['power']) + (0.01 * (level.innerHTML / 2)));}
   
 levelFeed.innerHTML = randomBits(9);
 }
@@ -693,8 +696,8 @@ if (level.innerHTML < 100){
     } else {bar4.style.width = '0%'}
     if((bar1.style.width === '0%' || bar2.style.width === '0%' || bar3.style.width === '0%' || bar4.style.width === '0%')&&localStorage['username']&&!localStorage['winner']){gameover();}
 
-    if(bar1_percentage <= 10 || bar2_percentage <= 10 || bar3_percentage <= 10 || bar4_percentage <= 10){emojiSad();
-    } if(bar1_percentage >= 90 && bar2_percentage >= 90 && bar3_percentage >= 90 && bar4_percentage >= 90) {autoLevelUp();emojiAction()
+    if(bar1_percentage <= 20 || bar2_percentage <= 20 || bar3_percentage <= 20 || bar4_percentage <= 20){emojiSad();
+    } if(bar1_percentage >= 95 && bar2_percentage >= 95 && bar3_percentage >= 95 && bar4_percentage >= 95) {autoLevelUp();emojiAction()
         
     } else { 
         levelFeed.innerHTML = 'Battery saver';}
