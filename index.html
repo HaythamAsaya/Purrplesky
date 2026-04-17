@@ -58,7 +58,7 @@ V 6.3
         .power-bar{margin:0 0 0 -10px; position: fixed;bottom:20px;right:50%;font-size: clamp(1em, 3vw, 32px);font-family: monospace;translate:50%}
         #cat-emoji{animation: cloud 2s alternate ease-in-out infinite;position: absolute;
     left: 10%;font-size: 2em;text-shadow: 0px 1px 2px var(--main-color2);transition: all 2s;} 
-    #cat-crown{position: absolute;right: 0;top: 0;font-size: 2.5em;text-shadow: 0px 1px 2px var(--main-color2);} 
+    #cat-crown{position: absolute;right: 0;top: -15%;font-size: 2.5em;text-shadow: 0px 1px 13px var(--main-color2);} 
         .logo{width:50px;height:50px;background:#311238; margin: 0 auto 0; position:relative;top:-30px}
         .cloud-one{position:absolute; width: 60px;top:18px; left:-20px; 
             animation: cloud 7s alternate ease-in-out infinite;}
@@ -77,7 +77,10 @@ V 6.3
         #con-butt{width: 100%;height: 100%;position:absolute;top:0;left: 0;z-index: -1;}
         .console-container{position: relative;}
         .console{height:100vh;max-height: 50vh;background: var(--main-color2);color: var(--main-color);padding-inline:15px;border-top:15px solid transparent;border-bottom:15px solid transparent;overflow-y:scroll;word-wrap: break-word;font-family: 'Courier New', monospace;font-size: clamp(14px, 4vw, 1em);font-weight: bold;word-break: break-word;overscroll-behavior: contain;}
-        .console-behind{background: linear-gradient(-45deg,#f1c40f,#e67e22,#e74c3c,#3498db,#2ecc71);height:100%;position: fixed;top:0;left:0;width: 100%;z-index: -2;animation:glow 1s ease alternate infinite;opacity: 0.03;transition: opacity 1s ease-out;background-size: 400% 400%;filter:hue-rotate();}
+        .console-behind {position: fixed;  inset: 0; z-index: -2;  background: linear-gradient(-45deg, #f1c40f, #e67e22, #e74c3c, #3498db, #2ecc71);
+  background-size: 400% 400%;  opacity: 0.03;  transition: opacity 1s ease-out;
+  animation: glow 1s ease alternate infinite;  will-change: opacity, background-position;
+}
         .form input[type=text] {width: 65%;display: inline;margin:0; border: 0;background: transparent;padding: 1em; color: var(--main-color2);font-size: clamp(12px, 4vw, 1.2em);    border-radius: 50px;}
         .form input[type=text]::placeholder{color: var(--main-color2);}
         .form input[type=submit] {width: 25%;display: inline;margin:15px 5px 0 0;float:right; border-radius: 0;appearance: none;-webkit-appearance:none;-webkit-border-radius:0;background: var(--main-color2); border: none;padding: .5em; transform: translate(-9px,-9px); color: var(--main-color); transition: all 100ms;font-weight: bold;}
@@ -215,6 +218,7 @@ V 6.3
     let cat5SVG = document.querySelector('#cat5-svg');
     let catCrown = document.querySelector('#cat-crown');
     let cat = document.querySelector('.cat');
+    let cat_emoji = document.querySelector('#cat-emoji')
     let regex_math = /^([\d\. ]+[\-\+\/\*][\d\. ]+)+$/;
     let regex_bg_color = /^(background:)/i;
     let regex_color = /^(color:)/i;
@@ -577,7 +581,7 @@ if(!localStorage['username']) {
   let currentLevel = Number(localStorage.getItem('level')) || 0;
   currentLevel += 1 / 600; // 100ms tick worth of progress
   localStorage.setItem('level', currentLevel);
-
+localStorage['power'] = parseFloat(Number(localStorage['power']) + 0.01);
   function randomBits(length = 6) {
   let str = '';
   for (let i = 0; i < length; i++) {
@@ -612,6 +616,7 @@ const glowinfin = setInterval(() => {
   generateFortune();
   scroller();
   autoLevelUp();
+  emojiAction();
 }, 1000);
 localStorage.setItem('winner', 1);
 // input.style.display = 'none'; enter.style.display = 'none';
@@ -649,8 +654,10 @@ if (level.innerHTML < 100){
     } else {bar4.style.width = '0%'}
     if((bar1.style.width === '0%' || bar2.style.width === '0%' || bar3.style.width === '0%' || bar4.style.width === '0%')&&localStorage['username']&&!localStorage['winner']){gameover();}
 
-    if(bar1_percentage <= 20 || bar2_percentage <= 20 || bar3_percentage <= 20 || bar4_percentage <= 20){emojiSad();
-    } if(bar1_percentage >= 80 && bar2_percentage >= 80 && bar3_percentage >= 80 && bar4_percentage >= 80) {autoLevelUp();} else { 
+    if(bar1_percentage <= 10 || bar2_percentage <= 10 || bar3_percentage <= 10 || bar4_percentage <= 10){emojiSad();
+    } if(bar1_percentage >= 90 && bar2_percentage >= 90 && bar3_percentage >= 90 && bar4_percentage >= 90) {autoLevelUp();emojiAction()
+        
+    } else { 
         levelFeed.innerHTML = 'Battery saver';}
 }
     
@@ -726,13 +733,12 @@ bar4.style.width = '0%';
                 // cat emotions
 
                 var lastClick = 0;
-var delay = 3000;
+                var delay = 3000;
 
                 const emojiAction = ()=>{ 
   if (lastClick >= (Date.now() - delay))
     return;
   lastClick = Date.now();
-                let cat_emoji = document.querySelector('#cat-emoji')
                 let catEmoji = ["😀","😁","😇","😋","😊","😍","😎","🤩","💗","💝","💖","💓","💕","✨","❤","⭐"];
         let randEmoji = Math.floor( Math.random() *catEmoji.length);
         cat_emoji.innerHTML = catEmoji[randEmoji];
@@ -741,7 +747,6 @@ var delay = 3000;
     setTimeout(()=> { cat_emoji.style.top="0%";cat_emoji.innerHTML = "";cat_emoji.style.opacity = "1";}, 3000)
 }
 const emojiSad = ()=>{ 
-    let cat_emoji = document.querySelector('#cat-emoji')
     let catEmoji = ["👀","💔","💩","💨","😕","😔","😓","😒","😟","😢","😥","😩","😪","😭","😵","🙁","🚨"];let randEmoji = Math.floor( Math.random() *catEmoji.length);
         cat_emoji.innerHTML = catEmoji[randEmoji];
 } 
