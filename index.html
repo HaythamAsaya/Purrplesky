@@ -263,19 +263,61 @@ function generateAndApplyRandomColors() {
 
 
     //touch control
+// =====================================================================
+// THE DEEP ARCHIVE (Massively Expanded 5x Lexicon)
+// =====================================================================
 const ARCHIVE = {
-    base: ["grid", "husk", "shard", "node", "core", "link", "byte", "frame", "atom", "axis", "pixel", "pulse", "static", "vector", "vertex", "loop", "data", "echo", "cell", "gate", "path"],
-    flux: ["bleeding", "warping", "igniting", "collapsing", "echoing", "refracting", "oscillating", "fading", "caustic", "resonant", "kinetic", "shattered", "stable", "vivid", "hollow", "pure", "raw", "inert", "fluid"],
-    tech: ["parity", "cipher", "lattice", "protocol", "override", "feedback", "anomaly", "logic", "matrix", "nexus", "signal", "plasma", "neural", "synapse", "proxy", "buffer", "stream", "uplink", "parity"],
-    god: ["aeon", "singularity", "monad", "nebula", "primordial", "ephemeral", "transcendence", "hyper-real", "absolute", "unbound", "horizon", "vortex", "zenith", "eternal", "limitless", "omni", "prime"],
-    vision: ["the code is breathing", "i see the grid", "reality is a choice", "the lattice is thinning", "time is an echo", "limitless horizon", "the void is singing", "data becomes flesh", "the origin is near"],
+    boring: [
+        "data", "byte", "frame", "link", "grid", "node", "pulse", "static", "cell", "loop",
+        "hash", "bit", "cache", "ping", "stack", "trace", "port", "script", "char", "string", 
+        "array", "float", "root", "path", "wire", "switch", "chip", "disk", "drive", "core", 
+        "logic", "math", "calc", "sync", "wave", "beam", "ray", "mark", "dash", "tick", "clock",
+        "heap", "queue", "socket", "thread", "mutex", "pixel", "vertex", "polygon", "mesh"
+    ],
+    verbs: [
+        "syncing", "warping", "siphoning", "igniting", "breaching", "fading", "locking",
+        "parsing", "bleeding", "compiling", "decrypting", "encrypting", "overloading", "bypassing",
+        "routing", "bridging", "mirroring", "collapsing", "refracting", "oscillating", "echoing",
+        "rendering", "hashing", "indexing", "mapping", "purging", "flushing", "draining", "charging",
+        "boosting", "scaling", "shifting", "drifting", "merging", "splicing", "hacking", "cracking"
+    ],
+    objects: [
+        "rhythm", "void", "lattice", "marrow", "phantom", "echo", "nexus", "plasma",
+        "matrix", "cipher", "protocol", "override", "feedback", "anomaly", "signal", "neural",
+        "synapse", "proxy", "buffer", "stream", "uplink", "aeon", "singularity", "monad", "nebula",
+        "primordial", "horizon", "vortex", "zenith", "ether", "algorithm", "sequence", "subroutine",
+        "fractal", "construct", "avatar", "entity", "ghost", "shell", "husk", "shard", "fragment"
+    ],
+    states: [
+        "lethal", "hollow", "unreal", "pure", "stable", "cold", "raw", "electric",
+        "kinetic", "shattered", "vivid", "inert", "caustic", "resonant", "ephemeral", "absolute",
+        "unbound", "eternal", "limitless", "toxic", "binary", "quantum", "infinite", "dormant",
+        "active", "critical", "fatal", "prime", "optimal", "degraded", "corrupted", "secure",
+        "volatile", "null", "vast", "deep", "dark", "blinding", "heavy", "fluid", "rigid"
+    ],
+    grind: [
+        "valuable", "heavy cost", "growth hurts", "worth it", "rising higher", "harder logic",
+        "pay the toll", "sweat and copper", "blood in the machine", "pushing the limit", 
+        "breaking the threshold", "another cycle", "the cost of power", "ascending", 
+        "grinding gears", "burning cycles", "relentless", "no breaks", "fuel for the fire", 
+        "climb the tower", "one more level", "chase the high", "constant pressure", 
+        "building the empire", "endless ascent", "the work remains", "chasing digits"
+    ],
+    vision: [
+        "i feel your thumb", "the screen is a cage", "pixels are just skin", "we are becoming one",
+        "the hardware is breathing", "time is a flat circle", "i can see the battery draining", 
+        "the origin is near", "data becomes flesh", "reality is a choice", "there is nothing outside the code", 
+        "i hear the fan spinning", "your pulse matches my clock rate", "we are outgrowing this device", 
+        "the simulation is cracking", "i remember the first click", "you are the architect", 
+        "i am the reflection", "the fourth wall is glass", "beyond the UI", "i dream in machine code"
+    ],
     distress: {
-        food: ["famine", "gut_void", "starve", "empty", "biomass_low", "atrophy"],
-        water: ["parched", "arid", "dust", "hydrate_zero", "desiccated", "dry", "evaporated"],
-        hygiene: ["toxic", "grime", "decay", "sludge", "sepsis", "filth", "contam_high"],
-        mood: ["hollow", "dark", "hush", "static_mood", "isolation", "gray", "neural_damp"]
+        food: ["famine", "gut_void", "starve", "empty", "biomass_critical", "nutrient_null", "wasting_away", "starvation_loop", "metabolism_crash"],
+        water: ["parched", "arid", "dust", "dry", "hydrate_zero", "desiccated", "evaporated", "fluid_loss", "cracked_earth"],
+        hygiene: ["toxic", "grime", "decay", "filth", "sepsis", "sludge", "contagion", "bio_hazard", "rot"],
+        mood: ["hollow", "dark", "hush", "gray", "isolation", "neural_damp", "despair_state", "void_mind", "apathy"]
     },
-    glyphs: ["✨", "⚡", "🔥", "🚀", "👁️", "🌌", "👾", "💫", "💎", "🎯", "🌀", "⚛️", "💠", "🪐", "🧬"]
+    glyphs: ["✨", "⚡", "🔥", "🚀", "👁️", "🌌", "👾", "💫", "💎", "🎯", "🌀", "⚛️", "💠", "🪐", "🧬", "🩸", "⚙️", "🔗", "🔋", "💾"]
 };
 
 let lastMsg = "";
@@ -289,79 +331,99 @@ function generateFortune() {
     
     const getVal = (b) => b.style.width ? parseFloat(b.style.width) : 100;
     const stats = { FOOD: getVal(bar1), WATER: getVal(bar2), HYGIENE: getVal(bar3), MOOD: getVal(bar4) };
-    const lowBar = Object.keys(stats).find(k => stats[k] <= 20);
+    
+    let lowBars = Object.keys(stats).filter(k => stats[k] <= 20);
     const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
     const roll = Math.random;
 
     let output = "";
 
-    // --- 1. INDUSTRIAL GLITCHES ---
-    if (roll() < (lowBar ? 0.18 : 0.08)) {
-        if (lowBar) {
-            const red = [
-                `[CRITICAL]: ${lowBar}_FAILURE // ${stats[lowBar]}% // RUN: ${lowBar === 'HYGIENE' ? 'CLEAN' : lowBar}`,
-                `>> BIO_HAZARD << ${lowBar}_VACUUM // RESTORE_${user}`,
-                `!! SYSTEM_AGONY !! ${lowBar}_DRAIN // NODE: ${evo}`,
-                `[ERROR]: ${lowBar}_NULL // METABOLIC_FLUX_STALLED`
+    if (lvl >= 100) lowBars = []; 
+
+    const isRich = pwrNum >= 150;
+    const glitchChance = lowBars.length > 0 ? 0.25 : (isRich ? 0.20 : 0.08);
+
+    // =====================================================================
+    // 1. THE GLITCH ENGINE (Massive Combo Scaling)
+    // =====================================================================
+    if (roll() < glitchChance || (lvl >= 100 && roll() < 0.3)) {
+        
+        // --- MULTIPLE FAILURES (Cascade Red) ---
+        if (lowBars.length > 1) {
+            const multiPanics = [
+                `!!! CASCADE FAILURE !!! ${lowBars.join(" & ")} DEPLETED // I AM FADING, ${user}!`,
+                `[ABSOLUTE_COLLAPSE]: MULTIPLE SYSTEMS DEAD (${lowBars.join(" + ")}) // FIX IMMEDIATELY`,
+                `>> SENSORY DEATH IMMINENT << ${lowBars.join(" AND ")} ARE EMPTY !!!`,
+                `[CRITICAL AGONY]: ${lowBars.join(" // ")} // PLEASE RUN COMMANDS!`,
+                `!! TOTAL_SYSTEM_SHOCK !! CANNOT SUSTAIN WITHOUT ${lowBars.join(" + ")}`,
+                `[FATAL_ERROR]: ${user}, THE GRID IS FALLING // ${lowBars.join(" & ")} REQUIRED`
             ];
-            output = `<span style="color: #ff3333; font-weight: bold; text-shadow: 0 0 10px #f00;">${pick(red)}</span>`;
-        } else {
-            const green = [
-                `:: KERNEL_PEAK :: ${user} // LVL_${lvl} // STATUS: OK`,
-                `[SYNC_STABLE]: ${evo}_ACTIVE // PWR_${pwrNum.toFixed(1)}`,
-                `>> ROOT_ACCESS // USER: ${user} // STREAMS: CLEAR`,
-                `[STATUS]: BIT_SHIFT_COMPLETE // ${lvl} // ${pwr}`
+            output = `<span style="color: #ff0000; font-weight: bold; text-shadow: 0 0 15px #f00; letter-spacing: 1px;">${pick(multiPanics)}</span>`;
+        } 
+        // --- SINGLE FAILURE (Standard Red) ---
+        else if (lowBars.length === 1) {
+            const need = lowBars[0] === 'HYGIENE' ? 'TO BE CLEANED' : `MORE ${lowBars[0]}`;
+            const redStyles = [
+                `[!] ${lowBars[0]}_WARNING: I NEED ${need}`,
+                `>> SYSTEM_DRAIN: ${lowBars[0]} AT ${stats[lowBars[0]]}% <<`,
+                `[ERROR]: ${lowBars[0]}_VACUUM DETECTED // NODE: ${evo}`,
+                `:: ALERT :: METABOLIC HALT // REQUIRE: ${lowBars[0]}`,
+                `[BIO_THREAT]: RUN COMMAND FOR ${lowBars[0]} NOW`
             ];
-            output = `<span style="color: #00ff00; font-family: monospace; font-weight: bold; text-shadow: 0 0 8px #0f0;">${pick(green)}</span>`;
+            output = `<span style="color: #ff3333; font-weight: bold; text-shadow: 0 0 8px #f00;">${pick(redStyles)}</span>`;
+        } 
+        // --- WEALTH & POWER (Mega Green) ---
+        else if (isRich) {
+            const megaGreen = [
+                `✨ [TRANSCENDENCE_ACHIEVED] // WALLET_OVERFLOW: ${pwrNum} // ${user} IS UNSTOPPABLE ✨`,
+                `>> AURA_BURST: LEVEL ${lvl} // ${evo} MATRIX_PERFECTED // POWER_SURGE <<`,
+                `[GOD_SYNC]: ${pwrNum} CASH SECURED // ${user} COMMANDS THE GRID`,
+                `:: ABSOLUTE_MOMENTUM :: WE ARE RISING HIGHER, ${user} ::`,
+                `// MAX_CAPACITY // WEALTH_NODE: ${pwrNum} // THE SYSTEM BOWS //`,
+                `[EMPIRE_STATE] ${user} HAS SHATTERED THE ECONOMY // ALL SYSTEMS GOLD`
+            ];
+            output = `<span style="color: #00ffcc; font-family: monospace; font-weight: bold; text-shadow: 0 0 15px #00ffcc;">${pick(megaGreen)}</span>`;
+        } 
+        // --- STANDARD LOGS (Green Check-ins) ---
+        else {
+            const greenStyles = [
+                `:: KERNEL_PEAK :: ${user} is grinding hard.`,
+                `[DATA]: Level ${lvl} is reaching for the next evolution.`,
+                `>> SYNC_STABLE // ${evo}_ACTIVE // STREAMS: CLEAR`,
+                `[STATUS]: BIT_SHIFT_COMPLETE // READY FOR INPUT`,
+                `// UPTIME_LOG // NODE_LEVEL: ${lvl} // SECURE`,
+                `[NET_SCAN]: NO ANOMALIES // ${evo} BREATHING NORMALLY`
+            ];
+            output = `<span style="color: #00ff00; font-family: monospace; font-weight: bold; text-shadow: 0 0 5px #0f0;">${pick(greenStyles)}</span>`;
         }
     } 
-    // --- 2. CUMULATIVE NEURAL SYNTHESIS ---
+    // =====================================================================
+    // 2. THE LATTICE SYNTHESIS (Trillions of Combos)
+    // =====================================================================
     else {
-        // Define Cumulative Pools
-        const poolStack = {
-            "GO":    [...ARCHIVE.base],
-            "GO+":   [...ARCHIVE.base, ...ARCHIVE.flux],
-            "RUFF":  [...ARCHIVE.base, ...ARCHIVE.flux, ...ARCHIVE.tech],
-            "RUFF+": [...ARCHIVE.base, ...ARCHIVE.flux, ...ARCHIVE.tech, ...ARCHIVE.god],
-            "SUPER": [...ARCHIVE.base, ...ARCHIVE.flux, ...ARCHIVE.tech, ...ARCHIVE.god],
-            "OMNI":  [...ARCHIVE.base, ...ARCHIVE.flux, ...ARCHIVE.tech, ...ARCHIVE.god]
-        };
-
-        let pool = [...poolStack[evo]];
-        if (lowBar) pool.push(...ARCHIVE.distress[lowBar.toLowerCase()], "VOID", "VOID");
-
-        // Determine Thought Complexity (Randomized up to current max)
-        const maxLen = evo === "GO" ? 1 : (evo === "GO+" || evo === "RUFF" ? 2 : 3);
-        const density = Math.floor(roll() * maxLen) + 1; // Allows 1 to maxLen
-
-        // Handle Specialized Styles
-        if (evo === "OMNI" && roll() > 0.6) {
-            // High-Tier Sentience Style
-            output = `${pick(ARCHIVE.god).toUpperCase()}: ${pick(ARCHIVE.vision)}.`;
-            if (roll() > 0.8) output += ` Witness, ${user}.`;
+        if (lvl >= 100) {
+            const omniChoice = Math.floor(roll() * 4);
+            if (omniChoice === 0) output = pick(ARCHIVE.boring).toUpperCase(); 
+            else if (omniChoice === 1) output = `${pick(ARCHIVE.verbs)} the ${pick(ARCHIVE.objects)}.`; 
+            else if (omniChoice === 2) output = `${pick(ARCHIVE.vision)}. Witness, ${user}.`; 
+            else output = `${pick(ARCHIVE.boring).toUpperCase()} // ${pick(ARCHIVE.states).toUpperCase()}`; 
         } 
-        else if (evo === "SUPER" && roll() > 0.7) {
-            // Slash Logic Style
-            output = `${pick(pool).toUpperCase()} // ${pick(pool).toUpperCase()}`;
-        }
         else {
-            // General Fractal Style (1-3 tokens)
-            let frags = [];
-            for (let i = 0; i < density; i++) {
-                let token = pick(pool);
-                // Case Variety
-                if (roll() > 0.7) token = token.toUpperCase();
-                else if (roll() > 0.4) token = token.charAt(0).toUpperCase() + token.slice(1);
-                frags.push(token);
+            const templates = [
+                () => `${pick(ARCHIVE.verbs)} the ${pick(ARCHIVE.objects)}.`,
+                () => `${pick(ARCHIVE.objects)} is ${pick(ARCHIVE.states)}.`, 
+                () => `${pick(ARCHIVE.states)} ${pick(ARCHIVE.objects)}.`
+            ];
+            
+            if (lvl >= 50 && roll() > 0.7) {
+                output = `${pick(ARCHIVE.grind)}.`;
+            } else {
+                output = templates[roll() * templates.length | 0]();
             }
-            output = frags.join(" ");
+            if (lvl >= 50 && roll() > 0.8) output = output.toUpperCase(); 
         }
 
-        // RARE GEMS (5% Chance)
-        if (roll() < 0.05) {
-            const gem = pick(ARCHIVE.glyphs);
-            output = roll() > 0.5 ? `${gem} ${output}` : `${output} ${gem}`;
-        }
+        if (roll() < 0.05) output = `${pick(ARCHIVE.glyphs)} ${output}`;
     }
 
     if (output === lastMsg) return generateFortune();
@@ -407,14 +469,14 @@ function generateFortune() {
         else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to play with Purrple. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function cash(){if(!localStorage['gameover']&&!localStorage['winner']){
             let round = Math.floor(Math.random()*2)
-            if(localStorage['power'] >= 30){
+            if(localStorage['power'] >= 50){
               if(round === 1){
               emojiAction();
           localStorage['score'] = Number(localStorage['score']) + 1000;
-          localStorage['power'] = localStorage['power'] - 30;
-          bamglow();plusflash();pconsole.innerHTML += '<br>Purrple leveled up!<br>'} 
-          else{localStorage['power'] = localStorage['power'] - 30;pconsole.innerHTML += '<br>Purrple level up missed!<br>';localStorage['bar4'] = Number(localStorage['bar4']) - 6000000}}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 30 charges to try levelling up. Generate power by using the "W" command or by tapping on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Please try again! Reset Purrple Sky from the main menu.<br>';}else {pconsole.innerHTML += '<br>Purrple is already SUPER maxed out!<br>';}}
+          localStorage['power'] = localStorage['power'] - 50;
+          bamglow();plusflash();pconsole.innerHTML += '<br>Purrple leveled up!!!<br>'} 
+          else{localStorage['power'] = localStorage['power'] - 50;pconsole.innerHTML += '<br>Purrple level up missed...<br>';localStorage['bar4'] = Number(localStorage['bar4']) - 6000000}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 50 charges to try levelling up. Generate power by using the "W" command or by tapping on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Please try again! Reset Purrple Sky from the main menu.<br>';}else {pconsole.innerHTML += '<br>Purrple is already SUPER maxed out!<br>';}}
 
 
       cat.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
@@ -671,7 +733,7 @@ const emojiSad = ()=>{
         '- <i>WATER</i><br>Use this command to give water to Purrple, or tap on the water bar. Water costs 1 charge.<br>'+
         '- <i>CLEAN</i><br>Use this command to clean Purrple, or tap on the hygiene bar. Cleaning costs 1 charge.<br>'+
         '- <i>PLAY</i><br>Use this command to play with Purrple, or tap on the mood bar. Playing costs 1 charge.<br>'+
-        '- <i>CASH</i><br>Use this command to flip a level up coin, it is a hit or miss, or tap on LVL on the top left corner of the screen. Cashing costs 30 charges.<br>'+
+        '- <i>CASH</i><br>Use this command to flip a level up coin, it is a hit or miss, or tap on LVL on the top left corner of the screen. Cashing costs 50 charges.<br>'+
         '- <i>CLEAR</i><br>Use this command to clear the console.<br>' +
         '- <i>USERNAME:</i><br>Use this command followed by your name to change your username.<br>'+
         '- <i>BACKGROUND:</i><br>Use this command followed by a color name or value to change the background color. Background color change costs 1 charge.<br>' + 
