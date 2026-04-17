@@ -53,7 +53,7 @@ V 6.3
         .username{font-weight: bold;margin: 0;font-size: clamp(1.2em, 4vw, 32px); 
             display: inline-block;}
             .lv-charge{font-size: clamp(0.9em, 2vw, 1.2em); position: relative;width: fit-content;}
-        .lv-plus{font-size: 3em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; right:-120%;z-index: 5;}
+        .lv-plus{font-size: 3em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; right:-80%;z-index: 5;}
         .wallet-plus{font-size: 5em; position: absolute;margin: 0;animation: cloud 600ms alternate ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal;top: -150%; right:-150%;z-index: 5;pointer-events: none;}
         .power-bar{margin:0 0 0 -10px; position: fixed;bottom:20px;right:50%;font-size: clamp(1em, 3vw, 32px);font-family: monospace;translate:50%}
         #cat-emoji{animation: cloud 2s alternate ease-in-out infinite;position: absolute;
@@ -121,7 +121,7 @@ V 6.3
 <!-- html -->
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Purrple is looking for a human friend. Help Purrple thrive and grow in your device.</li><li>Your progress will be saved automatically, come back at any time but don't be long!</li><li>Purrple's level indicator is on the top left corner of the screen.</li><li>Purrple's energy indicator has a thunder icon. Generate power and earn points by using the "W" command or by tapping on Purrple. Watch out for draining your resources when generating power!</li></ul><i>Last but not least, don't forget to customize the layout with your favorite colors. Good Luck!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Purrple Evolutions</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Purrple Go<br>LVL_20 - Purrple Go+<br>LVL_50 - Purrple Ruff<br>LVL_70 - Purrple Ruff+<br>LVL_80 - Purrple Super</div></details>Developed by: <br> <a href="mailto:haytham.asaya@gmail.com">Haytham.Asaya@gmail.com</a>
+    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Purrple is looking for a human friend. Help Purrple thrive and grow in your device.</li><li>Your progress will be saved automatically, come back at any time but don't be long!</li><li>Purrple's level indicator is on the top left corner of the screen, keep Purrple mining to level up by running on full resources.</li><li>Purrple's energy indicator has a thunder icon. Generate power and earn points by using the "W" command or by tapping on Purrple. Watch out for draining your resources when generating power!</li></ul><i>Last but not least, don't forget to customize the layout with your favorite colors. Good Luck!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Purrple Evolutions</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Purrple Go<br>LVL_20 - Purrple Go+<br>LVL_50 - Purrple Ruff<br>LVL_70 - Purrple Ruff+<br>LVL_80 - Purrple Super</div></details>Developed by: <br> <a href="mailto:haytham.asaya@gmail.com">Haytham.Asaya@gmail.com</a>
         <p style="font-size:X-small;">V 6.3</p><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
@@ -575,7 +575,7 @@ if(!localStorage['username']) {
     
     function autoLevelUp() {
   let currentLevel = Number(localStorage.getItem('level')) || 0;
-  currentLevel += 100 / 10000000; // 100ms tick worth of progress
+  currentLevel += 1 / 600; // 100ms tick worth of progress
   localStorage.setItem('level', currentLevel);
 
   function randomBits(length = 6) {
@@ -651,7 +651,7 @@ if (level.innerHTML < 100){
 
     if(bar1_percentage <= 20 || bar2_percentage <= 20 || bar3_percentage <= 20 || bar4_percentage <= 20){emojiSad();
     } if(bar1_percentage >= 80 && bar2_percentage >= 80 && bar3_percentage >= 80 && bar4_percentage >= 80) {autoLevelUp();} else { 
-        levelFeed.innerHTML = 'Resource saver';}
+        levelFeed.innerHTML = 'Battery saver';}
 }
     
 
