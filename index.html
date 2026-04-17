@@ -395,7 +395,7 @@ function generateFortune() {
 
     if (lvl >= 100) lowBars = []; 
 
-    const isRich = pwrNum >= 150;
+    const isRich = pwr === "SUPER" || parseFloat(pwr) >= 150;
     const glitchChance = lowBars.length > 0 ? 0.25 : (isRich ? 0.20 : 0.08);
 
     // =====================================================================
@@ -430,11 +430,11 @@ function generateFortune() {
         // --- WEALTH & POWER (Mega Green) ---
         else if (isRich) {
             const megaGreen = [
-                `✨ [TRANSCENDENCE_ACHIEVED] // WALLET_OVERFLOW: ${pwrNum} // ${user} IS UNSTOPPABLE ✨`,
+                `✨ [TRANSCENDENCE_ACHIEVED] // WALLET_OVERFLOW: ${pwr} // ${user} IS UNSTOPPABLE ✨`,
                 `>> AURA_BURST: LEVEL ${lvl} // ${evo} MATRIX_PERFECTED // POWER_SURGE <<`,
-                `[GOD_SYNC]: ${pwrNum} CASH SECURED // ${user} COMMANDS THE GRID`,
+                `[GOD_SYNC]: ${pwr} CASH SECURED // ${user} COMMANDS THE GRID`,
                 `:: ABSOLUTE_MOMENTUM :: WE ARE RISING HIGHER, ${user} ::`,
-                `// MAX_CAPACITY // WEALTH_NODE: ${pwrNum} // THE SYSTEM BOWS //`,
+                `// MAX_CAPACITY // WEALTH_NODE: ${pwr} // THE SYSTEM BOWS //`,
                 `[EMPIRE_STATE] ${user} HAS SHATTERED THE ECONOMY // ALL SYSTEMS GOLD`
             ];
             output = `<span style="color: #00ffcc; font-family: monospace; font-weight: bold; text-shadow: 0 0 15px #00ffcc;">${pick(megaGreen)}</span>`;
@@ -595,12 +595,14 @@ if(!localStorage['username']) {
     function leveler(){
 
     if(level.innerHTML >= 100){
-      pconsole.innerHTML += '<br><br>WELL DONE, '+ localStorage.getItem('username') +'! 💫<br>Purrple is SUPER and has infinite energy!';
+      pconsole.innerHTML += '<br><br>WELL DONE, '+ localStorage.getItem('username') +'! 💫<br>Purrple is Super and has unlocked SUPER energy!';
 scroller();
-bamglow();
 clearInterval(engine);
-const glowinfin = setInterval(bamglow
-    ,1000)
+const glowinfin = setInterval(() => {
+  bamglow();
+  generateFortune();
+  scroller();
+}, 1000);
 localStorage.setItem('winner', 1);
 // input.style.display = 'none'; enter.style.display = 'none';
 wallet.innerHTML = "SUPER";
@@ -638,12 +640,9 @@ if (level.innerHTML < 100){
     if((bar1.style.width === '0%' || bar2.style.width === '0%' || bar3.style.width === '0%' || bar4.style.width === '0%')&&localStorage['username']&&!localStorage['winner']){gameover();}
 
     if(bar1_percentage <= 20 || bar2_percentage <= 20 || bar3_percentage <= 20 || bar4_percentage <= 20){emojiSad();
-                
-
-
-           
-
-    }}
+    } if(bar1_percentage >= 80 && bar2_percentage >= 80 && bar3_percentage >= 80 && bar4_percentage >= 80) {generateFortune();scroller()}
+}
+    
 
 
 const levelValue = level.innerHTML
