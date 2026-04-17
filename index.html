@@ -9,7 +9,7 @@
 
 =========================
 Purrple by Haytham Asaya
-V 6.3
+V 6.5
 =========================
 
 -->
@@ -126,7 +126,7 @@ V 6.3
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
     <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Purrple is looking for a human friend. Help Purrple thrive and grow on your device.</li><li>Your progress is saved automatically, come back anytime, but don’t stay away too long!</li><li>Purrple’s level is displayed in the top-left corner of the screen.</li><li>Purrple’s energy is shown by the ⚡ icon. When resources are full, Purrple will automatically mine for power. You can generate power faster by using the "W" command or tapping on Purrple, but be careful, this will drain your resources!</li></ul><i>Customize the layout with your favorite colors and make it your own. Good luck!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Purrple Evolutions</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Purrple Go<br>LVL_20 - Purrple Go+<br>LVL_50 - Purrple Ruff<br>LVL_70 - Purrple Ruff+<br>LVL_80 - Purrple Super</div></details>Developed by: <br> <a href="mailto:haytham.asaya@gmail.com">Haytham.Asaya@gmail.com</a>
-        <p style="font-size:X-small;">V 6.3</p><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
+        <p style="font-size:X-small;">V 6.5</p><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
 	<line class="st0" x1="0" y1="20.5" x2="61" y2="20.5"/>
@@ -430,7 +430,7 @@ function generateFortune() {
                 `:: ALERT :: METABOLIC HALT // REQUIRE: ${lowBars[0]}`,
                 `[BIO_THREAT]: RUN COMMAND FOR ${lowBars[0]} NOW`
             ];
-            output = `<span style="color: #ff3333; font-weight: bold; text-shadow: 0 0 8px #f00;">${pick(redStyles)}</span>`;
+            output = `<span style="color: #ff3333; text-shadow: 0 0 8px #f00;">${pick(redStyles)}</span>`;
         } 
         // --- WEALTH & POWER (Mega Green) ---
         else if (isRich) {
@@ -442,7 +442,7 @@ function generateFortune() {
                 `// MAX_CAPACITY // WEALTH_NODE: ${pwr} // THE SYSTEM BOWS //`,
                 `[EMPIRE_STATE] ${user} HAS SHATTERED THE ECONOMY // ALL SYSTEMS GOLD`
             ];
-            output = `<span style="color: #00ffcc; font-family: monospace; font-weight: bold; text-shadow: 0 0 15px #00ffcc;">${pick(megaGreen)}</span>`;
+            output = `<span style="color: #00ffcc; text-shadow: 0 0 15px #00ffcc;">${pick(megaGreen)}</span>`;
         } 
         // --- STANDARD LOGS (Green Check-ins) ---
         else {
@@ -454,7 +454,7 @@ function generateFortune() {
                 `// UPTIME_LOG // NODE_LEVEL: ${lvl} // SECURE`,
                 `[NET_SCAN]: NO ANOMALIES // ${evo} BREATHING NORMALLY`
             ];
-            output = `<span style="color: #00ff00; font-family: monospace; font-weight: bold; text-shadow: 0 0 5px #0f0;">${pick(greenStyles)}</span>`;
+            output = `<span style="color: #00ff00; text-shadow: 0 0 5px #0f0;">${pick(greenStyles)}</span>`;
         }
     } 
     // =====================================================================
@@ -493,39 +493,76 @@ function generateFortune() {
     
     
     
-      function power(){ if(!localStorage['gameover']){
-          localStorage['power'] = parseFloat(Number(localStorage['power']) + 0.5).toFixed(1);
-          localStorage['bar1'] = Number(localStorage['bar1']) - 500000;
-          localStorage['bar2'] = Number(localStorage['bar2']) - 800000;
-          localStorage['bar3'] = Number(localStorage['bar3']) - 100000;
-          localStorage['bar4'] = Number(localStorage['bar4']) - 600000;
-          pluspower();localStorage['score']++;plusflash();generateFortune();
-      if(pconsole.innerHTML.length > 3000){
-          pconsole.innerHTML= '🫧 Housekeeping!';emojiAction();bamglow();localStorage['score']++;plusflash();}}}
+      let isCritical = false; // Persistent in memory while app is open
+
+function power() {
+    if (!localStorage['gameover']) {
+        // --- 1. THE LUCK ELEMENT (1% Chance) ---
+        if (!isCritical && Math.random() < 0.01) {
+            isCritical = true;
+            pconsole.innerHTML += `<br>- <span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL: FREE_SYNC [3s] ✨</span>`; bamglow()
+            
+            // End the jackpot after 3 seconds
+            setTimeout(() => { 
+                isCritical = false; 
+                pconsole.innerHTML += `<br>- <span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`; emojiSad()
+            }, 3000);
+        }
+
+        // --- 2. BRANCHING LOGIC (The Addictive Formula) ---
+        if (isCritical) {
+            // JACKPOT: 10x Power, 0.0 Drain, 2x Score
+            localStorage['power'] = (parseFloat(localStorage['power']) + 5.0).toFixed(1); 
+            localStorage['score'] = Number(localStorage['score']) + 2;
+            // No bar drain here!
+        } else {
+            // NORMAL: Standard behavior
+            localStorage['power'] = (parseFloat(localStorage['power']) + 0.5).toFixed(1);
+            localStorage['bar1'] = Number(localStorage['bar1']) - 500000;
+            localStorage['bar2'] = Number(localStorage['bar2']) - 800000;
+            localStorage['bar3'] = Number(localStorage['bar3']) - 100000;
+            localStorage['bar4'] = Number(localStorage['bar4']) - 600000;
+            localStorage['score']++;
+        }
+
+        // --- 3. THE HOUSEKEEPING & FEEDBACK ---
+        pluspower(); 
+        plusflash();
+        generateFortune();
+
+        if (pconsole.innerHTML.length > 3000) {
+            pconsole.innerHTML = '🫧 Housekeeping!';
+            emojiAction();
+            bamglow();
+            localStorage['score']++;
+            plusflash();
+        }
+    }
+}
 
           function food(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 2){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar1'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 2;}
-        pconsole.innerHTML += '<br>Nom Nom Nom<br>';} 
+        pconsole.innerHTML += '<br>- full storage.';} 
         else {pconsole.innerHTML += '<br>Not enough power. You need 2 charges to give Purrple food. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function water(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar2'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 1;}
-        pconsole.innerHTML += '<br>Slurp Slurp<br>';}
+        pconsole.innerHTML += '<br>- system hydrated.';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to give Purrple water. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function hygiene(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar3'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 1;}
-        pconsole.innerHTML += '<br>Lovely!<br>';}
+        pconsole.innerHTML += '<br>- fans cleaned!';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to clean Purrple. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function mood(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar4'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 1;}
-        pconsole.innerHTML += '<br>Purrr<br>';}
+        pconsole.innerHTML += '<br>- update complete.';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to play with Purrple. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function cash(){if(!localStorage['gameover']&&!localStorage['winner']){
             let round = Math.floor(Math.random()*2)
@@ -745,8 +782,8 @@ bar4.style.width = '0%';
         let randEmoji = Math.floor( Math.random() *catEmoji.length);
         cat_emoji.innerHTML = catEmoji[randEmoji];
         cat_emoji.style.top="0%";
-    setTimeout(()=> { cat_emoji.style.top="-5%";cat_emoji.style.opacity = "0";}, 2000)
-    setTimeout(()=> { cat_emoji.style.top="0%";cat_emoji.innerHTML = "";cat_emoji.style.opacity = "1";}, 3000)
+    setTimeout(()=> { cat_emoji.style.top="-5%";cat_emoji.style.opacity = "0";}, 1000)
+    setTimeout(()=> { cat_emoji.style.top="5%";cat_emoji.innerHTML = "";cat_emoji.style.opacity = "1";}, 2500)
 }
 const emojiSad = ()=>{ 
     let catEmoji = ["👀","💔","💩","💨","😕","😔","😓","😒","😟","😢","😥","😩","😪","😭","😵","🙁","🚨"];let randEmoji = Math.floor( Math.random() *catEmoji.length);
