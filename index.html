@@ -866,7 +866,7 @@ const emojiSad = ()=>{
         username.innerHTML = new_username;
         pconsole.innerHTML += '<br>Username updated.<br>';
         if(!localStorage['username']){
-        pconsole.innerHTML += '<br>Hello, ' + new_username + '!<br>You have now used the "USERNAME:" command.<br>Type "HELP" and press Enter to learn how to generate power and take care of Purrple 😎<br>';}
+        pconsole.innerHTML += '<br>Hello, ' + new_username + '!<br>You have now used the "USERNAME:" command, there are so many more!<br>Tapping on Purrple generates power for buying resources 😎. Fill up all bars to start mining!<br>';}
         localStorage.setItem('username', new_username);
       }}else if (input.value.trim().toLowerCase() === "reset" || input.value.trim().toLowerCase() === "clear" || input.value.trim().toLowerCase() === "restart"){
         let cleanAnswers = ["Fresh!","Clean console!","Clear as the sky ...","Voila!","All's gone!"]; let randAnswer = Math.floor(Math.random()*5)
