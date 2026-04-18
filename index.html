@@ -126,7 +126,7 @@ V 6.6
 <!-- html -->
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Purrple is looking for a human friend. Help Purrple thrive and grow on your device.</li><li>Your progress is saved automatically, come back anytime, but don’t stay away too long!</li><li>Purrple’s level is displayed in the top-left corner of the screen.</li><li>Purrple’s energy is shown by the ⚡ icon. When resources are full, Purrple will automatically mine for power. You can generate power faster by using the "W" command or tapping on Purrple, but be careful, this will drain your resources!</li></ul><i>Customize the layout with your favorite colors and make it your own. Good luck!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Purrple Evolutions</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Purrple Go<br>LVL_20 - Purrple Go+<br>LVL_50 - Purrple Ruff<br>LVL_70 - Purrple Ruff+<br>LVL_80 - Purrple Super</div></details>Developed by: <br> <a href="mailto:haytham.asaya@gmail.com">Haytham.Asaya@gmail.com</a>
+    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Purrple is looking for a human friend. Help Purrple thrive and grow on your device.</li><li>💾 Your progress is saved automatically, come back anytime, but don’t stay away too long!</li><li>Purrple’s level is displayed in the top-left corner of the screen. Use the "Cash" command or tap on your level to try leveling up! ➕</li><li>Purrple’s energy is shown by the ⚡ icon. You can generate power fast by using the "W" command or tapping on Purrple, but be careful, this will drain your resources!</li><li>⛏️ When resources are full, Purrple will automatically mine for power and level up.</li></ul><i>Customize the layout with your favorite colors and make it your own. Good luck!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Purrple Evolutions</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Purrple Go<br>LVL_20 - Purrple Go+<br>LVL_50 - Purrple Ruff<br>LVL_70 - Purrple Ruff+<br>LVL_80 - Purrple Super</div></details>Developed by: <br> <a href="mailto:haytham.asaya@gmail.com">Haytham.Asaya@gmail.com</a>
         <p style="font-size:X-small;">V 6.6</p><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
@@ -542,25 +542,25 @@ function power() {
 }
 
           function food(){if(!localStorage['gameover']){
-            if(localStorage['power'] >= 2){emojiAction();bamglow();localStorage['score']++;plusflash();
+            if(localStorage['power'] >= 5){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar1'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 5;}
         pconsole.innerHTML += '<br>- full storage.';} 
         else {pconsole.innerHTML += '<br>Not enough power. You need 5 charges to give Purrple food. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function water(){if(!localStorage['gameover']){
-            if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
+            if(localStorage['power'] >= 3){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar2'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 3;}
         pconsole.innerHTML += '<br>- system hydrated.';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 3 charge to give Purrple water. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function hygiene(){if(!localStorage['gameover']){
-            if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
+            if(localStorage['power'] >= 2){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar3'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 2;}
         pconsole.innerHTML += '<br>- fans cleaned!';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 2 charge to clean Purrple. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function mood(){if(!localStorage['gameover']){
-            if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
+            if(localStorage['power'] >= 4){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar4'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 4;}
         pconsole.innerHTML += '<br>- update complete.';}
@@ -571,13 +571,13 @@ function power() {
               if(round === 1){
               emojiAction();
           localStorage['score'] = Number(localStorage['score']) + 1000;
-          localStorage['power'] = localStorage['power'] - 50;
+          localStorage.setItem('power', 0);
             localStorage['bar1'] = Number(localStorage['bar1']) - 1000000;
             localStorage['bar2'] = Number(localStorage['bar2']) - 1500000;
             localStorage['bar3'] = Number(localStorage['bar3']) - 400000;
           bamglow();plusflash();pconsole.innerHTML += '<br>Purrple leveled up!!!<br>'} 
-          else{localStorage['power'] = localStorage['power'] - 50;pconsole.innerHTML += '<br>Purrple level up missed...<br>';localStorage['bar4'] = Number(localStorage['bar4']) - 6000000}}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 50 charges to try levelling up. Generate power by using the "W" command or by tapping on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Please try again! Reset Purrple Sky from the main menu.<br>';}else {pconsole.innerHTML += '<br>Purrple is already SUPER maxed out!<br>';}}
+          else{localStorage['power'] = localStorage['power'] - 50;pconsole.innerHTML += '<br>Purrple missed...<br>';localStorage['bar4'] = Number(localStorage['bar4']) - 6000000}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need at least 50 charges to try levelling up. Generate power by using the "W" command or by tapping on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Please try again! Reset Purrple Sky from the main menu.<br>';}else {pconsole.innerHTML += '<br>Purrple is already SUPER maxed out!<br>';}}
 
 
       cat.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
@@ -845,7 +845,7 @@ const emojiSad = ()=>{
         '- <i>WATER</i><br>Use this command to give water to Purrple, or tap on the water bar. Water costs 3 charge.<br>'+
         '- <i>CLEAN</i><br>Use this command to clean Purrple, or tap on the hygiene bar. Cleaning costs 2 charge.<br>'+
         '- <i>PLAY</i><br>Use this command to play with Purrple, or tap on the mood bar. Playing costs 4 charge.<br>'+
-        '- <i>CASH</i><br>Use this command to flip a level up coin, it is a hit or miss, or tap on LVL on the top left corner of the screen. Cashing costs 50 charges.<br>'+
+        '- <i>CASH</i><br>Use this command to try leveling up, or tap on LVL on the top left corner of the screen. Cashing requires at least 50 charges.<br>'+
         '- <i>CLEAR</i><br>Use this command to clear the console.<br>' +
         '- <i>USERNAME:</i><br>Use this command followed by your name to change your username.<br>'+
         '- <i>BACKGROUND:</i><br>Use this command followed by a color name or value to change the background color. Background color change costs 1 charge.<br>' + 
