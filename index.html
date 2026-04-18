@@ -576,7 +576,7 @@ function power() {
             localStorage['bar2'] = Number(localStorage['bar2']) - 1500000;
             localStorage['bar3'] = Number(localStorage['bar3']) - 400000;
           bamglow();plusflash();pconsole.innerHTML += '<br>Purrple leveled up!!!<br>'} 
-          else{localStorage['power'] = localStorage['power'] - 50;pconsole.innerHTML += '<br>Purrple missed...<br>';localStorage['bar4'] = Number(localStorage['bar4']) - 6000000}}
+          else{localStorage.setItem('power', 0);pconsole.innerHTML += '<br>Purrple missed...<br>';localStorage['bar4'] = Number(localStorage['bar4']) - 6000000}}
         else {pconsole.innerHTML += '<br>Not enough power. You need at least 50 charges to try levelling up. Generate power by using the "W" command or by tapping on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Please try again! Reset Purrple Sky from the main menu.<br>';}else {pconsole.innerHTML += '<br>Purrple is already SUPER maxed out!<br>';}}
 
 
