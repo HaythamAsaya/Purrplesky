@@ -546,25 +546,25 @@ function power() {
           localStorage['bar1'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 5;}
         pconsole.innerHTML += '<br>- full storage.';} 
-        else {pconsole.innerHTML += '<br>Not enough power. You need 2 charges to give Purrple food. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 5 charges to give Purrple food. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function water(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar2'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 3;}
         pconsole.innerHTML += '<br>- system hydrated.';}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to give Purrple water. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 3 charge to give Purrple water. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function hygiene(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar3'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 2;}
         pconsole.innerHTML += '<br>- fans cleaned!';}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to clean Purrple. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 2 charge to clean Purrple. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function mood(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 1){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar4'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 4;}
         pconsole.innerHTML += '<br>- update complete.';}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 1 charge to play with Purrple. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
+        else {pconsole.innerHTML += '<br>Not enough power. You need 4 charges to play with Purrple. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
           function cash(){if(!localStorage['gameover']&&!localStorage['winner']){
             let round = Math.floor(Math.random()*2)
             if(localStorage['power'] >= 50){
