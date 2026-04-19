@@ -626,7 +626,7 @@ function cash() {
     const lvl = parseInt(level.innerText) || 0;
     const pwr = Number(localStorage['power']);
 
-    if (pwr < 150) {
+    if (pwr < 50) {
         pconsole.innerHTML += '<br>Insufficient Power (150 required).<br>';
         return;
     }
@@ -689,7 +689,7 @@ function strikeHandler(e) {
         needle.style.background = "#00ffcc";
         emojiAction();
         localStorage['score'] = Number(localStorage['score']) + 1000;
-        localStorage['power'] = (Number(localStorage['power']) - 150).toFixed(1);
+        localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
         
         localStorage['bar1'] -= 1000000;
         localStorage['bar2'] -= 1500000;
@@ -699,7 +699,7 @@ function strikeHandler(e) {
         pconsole.innerHTML += `<br><span style="color:#00ffcc; font-weight:bold;">[!] SYNC_SUCCESS // LEVEL_UP</span>`;
     } else {
         needle.style.background = "#ff3333";
-        localStorage['power'] = (Number(localStorage['power']) - 150).toFixed(1);
+        localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
         localStorage['bar4'] -= 8000000; // Increased penalty for failing at high levels
         
         pconsole.innerHTML += '<br><span style="color:#ff3333;">[!] SYNC_FAILED // RECALIBRATING...</span>';
@@ -989,7 +989,7 @@ const emojiSad = ()=>{
         '- <i>WATER</i><br>Use this command to give water to Purrple, or tap on the water bar. Water costs 3 charge.<br>'+
         '- <i>CLEAN</i><br>Use this command to clean Purrple, or tap on the hygiene bar. Cleaning costs 2 charge.<br>'+
         '- <i>PLAY</i><br>Use this command to play with Purrple, or tap on the mood bar. Playing costs 4 charge.<br>'+
-        '- <i>CASH</i><br>Use this command to try leveling up, or tap on LVL on the top left corner of the screen. Cashing requires 150 charges.<br>'+
+        '- <i>CASH</i><br>Use this command to try leveling up, or tap on LVL on the top left corner of the screen. Cashing requires 50 charges.<br>'+
         '- <i>CLEAR</i><br>Use this command to clear the console.<br>' +
         '- <i>USERNAME:</i><br>Use this command followed by your name to change your username.<br>'+
         '- <i>BACKGROUND:</i><br>Use this command followed by a color name or value to change the background color. Background color change costs 1 charge.<br>' + 
