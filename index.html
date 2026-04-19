@@ -595,25 +595,25 @@ function power() {
             if(localStorage['power'] >= 5){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar1'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 5;}
-        pconsole.innerHTML += '<br>- full storage.';} 
+        pconsole.innerHTML += '<br>- Core Fish ready.';} 
         else {pconsole.innerHTML += '<br>Not enough power. You need 5 charges.<br>';}}}
           function water(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 3){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar2'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 3;}
-        pconsole.innerHTML += '<br>- system hydrated.';}
+        pconsole.innerHTML += '<br>- Core Water ready.';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 3 charges.<br>';}}}
           function hygiene(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 2){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar3'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 2;}
-        pconsole.innerHTML += '<br>- fans cleaned!';}
+        pconsole.innerHTML += '<br>- Core Star ready!';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 2 charges.<br>';}}}
           function mood(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 4){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar4'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 4;}
-        pconsole.innerHTML += '<br>- update complete.';}
+        pconsole.innerHTML += '<br>- Core Heart ready.';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 4 charges.<br>';}}}
         
 
