@@ -130,6 +130,38 @@ V 6.6
             .icon4{width:15px;}
             .logo {top:0}
             .help-help{right:30px}}
+
+           #metro-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--main-color); z-index: 10000; flex-direction: column; 
+    justify-content: center; align-items: center; font-family: monospace;
+    cursor: crosshair; /* Visual cue that the whole screen is a button */
+}
+
+#metro-bar {
+    width: 300px; height: 300px; background: var(--main-color); position: relative; border: 4px solid var(--main-color2);
+    border-radius: 50%; overflow: hidden;
+    animation: cat-float 1500ms ease-in-out infinite;
+}
+
+#sweet-spot {
+    position: absolute; width: 60px; height: 100%; background: var(--main-color2);
+    left: 120px; /* Perfectly centered on 300px bar */
+}
+
+#metro-needle {
+    position: absolute; width: 6px; height: 100%; background: var(--main-color2);
+    left: 0; box-shadow: 0 0 15px var(--main-color2);
+    /* This bezier curve makes the needle "snap" through the center */
+    animation: swing 0.8s infinite alternate cubic-bezier(0.85, 0, 0.15, 1);
+    will-change: left;
+}
+
+@keyframes swing {
+    from { left: 0%; }
+    to { left: calc(100% - 6px); }
+
+}
     </style>
 <!-- html -->
 <main class="main" id="main"> 
@@ -207,6 +239,16 @@ V 6.6
       <path class="cat1-color" d="M7.83,57.22l41.14,24.92c24.91,15.09,55.66,14.78,80.26-.81l37.97-24.06c4.15-2.63,7.04-8,7.04-11.88,0-2.78-3.48-7.21-6.95-9.34l-40.73-25.06c-22.95-14.12-51.76-14.65-75.21-1.38L7.98,34.13c-3.86,2.18-7.55,7.3-7.55,10.07,0,4.29,2.88,10.28,7.41,13.02ZM66.98,38.83l8.8-5.04,37.05-2.28c.86-.05,2.14-.67,3.38-1.26,1.53-.73,2.97-1.42,3.89-1.25.43.08.92.21,1.42.39.4,0,.79.02,1.11.06,1.74.26,2.29,2.24,2.65,3.54.05.16.09.32.13.46l26.21,13.06-1.39.87c-4.73,2.98-8.47,5.34-13.47,8.18-.66.38-1.49.76-2.36,1.17-1.82.85-4.31,2.02-4.3,2.84.02,2.29-1.91,3.94-5.04,4.29-.24.03-.48.04-.71.04-1.93,0-3.84-.83-4.65-1.72-.46-.51-.49-.94-.44-1.21.47-2.26,4.52-3.23,8.2-2.88l20.71-11.31-24.72-11.44c-.68-.31-2.44-.3-4-.29-2.37,0-3.62,0-3.96-.58-.09-.16-.17-.35-.24-.55-.61-.29-1.17-.6-1.62-.9l-35.71,2-9.05,4.56,6.87,3.79-.36.23-15.82,9.78-.12-.06-17.23-8.25,17.85-9.79,6.92,3.54ZM98.97,47.66l-6.01,2.23,1.11-6.36,4.9,4.14ZM90.89,46.24l-6.14,2.37,1.12-6.7,5.02,4.33ZM83.38,44.9l-6.63,2.36c0-2.4.32-4.35.98-6.86l5.66,4.5ZM26.39,44.18c4.73-2.98,8.47-5.33,13.46-8.18.65-.37,1.48-.76,2.35-1.17,1.95-.91,4.38-2.05,4.38-2.96-.02-2.22,1.87-3.82,4.92-4.17,2.11-.24,4.37.66,5.26,1.64.34.37.48.76.41,1.11-.46,2.2-4.46,3.13-8.11,2.78l-20.96,11.45,24.95,11.55c.62.29,2.08.31,3.49.31,0,0,0,0,.01,0,.66-.2,1.46-.16,2.28,0,1.19.03,1.91.15,2.12.51.04.07.08.16.11.24.71.32,1.37.68,1.89,1.02l35.65-1.99,8.81-4.44-6.85-3.77,16.43-10.16,17.63,8.44-18.12,9.94-6.92-3.54-8.79,5.02-37.05,2.28c-.83.05-2.1.66-3.33,1.25-1.38.66-2.7,1.29-3.65,1.29-.11,0-.21,0-.32-.03-.65-.12-1.42-.35-2.14-.67-.12-.01-.24-.02-.35-.04-1.66-.25-2.19-2.18-2.55-3.45-.05-.19-.1-.36-.15-.51l-26.06-12.99,1.2-.75Z"/>
 </svg>
     <span id="cat-emoji"></span><span id="cat-crown"></span></div>
+    
+    <div id="metro-overlay">
+        <div class="console-behind"></div>
+    <div id="metro-bar">
+        <div id="sweet-spot"></div>
+        <div id="metro-needle"></div>
+    </div>
+</div>
+
+</div>
 </main>
 <script> 
     let input = document.querySelector("#input");
@@ -574,19 +616,103 @@ function power() {
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 4;}
         pconsole.innerHTML += '<br>- update complete.';}
         else {pconsole.innerHTML += '<br>Not enough power. You need 4 charges to play with Purrple. Generate power by using the "W" command or by tapping on Purrple.<br>';}}}
-          function cash(){if(!localStorage['gameover']&&!localStorage['winner']){
-            let round = Math.floor(Math.random()*2)
-            if(localStorage['power'] >= 150){
-              if(round === 1){
-              emojiAction();
-          localStorage['score'] = Number(localStorage['score']) + 1000;
-          localStorage['power'] = Number(localStorage['power']) - 150;
-            localStorage['bar1'] = Number(localStorage['bar1']) - 1000000;
-            localStorage['bar2'] = Number(localStorage['bar2']) - 1500000;
-            localStorage['bar3'] = Number(localStorage['bar3']) - 400000;
-          bamglow();plusflash();pconsole.innerHTML += '<br>- <span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">Purrple leveled up!!!</span>'} 
-          else{localStorage['power'] = Number(localStorage['power']) - 150;pconsole.innerHTML += '<br>- missed...';localStorage['bar4'] = Number(localStorage['bar4']) - 6000000}}
-        else {pconsole.innerHTML += '<br>Not enough power. You need 150 charges to try levelling up. Generate power by using the "W" command or by tapping on Purrple.<br>';}}else if(localStorage['gameover']){pconsole.innerHTML += '<br>Please try again! Reset Purrple Sky from the main menu.<br>';}else {pconsole.innerHTML += '<br>Purrple is already SUPER maxed out!<br>';}}
+        
+
+
+         let isSyncing = false;
+
+function cash() {
+    if (localStorage['gameover'] || localStorage['winner']) return;
+    
+    const lvl = parseInt(level.innerText) || 0;
+    const pwr = Number(localStorage['power']);
+
+    if (pwr < 150) {
+        pconsole.innerHTML += '<br>Insufficient Power (150 required).<br>';
+        return;
+    }
+
+    const overlay = document.getElementById('metro-overlay');
+    const needle = document.getElementById('metro-needle');
+    const sweet = document.getElementById('sweet-spot');
+
+    // --- ELITE DIFFICULTY SCALING ---
+    
+    // 1. VARIABLE SPEED: We add a small random factor (+/- 10%) 
+    // so the player can't just memorize the rhythm.
+    const baseSpeed = Math.max(0.25, 1.5 - (lvl * 0.008)); 
+    const randomVariation = (Math.random() * 0.1) - 0.05;
+    const finalSpeed = baseSpeed + randomVariation;
+
+    // 2. MICROSCOPIC PRECISION: 
+    // Starts at 50px. By level 40, it's already down to 15px (Extremely hard).
+    const width = Math.max(60, 80 - (lvl * 0.6));
+
+    // Apply scaling
+    sweet.style.width = width + "px";
+    sweet.style.left = (150 - (width / 2)) + "px"; 
+    
+    // Reset Needle
+    needle.style.background = "var(--main-color2)"; 
+    needle.style.animation = 'none';
+    
+    setTimeout(() => {
+        // Force the new "Snap" animation
+        needle.style.animation = `swing ${finalSpeed}s infinite alternate cubic-bezier(0.85, 0, 0.15, 1)`;
+        overlay.style.display = 'flex';
+        isSyncing = true;
+        window.addEventListener('pointerdown', strikeHandler);
+    }, 20);
+}
+
+function strikeHandler(e) {
+    if (!isSyncing) return;
+    
+    const needle = document.getElementById('metro-needle');
+    const sweet = document.getElementById('sweet-spot');
+    const overlay = document.getElementById('metro-overlay');
+    
+    // Capture the "Live" GPU position
+    const needleLeft = parseFloat(window.getComputedStyle(needle).left);
+    
+    needle.style.animation = "none";
+    needle.style.left = needleLeft + "px";
+    
+    window.removeEventListener('pointerdown', strikeHandler);
+    isSyncing = false;
+
+    // PIXEL-PERFECT HIT TEST (No buffers, no mercy)
+    const start = sweet.offsetLeft;
+    const end = sweet.offsetLeft + sweet.offsetWidth;
+    const isHit = needleLeft >= start && needleLeft <= end;
+
+    if (isHit) {
+        needle.style.background = "#00ffcc";
+        emojiAction();
+        localStorage['score'] = Number(localStorage['score']) + 1000;
+        localStorage['power'] = (Number(localStorage['power']) - 150).toFixed(1);
+        
+        localStorage['bar1'] -= 1000000;
+        localStorage['bar2'] -= 1500000;
+        localStorage['bar3'] -= 400000;
+        
+        bamglow(); plusflash();
+        pconsole.innerHTML += `<br><span style="color:#00ffcc; font-weight:bold;">[!] SYNC_SUCCESS // LEVEL_UP</span>`;
+    } else {
+        needle.style.background = "#ff3333";
+        localStorage['power'] = (Number(localStorage['power']) - 150).toFixed(1);
+        localStorage['bar4'] -= 8000000; // Increased penalty for failing at high levels
+        
+        pconsole.innerHTML += '<br><span style="color:#ff3333;">[!] SYNC_FAILED // RECALIBRATING...</span>';
+    }
+
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        scroller(); 
+    }, 800);
+}
+
+
 
 
       cat.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
