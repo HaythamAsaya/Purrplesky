@@ -788,6 +788,7 @@ levelFeed.innerHTML = '⛏️ ' + randomBits(9);
 
     if(level.innerHTML >= 100){
       pconsole.innerHTML += '<br><br>WELL DONE, '+ localStorage.getItem('username') +'! 💫<br>Purrple has Superpowers!';
+      document.querySelector('.evo').innerHTML = 'OMNI';
 scroller();
 clearInterval(engine);
 const glowinfin = setInterval(() => {
