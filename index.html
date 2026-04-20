@@ -83,7 +83,7 @@ V 8.0
   position: fixed;
   inset: 0;
   z-index: -2;
-  background: linear-gradient(-45deg,  #f1c40f, #e74c3c, #f10fc4,#3498db, #2ecc71);
+  background: linear-gradient(-45deg, #e73c3c, #f10fc4,#3498db, #2ecc71);
   background-size: 400% 400%;
   background-position: 0% 50%;
   opacity: 0.02;
@@ -705,9 +705,9 @@ function strikeHandler(e) {
         if (!localStorage['winner']){localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
         }
         
-        bamglow(); plusflash();
+        bamglow(); plusflash(); power();
         pconsole.innerHTML += `<br>- <span style="color:#00ffcc; font-weight:bold;">[!] SMASH_HIT // LEVEL_UP</span>`;
-        power();
+
     } else {
         needle.style.background = "#ff3333";
        if (!localStorage['winner']){ localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
