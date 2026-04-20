@@ -738,9 +738,9 @@ function strikeHandler(e) {
 // localstorage
 if(!localStorage['username']) {
             pconsole.innerHTML += '- 🤖 Welcome to Purrple Sky.';input.value += "username: ";
-            setTimeout( () => {pconsole.innerHTML += '<br><br>- What is your name?<br>';} ,2000)
-            setTimeout( () => {input.style.background = 'rgba(255, 255, 255, 0.50)'} ,2500)
-            setTimeout( () => {input.style.background = 'none'} ,4000) 
+            setTimeout( () => {pconsole.innerHTML += '<br><br>- What is your name?<br>';} ,1000)
+            setTimeout( () => {input.style.background = 'rgba(255, 255, 255, 0.50)'} ,2000)
+            setTimeout( () => {input.style.background = 'none'} ,3500) 
 
             
            
@@ -1011,6 +1011,7 @@ const bamglow = () => {
           pconsole.innerHTML += '<br>Please enter a username of 10 or less characters.<br>';
           setTimeout(()=> {input.value += "username: "} ,100) 
         }else if(new_username.trim().length > 0){
+            username.innerHTML = new_username;
         if(!localStorage['username']){
         pconsole.innerHTML += '<br><br>- 🤖 Cool name. Oh look!<br>Hit the alien and fill the bars. Collect ⚡50 and hit SMASH!';}
         localStorage.setItem('username', new_username);
