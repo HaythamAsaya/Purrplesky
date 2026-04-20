@@ -441,7 +441,7 @@ function generateFortune() {
     document.querySelector('.evo').innerHTML = evo;
     
     const getVal = (b) => b.style.width ? parseFloat(b.style.width) : 100;
-    const stats = { FOOD: getVal(bar1), WATER: getVal(bar2), HYGIENE: getVal(bar3), MOOD: getVal(bar4) };
+    const stats = { FISH: getVal(bar1), WATER: getVal(bar2), STAR: getVal(bar3), HEART: getVal(bar4) };
     
     let lowBars = Object.keys(stats).filter(k => stats[k] <= 10);
     const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
