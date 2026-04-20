@@ -597,25 +597,25 @@ function power() {
           localStorage['bar1'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 5;}
         pconsole.innerHTML += '<br>- Core Fish ready.';} 
-        else {pconsole.innerHTML += '<br>Insufficient Power (5 required)<br>';}}}
+        else if(!localStorage['winner']){pconsole.innerHTML += '<br>Insufficient Power (5 required)<br>';}}}
           function water(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 3){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar2'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 3;}
         pconsole.innerHTML += '<br>- Core Water ready.';}
-        else {pconsole.innerHTML += '<br>Insufficient Power (3 required)<br>';}}}
+        else if(!localStorage['winner']){pconsole.innerHTML += '<br>Insufficient Power (3 required)<br>';}}}
           function hygiene(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 2){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar3'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 2;}
         pconsole.innerHTML += '<br>- Core Star ready.';}
-        else {pconsole.innerHTML += '<br>Insufficient Power (2 required)<br>';}}}
+        else if(!localStorage['winner']){pconsole.innerHTML += '<br>Insufficient Power (2 required)<br>';}}}
           function mood(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 4){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar4'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 4;}
         pconsole.innerHTML += '<br>- Core Heart ready.';}
-        else {pconsole.innerHTML += '<br>Insufficient Power (4 required)<br>';}}}
+        else if(!localStorage['winner']){pconsole.innerHTML += '<br>Insufficient Power (4 required)<br>';}}}
         
 
 
@@ -691,19 +691,19 @@ function strikeHandler(e) {
         needle.style.background = "#00ffcc";
         emojiAction();
         localStorage['score'] = Number(localStorage['score']) + 1000;
-        localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
+        if (!localStorage['winner']){localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
         
         localStorage['bar1'] -= 1000000;
         localStorage['bar2'] -= 1500000;
-        localStorage['bar3'] -= 400000;
+        localStorage['bar3'] -= 400000;}
         
         bamglow(); plusflash();
         pconsole.innerHTML += `<br><span style="color:#00ffcc; font-weight:bold;">[!] SYNC_SUCCESS // LEVEL_UP</span>`;
     } else {
         needle.style.background = "#ff3333";
-        localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
+       if (!localStorage['winner']){ localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
         localStorage['bar4'] -= 8000000; // Increased penalty for failing at high levels
-        
+    }
         pconsole.innerHTML += '<br><span style="color:#ff3333;">[!] SYNC_FAILED // RECALIBRATING...</span>';
     }
 
