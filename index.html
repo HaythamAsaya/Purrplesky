@@ -1012,6 +1012,7 @@ const bamglow = () => {
           setTimeout(()=> {input.value += "username: "} ,100) 
         }else if(new_username.trim().length > 0){
             username.innerHTML = new_username;
+            pconsole.innerHTML += '<br>Username updated.<br>';
         if(!localStorage['username']){
         pconsole.innerHTML += '<br><br>- 🤖 Cool name. Oh look!<br>Hit the alien and fill the bars. Collect ⚡50 and hit SMASH!';}
         localStorage.setItem('username', new_username);
