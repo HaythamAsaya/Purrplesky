@@ -622,15 +622,16 @@ function power() {
          let isSyncing = false;
 
 function cash() {
-    if (localStorage['gameover'] || localStorage['winner']) return;
+    if (localStorage['gameover']) return;
     
     const lvl = parseInt(level.innerText) || 0;
     const pwr = Number(localStorage['power']);
 
+    if (!localStorage['winner']){
     if (pwr < 50) {
         pconsole.innerHTML += '<br>Insufficient Power (50 required).<br>';
         return;
-    }
+    }}
 
     const overlay = document.getElementById('metro-overlay');
     const needle = document.getElementById('metro-needle');
