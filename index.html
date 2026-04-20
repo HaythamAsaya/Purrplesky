@@ -83,7 +83,7 @@ V 8.0
   position: fixed;
   inset: 0;
   z-index: -2;
-  background: linear-gradient(-45deg, #f1c40f, #e74c3c, #3498db, #2ecc71);
+  background: linear-gradient(-45deg,  #f1c40f, #e74c3c, #f10fc4,#3498db, #2ecc71);
   background-size: 400% 400%;
   background-position: 0% 50%;
   opacity: 0.02;
@@ -184,7 +184,7 @@ V 8.0
         </div>
         <div class="container" style="grid-area:container"> 
             <div class="console-header" style="position: relative">
-    <div class="console-button"><p>Trainer</p>
+    <div class="console-button"><p>BOT</p>
     <svg id="con-butt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 461.02 90" preserveAspectRatio="none"><defs><style>.con-butt{fill:var(--main-color2);}</style></defs><polygon class="con-butt" points="461.02 90 405.92 0 55.1 0 0 90 461.02 90"/></svg></div><p class="help-help">Type "help" for commands list ↵</p></div><div class="console-container"><div class="console"></div>
         <div class="console-behind"></div></div>
     <form action="" class="form" onsubmit="slap()" method="post">
@@ -561,12 +561,12 @@ function power() {
         if (!localStorage['winner']) {
         if (!isCritical && Math.random() < 0.01) {
             isCritical = true;
-            pconsole.innerHTML += `<br>- <span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL: HITS [3s] ✨</span>`; bamglow()
+            pconsole.innerHTML += `<br>- <span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL: HITS [3s] ✨</span>`;
             
             // End the jackpot after 3 seconds
             setTimeout(() => { 
                 isCritical = false; 
-                pconsole.innerHTML += `<br>- <span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`; bamglow()
+                pconsole.innerHTML += `<br>- <span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`;
             }, 3000);
         }}
 
@@ -575,7 +575,7 @@ function power() {
             // JACKPOT: 10x Power, 0.0 Drain, 2x Score
             localStorage['power'] = (parseFloat(localStorage['power']) + 1.0).toFixed(1); 
             localStorage['score'] = Number(localStorage['score']) + 2;
-            emojiAction();
+            emojiAction(); bamglow()
             // No bar drain here!
         } else {
             // NORMAL: Standard behavior
@@ -585,7 +585,7 @@ function power() {
             localStorage['bar3'] = Number(localStorage['bar3']) - 100000;
             localStorage['bar4'] = Number(localStorage['bar4']) - 600000;
             localStorage['score']++;
-            emojiAction();
+            emojiAction(); bamglow()
         }
 
         // --- 3. THE HOUSEKEEPING & FEEDBACK ---
@@ -703,10 +703,7 @@ function strikeHandler(e) {
         emojiAction();
         localStorage['score'] = Number(localStorage['score']) + 1000;
         if (!localStorage['winner']){localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
-        
-        localStorage['bar1'] -= 1000000;
-        localStorage['bar2'] -= 1500000;
-        localStorage['bar3'] -= 400000;}
+        }
         
         bamglow(); plusflash();
         pconsole.innerHTML += `<br>- <span style="color:#00ffcc; font-weight:bold;">[!] SMASH_HIT // LEVEL_UP</span>`;
@@ -714,7 +711,6 @@ function strikeHandler(e) {
     } else {
         needle.style.background = "#ff3333";
        if (!localStorage['winner']){ localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
-        localStorage['bar4'] -= 8000000; // Increased penalty for failing at high levels
     }
         pconsole.innerHTML += '<br>- <span style="color:#ff3333;">[!] SMASH_FAILED // RECALIBRATING...</span>';
     }
@@ -945,9 +941,9 @@ const bamglow = () => {
                 let catEmoji = ["💔","😕","😔","😓","😒","😟","😢","😥","😩","😪","😭","😵","🙁", "😣", "👽"];
         let randEmoji = Math.floor( Math.random() *catEmoji.length);
         cat_emoji.innerHTML = catEmoji[randEmoji];
-        cat_emoji.style.top="0%";
-    setTimeout(()=> { cat_emoji.style.top="-5%";cat_emoji.style.opacity = "0";}, 1000)
-    setTimeout(()=> { cat_emoji.style.top="5%";cat_emoji.innerHTML = "";cat_emoji.style.opacity = "1";}, 2500)
+        cat_emoji.style.top="15%";cat_emoji.style.scale="2";
+    setTimeout(()=> { cat_emoji.style.top="0%";cat_emoji.style.opacity = "0";cat_emoji.style.scale="1";}, 1000)
+    setTimeout(()=> { cat_emoji.style.top="15%";cat_emoji.innerHTML = "";cat_emoji.style.opacity = "1";}, 2500)
 }
 
 
@@ -999,12 +995,12 @@ const bamglow = () => {
         '- <i>C3</i><br>Use this command to fill up Core Star. C3 costs 2 charge.<br>'+
         '- <i>C4</i><br>Use this command to fill up Core Heart. C4 costs 4 charge.<br>'+
         '- <i>SMASH</i><br>Use this command to smash, SMASH costs 50 charges.<br>'+
-        '- <i>CLEAR</i><br>Use this command to clear the trainer console.<br>' +
+        '- <i>CLEAR</i><br>Use this command to clear the bot console.<br>' +
         '- <i>USERNAME:</i><br>Use this command followed by your name to change your username.<br>'+
         '- <i>BACKGROUND:</i><br>Use this command followed by a color name or value to change the background color. Background color change costs 1 charge.<br>' + 
         '- <i>COLOR:</i><br>Use this command followed by a color name or value to change the foreground color. Color change costs 1 charge.<br>'+
         '- <i>6+6</i><br>Trainer thinks math is cool.<br>'+
-        '<br>P.s. If you experiment with colors and encounter an error, tap on the clouds on top of the screen.<br><br>Read more on how to play in the main menu.<br><br>Scroll up in the trainer console if you can\'t see the full list.<br>';
+        '<br>P.s. If you experiment with colors and encounter an error, tap on the clouds on top of the screen.<br><br>Read more on how to play in the main menu.<br><br>Scroll up in the bot console if you can\'t see the full list.<br>';
       } else if (regex_username.test(input.value.trim())){
         let new_username = input.value.replace(regex_username, '');
         if(new_username.trim().length > 10){
@@ -1015,8 +1011,7 @@ const bamglow = () => {
             pconsole.innerHTML += '<br>Username updated.<br>';
         if(!localStorage['username']){
         pconsole.innerHTML += '<br><br>- 🤖 Oh look over there!<br>Hit the alien and fill the 4 cores. Collect ⚡50 and hit SMASH!';
-                setTimeout( () => {cat.style.background = 'rgba(255, 255, 255, 0.70)'} ,1000)
-            setTimeout( () => {cat.style.background = 'none'} ,3500) 
+                setTimeout( () => {bamglow()} ,1000)
         }
         localStorage.setItem('username', new_username);
       }}else if (input.value.trim().toLowerCase() === "reset" || input.value.trim().toLowerCase() === "clear" || input.value.trim().toLowerCase() === "restart"){
