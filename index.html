@@ -91,6 +91,8 @@ V 8.0
   animation: glow 8s linear infinite;
   will-change: opacity, background-position;
 }
+        .form {opacity: 0;}
+        .form.active {opacity:1;}
         .form input[type=text] {width: 65%;display: inline;margin:0; border: 0;background: transparent;padding: 1em; color: var(--main-color2);font-size: clamp(12px, 4vw, 1.2em);    border-radius: 50px;}
         .form input[type=text]::placeholder{color: var(--main-color2);}
         .form input[type=submit] {width: 25%;display: inline;margin:15px 5px 0 0;float:right; border-radius: 0;appearance: none;-webkit-appearance:none;-webkit-border-radius:0;background: var(--main-color2); border: none;padding: .5em; transform: translate(-9px,-9px); color: var(--main-color); transition: all 100ms;font-weight: bold;}
@@ -119,7 +121,7 @@ V 8.0
             @keyframes shadow {0% {}50% {width:10.5vh}}
             .container,.cat {display: grid;align-content:center; align-items: start;}
             .bars{display: grid;align-content:stretch}
-            .help-help{text-align: right; margin:0;font-size: clamp(12px, 2vw, 1.2em);position:absolute;right: 0;top:0;}
+            .help-help{text-align: right; margin:0;font-size: clamp(12px, 2vw, 1.2em);position:absolute;right: 0;top:0; display: none;}
             
 
            #metro-overlay {
@@ -151,7 +153,7 @@ V 8.0
 
 @media (orientation: portrait) {
                 #metro-bar {scale:1}
-            .main {grid-template-columns:4fr 6fr;grid-template-rows: 1fr 4fr 3fr;
+            .main {grid-template-columns:4fr 6fr;grid-template-rows: 1fr 3fr 3fr;
             grid-template-areas: "navbar navbar""container container""bars cat";gap:5vw;padding: 30px 30px 60px 30px;}
             .console{height:600px;max-height: 25vh;width:100vw;margin-left:-30px}
             .icon{width:25px;}
@@ -159,7 +161,9 @@ V 8.0
             .icon3{width:17px;}
             .icon4{width:15px;}
             .logo {top:0}
-            .help-help{right:30px}
+            .help-help{right:30px;}
+            .help-help.active {display: block;}
+            form.active {opacity: 1;}
         .console-button{margin-left: 0px;}}
 
 @keyframes swing {
@@ -171,8 +175,8 @@ V 8.0
 <!-- html -->
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>An alien landed and we need to fight!</li><li>💾 Game progress is saved automatically, come back anytime, but don’t stay away too long.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by punching, and lose some by filling cores.</li><li>🔍 You will study the alien when your cores are full.</li></ul><i>Customize the layout with your favorite colors and make it your own!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details>Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
-        <p style="font-size:X-small;">V 8.0</p><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
+    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>An alien landed and we need to fight!</li><li>💾 Game progress is saved automatically, come back anytime, but don’t stay away too long.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by punching the alien, and lose some by filling cores and missing smashes.</li><li>🔍 You will study the alien when your cores are full.</li></ul><i>Customize the layout with your favorite colors and make it your own!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
+        <p style="font-size:X-small;">V 8.0</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
 	<line class="st0" x1="0" y1="20.5" x2="61" y2="20.5"/>
@@ -743,6 +747,7 @@ setTimeout(() => {
 if(!localStorage['username']) {
             pconsole.innerHTML += '- 🤖 Welcome to Purrple Sky.';input.value += "username: ";
             setTimeout( () => {pconsole.innerHTML += '<br><br>- What is your name?<br>';} ,500)
+             form.classList.toggle("active");
             setTimeout( () => {input.style.background = 'rgba(255, 255, 255, 0.60)'} ,1500)
             setTimeout( () => {input.style.background = 'none'} ,3500) 
 
@@ -1018,8 +1023,8 @@ const bamglow = () => {
             username.innerHTML = new_username;
             pconsole.innerHTML += '<br>Username updated.<br>';
         if(!localStorage['username']){
-        pconsole.innerHTML += '<br><br>- 🤖 OMG, an alien!<br>Hit the alien and stay alive. Collect ⚡15 and hit SMASH!';
-                setTimeout( () => {bamglow()} ,1000)
+        pconsole.innerHTML += '<br><br>- 🤖 OMG, an alien!<br>Hit the alien and stay alive. Collect ⚡15 and hit the SMASH button!';
+            form.classList.toggle("active");
         }
         localStorage.setItem('username', new_username);
       }}else if (input.value.trim().toLowerCase() === "reset" || input.value.trim().toLowerCase() === "clear" || input.value.trim().toLowerCase() === "restart"){
@@ -1043,6 +1048,13 @@ document.addEventListener('click', function(e) {
   if (!details.some(f => f.contains(e.target))) {
     details.forEach(f => f.removeAttribute('open'));
   } else {details.forEach(f => !f.contains(e.target) ? f.removeAttribute('open') : '')}})
+
+
+  // developer input
+  document.getElementById("developer").onclick = function () {
+    document.querySelector(".help-help").classList.toggle("active");
+    form.classList.toggle("active");
+  };
 
 </script>
 </body>
