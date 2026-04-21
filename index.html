@@ -705,7 +705,6 @@ function strikeHandler(e) {
 
     if (isHit) {
         needle.style.background = "#00ffcc";
-        document.querySelector(".main").style.transform = "scale(2)";
 ko.style.scale = "2";
         localStorage['score'] = Number(localStorage['score']) + 1000;
         // if (!localStorage['winner']){localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
@@ -732,7 +731,6 @@ ko.style.scale = "2";
 overlay.style.opacity = "0"
 setTimeout(() => {
     overlay.style.display = 'none';
-    document.querySelector(".main").style.transform = "scale(1)";
 overlay.style.opacity = "1"
 ko.style.scale = "1";
 }, 700);
