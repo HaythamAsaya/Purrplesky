@@ -308,86 +308,15 @@ function scroller(){pconsole.scrollTo(0, pconsole.scrollHeight);}
 
 
 function generateAndApplyRandomColors() {
-  const hslToRgb = (h, s, l) => {
-    s /= 100;
-    l /= 100;
+  const r = (min, max) => (Math.random() * (max - min + 1) | 0) + min;
 
-    const c = (1 - Math.abs(2 * l - 1)) * s;
-    const x = c * (1 - Math.abs((h / 60) % 2 - 1));
-    const m = l - c / 2;
+  const h = r(0, 359);
+  const bg = `hsl(${h}, ${r(8, 16)}%, ${r(84, 88)}%)`;
+  const fg = `hsl(${h}, ${r(70, 90)}%, ${r(12, 18)}%)`;
 
-    let r = 0, g = 0, b = 0;
-
-    if (h >= 0 && h < 60) [r, g, b] = [c, x, 0];
-    else if (h < 120)     [r, g, b] = [x, c, 0];
-    else if (h < 180)     [r, g, b] = [0, c, x];
-    else if (h < 240)     [r, g, b] = [0, x, c];
-    else if (h < 300)     [r, g, b] = [x, 0, c];
-    else                  [r, g, b] = [c, 0, x];
-
-    return [
-      Math.round((r + m) * 255),
-      Math.round((g + m) * 255),
-      Math.round((b + m) * 255),
-    ];
-  };
-
-  const luminanceFromHsl = (h, s, l) => {
-    const [r, g, b] = hslToRgb(h, s, l)
-      .map(v => v / 255)
-      .map(v => v <= 0.03928
-        ? v / 12.92
-        : Math.pow((v + 0.055) / 1.055, 2.4)
-      );
-
-    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
-  };
-
-  const contrastRatio = (lum1, lum2) => {
-    const lighter = Math.max(lum1, lum2);
-    const darker = Math.min(lum1, lum2);
-    return (lighter + 0.05) / (darker + 0.05);
-  };
-
-  const randomInt = (min, max) =>
-    Math.floor(Math.random() * (max - min + 1)) + min;
-
-  const safeFgHue = () => {
-    // Avoid neon-ish red, green, blue zones for foreground:
-    // red ~ 0, green ~ 120, blue ~ 240
-    const ranges = [
-      [20, 85],   // warm yellow / orange
-      [145, 205], // teal / cyan
-      [265, 340], // purple / magenta
-    ];
-    const [min, max] = ranges[randomInt(0, ranges.length - 1)];
-    return randomInt(min, max);
-  };
-
-  let bg, fg, bgLum, fgLum;
-
-  do {
-    // Background: always light and soft
-    const bgH = randomInt(0, 359);
-    const bgS = randomInt(20, 45);
-    const bgL = randomInt(78, 90);
-
-    // Foreground: always darker, with controlled saturation
-    const fgH = safeFgHue();
-    const fgS = randomInt(25, 55);
-    const fgL = randomInt(18, 32);
-
-    bg = `hsl(${bgH}, ${bgS}%, ${bgL}%)`;
-    fg = `hsl(${fgH}, ${fgS}%, ${fgL}%)`;
-
-    bgLum = luminanceFromHsl(bgH, bgS, bgL);
-    fgLum = luminanceFromHsl(fgH, fgS, fgL);
-  } while (contrastRatio(bgLum, fgLum) < 4.5);
-
-  localStorage["bg_color"] = bg;
-  localStorage["color"] = fg;
-
-  window.location.reload();
+  localStorage.setItem("bg_color", bg);
+  localStorage.setItem("color", fg);
+  location.reload();
 }
 
 
@@ -566,9 +495,9 @@ function generateFortune() {
       let isCritical = false; // Persistent in memory while app is open
 
 function power() {
-    if (!localStorage['gameover']) {
+    if (!localStorage['gameover'] && !localStorage['winner']) {
         // --- 1. THE LUCK ELEMENT (1% Chance) ---
-        if (!localStorage['winner']) {
+        if (!localStorage['winner']) 
         if (!isCritical && Math.random() < 0.01) {
             isCritical = true;
             pconsole.innerHTML += `<br>- <span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL: FREE_HITS [3s] ✨</span>`;
@@ -579,7 +508,7 @@ function power() {
                 pconsole.innerHTML += `<br>- <span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`;
                 wallet_plus.style.scale = "1"
             }, 3000);
-        }}
+        }
 
         // --- 2. BRANCHING LOGIC (The Addictive Formula) ---
         if (isCritical) {
@@ -610,6 +539,8 @@ function power() {
             localStorage['score']++;
             plusflash();
         }
+    } else if (localStorage['winner']) {
+        cash()
     }
 }
 
