@@ -181,7 +181,7 @@ V 8.0
 <!-- html -->
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>An alien landed and we need to fight!</li><li>💾 Game progress is saved automatically, come back anytime, but don’t stay away too long.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by punching the alien, and lose some by filling cores and missing smashes.</li><li>🔍 You will study the alien when your cores are full.</li></ul><i>Customize the layout with your favorite colors and make it your own!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
+    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>An alien landed and we need to fight!</li><li>💾 Game progress is saved automatically, come back anytime, but don’t stay away too long.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by punching the alien, and lose some by filling cores and missing smashes.</li><li>🔍 You will study the alien when your cores are full.</li></ul></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
         <p style="font-size:X-small;">V 8.0</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
@@ -198,7 +198,7 @@ V 8.0
     <svg id="con-butt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 461.02 90" preserveAspectRatio="none"><defs><style>.con-butt{fill:var(--main-color2);}</style></defs><polygon class="con-butt" points="461.02 90 405.92 0 55.1 0 0 90 461.02 90"/></svg></div><p class="help-help">Type "help" for commands list ↵</p></div><div class="console-container"><div class="console"></div>
         <div class="console-behind"></div></div>
     <form action="" class="form" onsubmit="slap()" method="post">
-        <input type="text" name="input" id="input" placeholder="Type here . . ." autocomplete="off" spellcheck="false" autofocus >
+        <input type="text" name="input" id="input" placeholder="Type here . . ." autocomplete="off" spellcheck="false">
         <input type="submit" name="enter" id="enter" value="HIT"></form></div>
         <div class="bars" style="grid-area:bars">
         <div class="food-box"><div class="bar1box">
@@ -303,6 +303,11 @@ V 8.0
     let regex_power =  /^(w)$/i;
     let regex_cash =  /^(smash)$/i;
 
+
+const landscape = window.matchMedia("(orientation: landscape)");
+if (landscape.matches) {
+  input.focus();
+}
 
 function scroller(){pconsole.scrollTo(0, pconsole.scrollHeight);}
 
