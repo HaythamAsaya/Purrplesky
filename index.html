@@ -640,8 +640,8 @@ function cash() {
     const pwr = Number(localStorage['power']);
 
     if (!localStorage['winner']){
-    if (pwr < 50) {
-        pconsole.innerHTML += '<br>- Insufficient Power (50 required).<br>';
+    if (pwr < 15) {
+        pconsole.innerHTML += '<br>- Insufficient Power (15 required).<br>';
         return;
     }}
 
@@ -714,7 +714,7 @@ function strikeHandler(e) {
 
     } else {
         needle.style.background = "#ff3333";
-       if (!localStorage['winner']){ localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
+       if (!localStorage['winner']){ localStorage['power'] = (Number(localStorage['power']) - 15).toFixed(1);
     }
         pconsole.innerHTML += '<br>- <span style="color:#ff3333;">[!] SMASH_FAILED // RECALIBRATING...</span>';
     }
@@ -797,7 +797,7 @@ levelFeed.innerHTML = '🔍 ' + 'Studying ' + randomBits(9);
 
     function leveler(){
 
-if (localStorage['power'] > 50 || localStorage['winner']) {
+if (localStorage['power'] > 15 || localStorage['winner']) {
         ko.style.display = "block";
     } else { ko.style.display = "none";}
 
@@ -1014,7 +1014,7 @@ const bamglow = () => {
             username.innerHTML = new_username;
             pconsole.innerHTML += '<br>Username updated.<br>';
         if(!localStorage['username']){
-        pconsole.innerHTML += '<br><br>- 🤖 OMG, an alien!<br>Hit the alien and stay alive. Collect ⚡50 and hit SMASH!';
+        pconsole.innerHTML += '<br><br>- 🤖 OMG, an alien!<br>Hit the alien and stay alive. Collect ⚡15 and hit SMASH!';
                 setTimeout( () => {bamglow()} ,1000)
         }
         localStorage.setItem('username', new_username);
