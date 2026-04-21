@@ -60,7 +60,7 @@ V 8.0
         .level-feed{position: fixed;bottom:30px;left:50%;translate:-50%;font-size: clamp(0.9em, 2vw, 1.2em);}
         #cat-emoji{animation: cloud 2s alternate ease-in-out infinite;position: absolute;
     left: 10%;font-size: 2em;text-shadow: 0px 1px 2px var(--main-color2);transition: all 2s;} 
-    #cat-crown{position: absolute;right: 0;top: 0;font-size: 2.5em;text-shadow: 0px 1px 13px var(--main-color2);} 
+    #cat-crown{position: absolute;right: 0;top: 0;font-size: 2.5em;text-shadow: 1px 2px 4px var(--main-color2);animation: cloud 7s alternate ease-in-out infinite;} 
         .logo{width:50px;height:50px;background:#311238; margin: 0 auto 0; position:relative;top:-30px}
         .cloud-one{position:absolute; width: 60px;top:18px; left:-20px; 
             animation: cloud 7s alternate ease-in-out infinite;}
@@ -122,6 +122,8 @@ V 8.0
             .container,.cat {display: grid;align-content:center; align-items: start;}
             .bars{display: grid;align-content:stretch}
             .help-help{text-align: right; margin:0;font-size: clamp(12px, 2vw, 1.2em);position:absolute;right: 0;top:0; display: none;}
+            .help-help.active {display: block;}
+
             
 
            #metro-overlay {
@@ -162,7 +164,6 @@ V 8.0
             .icon4{width:15px;}
             .logo {top:0}
             .help-help{right:30px;}
-            .help-help.active {display: block;}
             form.active {display: block;}
         .console-button{margin-left: 0px;}}
 
@@ -730,10 +731,10 @@ ko.style.scale = "2";
 }
 overlay.style.opacity = "0"
 setTimeout(() => {
+    ko.style.scale = "1";
     overlay.style.display = 'none';
-overlay.style.opacity = "1"
-ko.style.scale = "1";
-}, 700);
+    overlay.style.opacity = "1"
+}, 500);
 
 }
 
@@ -792,7 +793,8 @@ if(!localStorage['username']) {
   currentLevel += 1 / (30 * level.innerHTML); // 100ms tick worth of progress
   localStorage.setItem('level', currentLevel);
 if (!localStorage['winner']){localStorage['power'] = parseFloat(Number(localStorage['power']) + (0.01 * (level.innerHTML / 2)));}
-levelFeed.innerHTML = '🔍 ' + 'Studying ' + randomBits(9);
+levelFeed.innerHTML = '🔍 ' + 'Studying ';
+pconsole.innerHTML += ' ' + randomBits(9);
 }
     const levelCounter = setInterval(() => {
       if(localStorage['username']) {
@@ -819,6 +821,7 @@ if (localStorage['power'] > 15 || localStorage['winner']) {
 scroller();
 clearInterval(engine);
 const glowinfin = setInterval(() => {
+generateFortune();scroller(); 
 bamglow()
 }, 1000);
 localStorage.setItem('winner', 1);
