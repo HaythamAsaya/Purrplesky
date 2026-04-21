@@ -171,7 +171,7 @@ V 8.0
 <!-- html -->
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>An alien landed and we need to fight!</li><li>💾 Game progress is saved automatically, come back anytime, but don’t stay away too long, it might die.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by punching, and lose by giving the alien resources to keep it alive.</li><li>🔍 You can study the alien when all 4 cores are full.</li></ul><i>Customize the layout with your favorite colors and make it your own!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details>Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
+    <details class="menu"><details style="padding:2em 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>An alien landed and we need to fight!</li><li>💾 Game progress is saved automatically, come back anytime, but don’t stay away too long, it will win.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by punching, and lose by staying alive.</li><li>🔍 You can study the alien when your cores are full.</li></ul><i>Customize the layout with your favorite colors and make it your own!</i></details><details style="padding:0 4em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details>Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
         <p style="font-size:X-small;">V 8.0</p><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
@@ -707,6 +707,9 @@ function strikeHandler(e) {
         
         bamglow(); plusflash(); power();
         pconsole.innerHTML += `<br>- <span style="color:#00ffcc; font-weight:bold;">[!] SMASH_HIT // LEVEL_UP</span>`;
+        localStorage['bar1'] = new Date().getTime();localStorage['bar2'] = new Date().getTime();
+        localStorage['bar3'] = new Date().getTime();localStorage['bar4'] = new Date().getTime();
+
 
     } else {
         needle.style.background = "#ff3333";
@@ -798,7 +801,7 @@ if (localStorage['power'] > 50 || localStorage['winner']) {
     } else { ko.style.display = "none";}
 
     if(level.innerHTML >= 100){
-      pconsole.innerHTML += '<br><br>- OMG, '+ localStorage.getItem('username') +'! 💫<br>The alien developed Stockholm syndrome.!'; 
+      pconsole.innerHTML += '<br><br>- OMG, '+ localStorage.getItem('username') +'! 💫<br>You have Superpowers!'; 
       document.querySelector('.evo').innerHTML = 'OMNI';
 scroller();
 clearInterval(engine);
@@ -881,7 +884,7 @@ const levelValue = level.innerHTML
 
 
 const gameover = ()=> {
-pconsole.innerHTML += '<br>- GAME OVER!<br>The alien escaped at level (' + level.innerHTML + ').<br>Reset the game from the menu to smash again!';
+pconsole.innerHTML += '<br>- GAME OVER!<br>You died at level (' + level.innerHTML + ').<br>Reset the game from the menu to smash again!';
 scroller();
 cat.style.opacity = 0;
 clearInterval(engine);
@@ -1010,7 +1013,7 @@ const bamglow = () => {
             username.innerHTML = new_username;
             pconsole.innerHTML += '<br>Username updated.<br>';
         if(!localStorage['username']){
-        pconsole.innerHTML += '<br><br>- 🤖 Oh look over there!<br>Hit the alien and fill the 4 cores. Collect ⚡50 and hit SMASH!';
+        pconsole.innerHTML += '<br><br>- 🤖 Oh look over there, an alien!<br>Hit the alien and stay alive. Collect ⚡50 and hit SMASH!';
                 setTimeout( () => {bamglow()} ,1000)
         }
         localStorage.setItem('username', new_username);
