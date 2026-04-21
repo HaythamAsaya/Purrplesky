@@ -702,11 +702,11 @@ function strikeHandler(e) {
         needle.style.background = "#00ffcc";
         emojiAction();
         localStorage['score'] = Number(localStorage['score']) + 1000;
-        if (!localStorage['winner']){localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
-        }
+        // if (!localStorage['winner']){localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
+        // }
         
         bamglow(); plusflash(); power();
-        pconsole.innerHTML += `<br>- <span style="color:#00ffcc; font-weight:bold;">[!] SMASH_HIT // LEVEL_UP</span>`;
+        pconsole.innerHTML += `<br>- <span style="color:#00ffcc; font-weight:bold;">[!] SMASH_HIT // LEVEL_UP!</span>`;
         localStorage['bar1'] = new Date().getTime();localStorage['bar2'] = new Date().getTime();
         localStorage['bar3'] = new Date().getTime();localStorage['bar4'] = new Date().getTime();
 
@@ -884,7 +884,7 @@ const levelValue = level.innerHTML
 
 
 const gameover = ()=> {
-pconsole.innerHTML += '<br>- GAME OVER!<br>You died at level (' + level.innerHTML + ').<br>Reset the game from the menu to smash again!';
+pconsole.innerHTML += '<br>- GAME OVER!<br>You died at level (' + level.innerHTML + ').<br><div style="cursor:pointer; margin-block: 2em;" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;color: var(--main-color);width: 100%;margin: 5px auto;border: 2px solid var(--main-color);text-align: center;">NEW GAME</p></div>';
 scroller();
 cat.style.opacity = 0;
 clearInterval(engine);
@@ -1013,7 +1013,7 @@ const bamglow = () => {
             username.innerHTML = new_username;
             pconsole.innerHTML += '<br>Username updated.<br>';
         if(!localStorage['username']){
-        pconsole.innerHTML += '<br><br>- 🤖 Oh look over there, an alien!<br>Hit the alien and stay alive. Collect ⚡50 and hit SMASH!';
+        pconsole.innerHTML += '<br><br>- 🤖 OMG, an alien!<br>Hit the alien and stay alive. Collect ⚡50 and hit SMASH!';
                 setTimeout( () => {bamglow()} ,1000)
         }
         localStorage.setItem('username', new_username);
