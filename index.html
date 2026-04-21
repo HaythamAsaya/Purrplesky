@@ -715,14 +715,18 @@ function strikeHandler(e) {
     } else {
         needle.style.background = "#ff3333";
        if (!localStorage['winner']){ localStorage['power'] = (Number(localStorage['power']) - 15).toFixed(1);
+            localStorage['bar1'] = Number(localStorage['bar1']) - 2000000;
+            localStorage['bar2'] = Number(localStorage['bar2']) - 2400000;
+            localStorage['bar3'] = Number(localStorage['bar3']) - 400000;
+            localStorage['bar4'] = Number(localStorage['bar4']) - 2400000;
     }
-        pconsole.innerHTML += '<br>- <span style="color:#ff3333;">[!] SMASH_FAILED // RECALIBRATING...</span>';
-    }
+    pconsole.innerHTML += '<br>- <span style="color:#ff3333;">[!] SMASH_FAILED // RECALIBRATING...</span>';
+    scroller(); 
+}
+setTimeout(() => {
+    overlay.style.display = 'none';
+}, 700);
 
-    setTimeout(() => {
-        overlay.style.display = 'none';
-        scroller(); 
-    }, 800);
 }
 
 
