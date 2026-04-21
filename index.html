@@ -135,7 +135,7 @@ V 8.0
     width: 300px; height: 300px; background: var(--main-color); position: relative; border: 4px solid var(--main-color2);
     border-radius: 50%; overflow: hidden;
     animation: cloud 2s alternate ease-in-out infinite;
-    scale:2;
+    scale:2;cursor: crosshair; 
 }
 
 #sweet-spot {
@@ -705,15 +705,17 @@ function strikeHandler(e) {
 
     if (isHit) {
         needle.style.background = "#00ffcc";
-        emojiAction();
+        document.querySelector(".main").style.transform = "scale(2)";
+ko.style.scale = "2";
         localStorage['score'] = Number(localStorage['score']) + 1000;
         // if (!localStorage['winner']){localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
         // }
         
         pconsole.innerHTML += `<br>- <span style="color:#00ffcc; font-weight:bold;">[!] SMASH_HIT // LEVEL_UP!</span>`;
-        bamglow(); plusflash(); pluspower()
+        bamglow(); plusflash(); pluspower(); scroller(); 
         localStorage['bar1'] = new Date().getTime();localStorage['bar2'] = new Date().getTime();
         localStorage['bar3'] = new Date().getTime();localStorage['bar4'] = new Date().getTime();
+        
 
 
     } else {
@@ -727,8 +729,12 @@ function strikeHandler(e) {
     pconsole.innerHTML += '<br>- <span style="color:#ff3333;">[!] SMASH_FAILED // RECALIBRATING...</span>';
     scroller(); 
 }
+overlay.style.opacity = "0"
 setTimeout(() => {
     overlay.style.display = 'none';
+    document.querySelector(".main").style.transform = "scale(1)";
+overlay.style.opacity = "1"
+ko.style.scale = "1";
 }, 700);
 
 }
@@ -819,12 +825,13 @@ bamglow()
 }, 1000);
 localStorage.setItem('winner', 1);
 // input.style.display = 'none'; enter.style.display = 'none';
-wallet.innerHTML = "SUPER";
+wallet.innerHTML = "♾️";
 bar1.style.width = '100%';
 bar2.style.width = '100%';
 bar3.style.width = '100%';
 bar4.style.width = '100%';
 ko.style.display = "block";
+levelFeed.innerHTML = ' '
           } 
 
           if(localStorage['username']) {
