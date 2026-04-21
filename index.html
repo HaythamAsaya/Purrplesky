@@ -304,10 +304,6 @@ V 8.0
     let regex_cash =  /^(smash)$/i;
 
 
-const landscape = window.matchMedia("(orientation: landscape)");
-if (landscape.matches) {
-  input.focus();
-}
 
 function scroller(){pconsole.scrollTo(0, pconsole.scrollHeight);}
 
@@ -690,7 +686,7 @@ setTimeout(() => {
       document.querySelector('.knock-out').addEventListener("click", ()=>{if(localStorage['username']){cash();scroller()}})
               
 // localstorage
-if(!localStorage['username']) {
+if(!localStorage['username']) {   input.focus();
             pconsole.innerHTML += '- 🤖 Welcome to Purrple Sky.';input.value += "username: ";
             setTimeout( () => {pconsole.innerHTML += '<br><br>- What is your name?<br>';} ,500)
              form.classList.toggle("active");
