@@ -46,6 +46,8 @@ V 8.0
         body{background:var(--main-color); color:var(--main-color2); margin: 0; 
             box-sizing:border-box; font-family:Arial, Helvetica, sans-serif;font-weight: 600;overflow:hidden;font-stretch: condensed;}
             .main {height:100vh;height:100dvh; max-height: 100%; max-width: 1400px;margin-inline: auto;padding:60px; display:grid; grid-template-columns:2fr 1fr;grid-template-rows: 1fr 3fr 5fr;grid-template-areas: "navbar navbar""container bars""container cat";gap:9vh;overflow:hidden;cursor: default;}
+            .main.omni {grid-template-rows: 1fr 3fr;
+    grid-template-areas:         "navbar navbar"        "container cat"        "container cat";}
             /* header */
         .container{width:100%;margin:0 auto;position: relative}
         .profile{position:absolute; top: 30px; left:30px;z-index: 2;color: var(--main-color2);}
@@ -165,7 +167,10 @@ V 8.0
             .logo {top:0}
             .help-help{right:30px;}
             form.active {display: block;}
-        .console-button{margin-left: 0px;}}
+        .console-button{margin-left: 0px;}
+        .main.omni {grid-template-columns:4fr 6fr;grid-template-rows: 1fr 3fr 3fr;
+            grid-template-areas: "navbar navbar""container container""cat cat";}
+    }
 
 @keyframes swing {
     from { left: 0%; }
@@ -760,7 +765,7 @@ if(!localStorage['username']) {
            
         } else {
           username.innerHTML = localStorage.getItem('username');
-          if(!localStorage['gameover']){
+          if(!localStorage['gameover'] && !localStorage['winner']){
     let magicAnswers = ['- 🤖 Hello ', '- 🤖 Hi ', '- 🤖 Welcome back ', '- 🤖 Yo ', '- 🤖 It\'s '];
     let randAnswer = Math.floor( Math.random() *magicAnswers.length)
     pconsole.innerHTML += magicAnswers[randAnswer] + localStorage.getItem('username') + ".<br>Hit the alien and stay alive. Collect ⚡15 and hit the SMASH button!";}
@@ -816,12 +821,19 @@ if (localStorage['power'] > 15 || localStorage['winner']) {
     } else { ko.style.display = "none";}
 
     if(level.innerHTML >= 100){
-      pconsole.innerHTML += '<br><br>- OMG, '+ localStorage.getItem('username') +'! 💫<br>You have Superpowers!'; 
+      pconsole.innerHTML += '<br>- OMG, '+ localStorage.getItem('username') +'! 💫<br>You have Superpowers!'; 
       document.querySelector('.evo').innerHTML = 'OMNI';
 scroller();
 clearInterval(engine);
+
+document.querySelector(".bars").style.display = "none";
+document.querySelector(".main").classList.toggle("omni")
+
 const glowinfin = setInterval(() => {
 generateFortune();scroller(); 
+if (pconsole.innerHTML.length > 3000) {
+            pconsole.innerHTML = '- 🫧 Housekeeping!';
+        }
 bamglow()
 }, 1000);
 localStorage.setItem('winner', 1);
