@@ -44,7 +44,7 @@ V 8.0
             .menu > summary, .reset {list-style: none} 
             .menu > summary::-webkit-details-marker, .reset::-webkit-details-marker {display: none; }
         body{background:var(--main-color); color:var(--main-color2); margin: 0; 
-            box-sizing:border-box; font-family:Arial, Helvetica, sans-serif;overflow:hidden;font-stretch: condensed;}
+            box-sizing:border-box; font-family:Arial, Helvetica, sans-serif;font-weight: 600;overflow:hidden;font-stretch: condensed;}
             .main {height:100vh;height:100dvh; max-height: 100%; max-width: 1400px;margin-inline: auto;padding:60px; display:grid; grid-template-columns:2fr 1fr;grid-template-rows: 1fr 3fr 5fr;grid-template-areas: "navbar navbar""container bars""container cat";gap:9vh;overflow:hidden;cursor: default;}
             /* header */
         .container{width:100%;margin:0 auto;position: relative}
@@ -71,7 +71,7 @@ V 8.0
             30% {transform:translate(-3px, -1px);transform:scale(0.9)}
             70% {transform:translate(3px, 1px)}
             100%{transform:translate(0px, 0px);transform:scale(1)}}
-        .menu{position:absolute;right:0;width:80px;min-width: fit-content;top:0; display: inline;text-align: right;transition: all 500ms;z-index: 3;overflow: auto;max-height: 100vh;max-height: 100dvh;}
+        .menu{position:absolute;right:0;width:80px;min-width: fit-content;top:0; display: inline;text-align: right;transition: all 500ms;z-index: 7;overflow: auto;max-height: 100vh;max-height: 100dvh;}
         details[open].menu { text-align: center; padding: 0 0 2em;max-width: min-content;background: var(--main-color);box-shadow: -1px 1px 0px var(--main-color2);}
         .menu summary {margin: 0 0 0 auto;}
         .menu-icon {max-width:30px; cursor:pointer;text-align: right; margin:40px 40px 0 auto;}
@@ -104,7 +104,7 @@ V 8.0
             align-items: center;justify-content: space-between;}
             .bar{height: 100%;background:var(--main-color2);border-radius:50px}
             .bar1,.bar2,.bar3,.bar4{width: 0%;opacity: 0.8;}
-            .bar-text{margin:0 0 .5em;color:var(--main-color2);font-weight: 800;font-size: clamp(10px, 1vw, 1em);}
+            .bar-text{margin:0 ;color:var(--main-color2);font-weight: 800;font-size: clamp(12px, 2vw, 1em);line-height: 0;}
             .icon{width:30px;}
             .icon2{width:40px;}
             .icon3{width:20px;}
@@ -460,7 +460,7 @@ function generateFortune() {
 
     if (lvl >= 100) lowBars = []; 
 
-    const isRich = pwr === "SUPER" || parseFloat(pwr) >= 50;
+    const isRich = pwr === "SUPER" || parseFloat(pwr) >= 15;
     const glitchChance = lowBars.length > 0 ? 0.25 : (isRich ? 0.20 : 0.08);
 
     // =====================================================================
@@ -607,25 +607,25 @@ function power() {
             if(localStorage['power'] >= 5){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar1'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 5;}
-        pconsole.innerHTML += '<br>- Core Fish ready.';} 
+        pconsole.innerHTML += '<br>- Core Fish check.';} 
         else if(!localStorage['winner']){pconsole.innerHTML += '<br>- Insufficient Power (5 required)<br>';}}}
           function water(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 3){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar2'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 3;}
-        pconsole.innerHTML += '<br>- Core Water ready.';}
+        pconsole.innerHTML += '<br>- Core Water check.';}
         else if(!localStorage['winner']){pconsole.innerHTML += '<br>- Insufficient Power (3 required)<br>';}}}
           function hygiene(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 2){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar3'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 2;}
-        pconsole.innerHTML += '<br>- Core Star ready.';}
+        pconsole.innerHTML += '<br>- Core Star check.';}
         else if(!localStorage['winner']){pconsole.innerHTML += '<br>- Insufficient Power (2 required)<br>';}}}
           function mood(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 4){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar4'] = new Date().getTime();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 4;}
-        pconsole.innerHTML += '<br>- Core Heart ready.';}
+        pconsole.innerHTML += '<br>- Core Heart check.';}
         else if(!localStorage['winner']){pconsole.innerHTML += '<br>- Insufficient Power (4 required)<br>';}}}
         
     
