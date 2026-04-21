@@ -788,7 +788,6 @@ if(!localStorage['username']) {
   currentLevel += 1 / (30 * level.innerHTML); // 100ms tick worth of progress
   localStorage.setItem('level', currentLevel);
 if (!localStorage['winner']){localStorage['power'] = parseFloat(Number(localStorage['power']) + (0.01 * (level.innerHTML / 2)));}
-  bamglow();
 levelFeed.innerHTML = '🔍 ' + 'Studying ' + randomBits(9);
 }
     const levelCounter = setInterval(() => {
