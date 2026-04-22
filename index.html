@@ -732,6 +732,9 @@ if(!localStorage['username']) {   input.focus();
 if (!localStorage['winner']){localStorage['power'] = parseFloat(Number(localStorage['power']) + (0.01 * (level.innerHTML / 2)));}
 levelFeed.innerHTML = '🔍 ' + 'Studying ';
 pconsole.innerHTML += ' ' + randomBits(9);scroller();
+if (pconsole.innerHTML.length > 3000) {
+            pconsole.innerHTML = '- 🔍 Studying!';
+        }
 }
     const levelCounter = setInterval(() => {
       if(localStorage['username']) {
