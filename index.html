@@ -55,7 +55,7 @@ V 8.0
         .username{font-weight: bold;margin: 0;font-size: clamp(1.2em, 4vw, 32px); 
             display: inline-block;}
             .lv-charge{font-size: clamp(0.9em, 2vw, 1.2em); position: relative;width: fit-content;}
-        .lv-plus{font-size: 5em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; left:0;z-index: 5;}
+        .lv-plus{font-size: 4em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; left:0;z-index: 5;}
         .wallet-plus{font-size: 5em; position: fixed;margin: 0;animation: cloud 600ms alternate ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal;top: 50%; left:50%;z-index: 5;pointer-events: none;}
         .knock-out{animation: cloud 400ms alternate ease-in-out infinite; position: fixed; margin: 0; padding: 1em; left: 50%; translate: -50%;bottom:40%;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: radial-gradient(rgba(255, 166, 0, 0.282), transparent 70%);display: none;font-size: clamp(2em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;} 
         .power-bar{margin:0 0 0 -10px; position: absolute;top:0;left:0;font-size: clamp(1em, 3vw, 32px);font-family: monospace;}
@@ -705,7 +705,7 @@ if(!localStorage['username']) {   input.focus();
           if(!localStorage['gameover'] && !localStorage['winner']){
     let magicAnswers = ['- 🤖 Hello ', '- 🤖 Hi ', '- 🤖 Welcome back ', '- 🤖 Yo ', '- 🤖 It\'s '];
     let randAnswer = Math.floor( Math.random() *magicAnswers.length)
-    pconsole.innerHTML += magicAnswers[randAnswer] + localStorage.getItem('username') + ".<br>Hit and SMASH the alien!";}
+    pconsole.innerHTML += magicAnswers[randAnswer] + localStorage.getItem('username') + ".<br>Let\'s SMASH!";}
 }
     if (localStorage['bg_color']){
         document.documentElement.style.setProperty('--main-color', localStorage.getItem('bg_color'))}
@@ -985,7 +985,7 @@ const bamglow = () => {
             username.innerHTML = new_username;
             pconsole.innerHTML += '<br>Username updated.<br>';
         if(!localStorage['username']){
-        pconsole.innerHTML += '<br><br>- 🤖 OMG, it\'s an alien!<br>Hit the alien and fill the bars till the SMASH button shows up!';
+        pconsole.innerHTML += '<br><br>- 🤖 OMG, it\'s an alien!<br>Hit the alien and fill the bars till the SMASH button shows up after collecting⚡15!';
             form.classList.toggle("active");
         }
         localStorage.setItem('username', new_username);
