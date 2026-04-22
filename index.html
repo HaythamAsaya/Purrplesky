@@ -55,7 +55,7 @@ V 8.0
         .username{font-weight: bold;margin: 0;font-size: clamp(1.2em, 4vw, 32px); 
             display: inline-block;}
             .lv-charge{font-size: clamp(0.9em, 2vw, 1.2em); position: relative;width: fit-content;}
-        .lv-plus{font-size: 3em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; right:-80%;z-index: 5;}
+        .lv-plus{font-size: 5em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; left:0;z-index: 5;}
         .wallet-plus{font-size: 5em; position: fixed;margin: 0;animation: cloud 600ms alternate ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal;top: 50%; left:50%;z-index: 5;pointer-events: none;}
         .knock-out{animation: cloud 400ms alternate ease-in-out infinite; position: fixed; margin: 0; padding: 1em; left: 50%; translate: -50%;bottom:40%;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: radial-gradient(rgba(255, 166, 0, 0.282), transparent 70%);display: none;font-size: clamp(2em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;} 
         .power-bar{margin:0 0 0 -10px; position: absolute;top:0;left:0;font-size: clamp(1em, 3vw, 32px);font-family: monospace;}
@@ -290,6 +290,8 @@ V 8.0
     let catCrown = document.querySelector('#cat-crown');
     let cat = document.querySelector('.cat');
     let cat_emoji = document.querySelector('#cat-emoji')
+    const lv_plus = document.querySelector('.lv-plus');
+    const wallet_plus = document.querySelector('.wallet-plus');
     let regex_math = /^([\d\. ]+[\-\+\/\*][\d\. ]+)+$/;
     let regex_bg_color = /^(background:)/i;
     let regex_color = /^(color:)/i;
@@ -302,6 +304,7 @@ V 8.0
     let regex_mood =  /^(c4)$/i;
     let regex_power =  /^(w)$/i;
     let regex_cash =  /^(smash)$/i;
+
 
 
 
@@ -644,6 +647,7 @@ function strikeHandler(e) {
     if (isHit) {
         needle.style.background = "#00ffcc";
 ko.style.scale = "2";
+    lv_plus.style.scale = "2";
         localStorage['score'] = Number(localStorage['score']) + 1000;
         // if (!localStorage['winner']){localStorage['power'] = (Number(localStorage['power']) - 50).toFixed(1);
         // }
@@ -669,6 +673,7 @@ ko.style.scale = "2";
 overlay.style.opacity = "0"
 setTimeout(() => {
     ko.style.scale = "1";
+    lv_plus.style.scale = "1";
     overlay.style.display = 'none';
     overlay.style.opacity = "1"
 }, 500);
@@ -889,8 +894,7 @@ const bamglow = () => {
     
 
 
-    const lv_plus = document.querySelector('.lv-plus');
-    const wallet_plus = document.querySelector('.wallet-plus');
+
     const plusflash = ()=>{
             lv_plus.style.opacity = "1";lv_plus.style.transitionDelay = "0s";
             setTimeout(()=>{lv_plus.style.opacity = "0";lv_plus.style.transitionDelay = "200ms";
@@ -981,7 +985,7 @@ const bamglow = () => {
             username.innerHTML = new_username;
             pconsole.innerHTML += '<br>Username updated.<br>';
         if(!localStorage['username']){
-        pconsole.innerHTML += '<br><br>- 🤖 OMG, it\'s thos aliens again!<br>Hit the alien a lot! <br>Collect ⚡15 and hit the SMASH button!';
+        pconsole.innerHTML += '<br><br>- 🤖 OMG, it\'s an alien!<br>Hit the alien and fill the bars till the SMASH button shows up!';
             form.classList.toggle("active");
         }
         localStorage.setItem('username', new_username);
