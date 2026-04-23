@@ -598,7 +598,12 @@ function cash() {
     
     // 1. VARIABLE SPEED: We add a small random factor (+/- 10%) 
     // so the player can't just memorize the rhythm.
-    const baseSpeed = Math.max(0.25, 1.5 - (lvl * 0.008)); 
+// 1. THE SPEED "BLACK HOLE"
+// Instead of Math.max, we use an inverse curve. 
+// It will get closer and closer to 0.1s but never quite reach it.
+// At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
+const baseSpeed = 0.1 + (1.1 / (1 + (lvl * 0.03)));
+
     const randomVariation = (Math.random() * 0.1) - 0.05;
     const finalSpeed = baseSpeed + randomVariation;
 
@@ -645,6 +650,7 @@ function strikeHandler(e) {
     const isHit = needleLeft >= start && needleLeft <= end;
 
     if (isHit) {
+    const lvl = parseInt(level.innerText) || 0;
         needle.style.background = "#00ffcc";
 ko.style.scale = "2";
     lv_plus.style.scale = "2";
