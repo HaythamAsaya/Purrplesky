@@ -471,7 +471,7 @@ function generateFortune() {
             const omniChoice = Math.floor(roll() * 4);
             if (omniChoice === 0) output = pick(ARCHIVE.boring).toUpperCase(); 
             else if (omniChoice === 1) output = `${pick(ARCHIVE.verbs)} the ${pick(ARCHIVE.objects)}.`; 
-            else if (omniChoice === 2) output = `${pick(ARCHIVE.vision)}. Witness, ${user}.`; 
+            else if (omniChoice === 2) output = `${pick(ARCHIVE.vision)}. Purrple Sky, ${user}.`; 
             else output = `${pick(ARCHIVE.boring).toUpperCase()} // ${pick(ARCHIVE.states).toUpperCase()}`; 
 
             if (roll() < 0.05) output = `${pick(ARCHIVE.glyphs)} ${output}`;
