@@ -755,10 +755,10 @@ if (localStorage['power'] > 15 || localStorage['winner']) {
     } else { ko.style.display = "none";}
 
     if(level.innerHTML >= 100){
-      pconsole.innerHTML += '<br>- OMG, '+ localStorage.getItem('username') +'! 💫<br>The alien is finally speaking!<br>'; 
+        clearInterval(engine);
+      pconsole.innerHTML += '<br>- OMG, '+ localStorage.getItem('username') +'! 💫<br>The alien is trying to communicate!<br>'; 
       document.querySelector('.evo').innerHTML = 'OMNI';
 scroller();
-clearInterval(engine);
 
 document.querySelector(".bars").style.display = "none";
 document.querySelector(".main").classList.toggle("omni")
@@ -772,7 +772,8 @@ const chatty = () => {
     if (pconsole.innerHTML.length > 3000) pconsole.innerHTML = '- 🫧 Housekeeping!';
     setTimeout(chatty, 3000 + Math.random() * 3000);
 };
-chatty();
+setTimeout(chatty, 2000)
+
 
 localStorage.setItem('winner', 1);
 // input.style.display = 'none'; enter.style.display = 'none';
@@ -911,7 +912,7 @@ const bamglow = () => {
   if (lastClick >= (Date.now() - delay))
     return;
   lastClick = Date.now();
-                let catEmoji = ["💔","😕","😔","😓","😒","😟","😢","😥","😩","😪","😭","😵","🙁", "😣", "👽"];
+                let catEmoji = ["👾","🛸","📡","🪐","🌑","🌕","🛰️","🌠","⭐","🌌","☁️","👁️‍🗨️","⚠️", "☣️", "👽","☢️","💥", "💢", "☄️", "🧬", "⚖️"];
         let randEmoji = Math.floor( Math.random() *catEmoji.length);
         cat_emoji.innerHTML = catEmoji[randEmoji];
         cat_emoji.style.top="15%";cat_emoji.style.scale="2";
