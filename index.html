@@ -470,23 +470,11 @@ function generateFortune() {
             else if (omniChoice === 1) output = `${pick(ARCHIVE.verbs)} the ${pick(ARCHIVE.objects)}.`; 
             else if (omniChoice === 2) output = `${pick(ARCHIVE.vision)}. Witness, ${user}.`; 
             else output = `${pick(ARCHIVE.boring).toUpperCase()} // ${pick(ARCHIVE.states).toUpperCase()}`; 
-        } 
-        else {
-            const templates = [
-                () => `${pick(ARCHIVE.verbs)} the ${pick(ARCHIVE.objects)}.`,
-                () => `${pick(ARCHIVE.objects)} is ${pick(ARCHIVE.states)}.`, 
-                () => `${pick(ARCHIVE.states)} ${pick(ARCHIVE.objects)}.`
-            ];
-            
-            if (lvl >= 50 && roll() > 0.7) {
-                output = `${pick(ARCHIVE.grind)}.`;
-            } else {
-                output = templates[roll() * templates.length | 0]();
-            }
-            if (lvl >= 50 && roll() > 0.8) output = output.toUpperCase(); 
-        }
 
-        if (roll() < 0.05) output = `${pick(ARCHIVE.glyphs)} ${output}`;
+            if (roll() < 0.05) output = `${pick(ARCHIVE.glyphs)} ${output}`;
+        } else {
+            return generateFortune();
+        }
     }
 
     if (output === lastMsg) return generateFortune();
@@ -767,7 +755,7 @@ if (localStorage['power'] > 15 || localStorage['winner']) {
     } else { ko.style.display = "none";}
 
     if(level.innerHTML >= 100){
-      pconsole.innerHTML += '<br>- OMG, '+ localStorage.getItem('username') +'! 💫<br>You have Superpowers!'; 
+      pconsole.innerHTML += '<br>- OMG, '+ localStorage.getItem('username') +'! 💫<br>The alien is finally speaking!'; 
       document.querySelector('.evo').innerHTML = 'OMNI';
 scroller();
 clearInterval(engine);
