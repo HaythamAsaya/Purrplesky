@@ -755,7 +755,7 @@ if (localStorage['power'] > 15 || localStorage['winner']) {
     } else { ko.style.display = "none";}
 
     if(level.innerHTML >= 100){
-      pconsole.innerHTML += '<br>- OMG, '+ localStorage.getItem('username') +'! 💫<br>The alien is finally speaking!'; 
+      pconsole.innerHTML += '<br>- OMG, '+ localStorage.getItem('username') +'! 💫<br>The alien is finally speaking!<br>'; 
       document.querySelector('.evo').innerHTML = 'OMNI';
 scroller();
 clearInterval(engine);
