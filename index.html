@@ -304,6 +304,9 @@ V 8.0
     let regex_mood =  /^(c4)$/i;
     let regex_power =  /^(w)$/i;
     let regex_cash =  /^(smash)$/i;
+    const catEmoji = ["👾","🛸","📡","🪐","🌑","🌕","🛰️","🌠","⭐","🌌","☁️","👁️‍🗨️","⚠️", "☣️", "👽","☢️","💥", "💢", "☄️", "🧬", "⚖️"];
+    const evo_el = document.querySelector('.evo');
+
 
 
 
@@ -390,7 +393,7 @@ function generateFortune() {
     const pwrNum = parseFloat(pwr) || 0;
     const user = (username.innerText || "USER").toUpperCase();
     const evo = lvl >= 100 ? "OMNI" : lvl >= 80 ? "SUPER" : lvl >= 70 ? "RUFF+" : lvl >= 50 ? "RUFF" : lvl >= 20 ? "GO+" : "GO";
-    document.querySelector('.evo').innerHTML = evo;
+    evo_el.innerHTML = evo;
     
     const getVal = (b) => b.style.width ? parseFloat(b.style.width) : 100;
     const stats = { FISH: getVal(bar1), WATER: getVal(bar2), STAR: getVal(bar3), HEART: getVal(bar4) };
@@ -538,25 +541,25 @@ function power() {
 
           function food(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 5){emojiAction();bamglow();localStorage['score']++;plusflash();
-          localStorage['bar1'] = new Date().getTime();
+          localStorage['bar1'] = Date.now();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 5;}
         pconsole.insertAdjacentHTML('beforeend', '<br>- Core Fish check.');} 
         else if(!localStorage['winner']){pconsole.insertAdjacentHTML('beforeend', '<br>- Insufficient Power (5 required)<br>');}}}
           function water(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 3){emojiAction();bamglow();localStorage['score']++;plusflash();
-          localStorage['bar2'] = new Date().getTime();
+          localStorage['bar2'] = Date.now();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 3;}
         pconsole.insertAdjacentHTML('beforeend', '<br>- Core Water check.');}
         else if(!localStorage['winner']){pconsole.insertAdjacentHTML('beforeend', '<br>- Insufficient Power (3 required)<br>');}}}
           function hygiene(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 2){emojiAction();bamglow();localStorage['score']++;plusflash();
-          localStorage['bar3'] = new Date().getTime();
+          localStorage['bar3'] = Date.now();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 2;}
         pconsole.insertAdjacentHTML('beforeend', '<br>- Core Star check.');}
         else if(!localStorage['winner']){pconsole.insertAdjacentHTML('beforeend', '<br>- Insufficient Power (2 required)<br>');}}}
           function mood(){if(!localStorage['gameover']){
             if(localStorage['power'] >= 4){emojiAction();bamglow();localStorage['score']++;plusflash();
-          localStorage['bar4'] = new Date().getTime();
+          localStorage['bar4'] = Date.now();
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 4;}
         pconsole.insertAdjacentHTML('beforeend', '<br>- Core Heart check.');}
         else if(!localStorage['winner']){pconsole.insertAdjacentHTML('beforeend', '<br>- Insufficient Power (4 required)<br>');}}}
@@ -648,8 +651,8 @@ ko.style.scale = "2";
         
         pconsole.insertAdjacentHTML('beforeend', `<br>- <span style="color:#00ffcc; font-weight:bold;">[!] SMASH_HIT // LEVEL_UP!</span>`);
         bamglow(); plusflash(); pluspower(); scroller(); 
-        localStorage['bar1'] = new Date().getTime();localStorage['bar2'] = new Date().getTime();
-        localStorage['bar3'] = new Date().getTime();localStorage['bar4'] = new Date().getTime();
+        localStorage['bar1'] = Date.now();localStorage['bar2'] = Date.now();
+        localStorage['bar3'] = Date.now();localStorage['bar4'] = Date.now();
         
 
 
@@ -707,13 +710,13 @@ if(!localStorage['username']) {   input.focus();
     if (localStorage['color']){
         document.documentElement.style.setProperty('--main-color2', localStorage.getItem('color'));}
     if(!localStorage['start']){
-        localStorage.setItem('start', new Date().getTime())
+        localStorage.setItem('start', Date.now())
         localStorage.setItem('level', 1)
         localStorage.setItem('score', 0)
-        localStorage.setItem('bar1', (new Date().getTime() - 30000000))
-        localStorage.setItem('bar2', (new Date().getTime() - 30000000))
-        localStorage.setItem('bar3', (new Date().getTime() - 20000000))
-        localStorage.setItem('bar4', (new Date().getTime() - 35000000))
+        localStorage.setItem('bar1', (Date.now() - 30000000))
+        localStorage.setItem('bar2', (Date.now() - 30000000))
+        localStorage.setItem('bar3', (Date.now() - 20000000))
+        localStorage.setItem('bar4', (Date.now() - 35000000))
         localStorage.setItem('power', 0);
     }
 
@@ -758,7 +761,7 @@ if (localStorage['power'] > 15 || localStorage['winner']) {
     if(level.innerHTML >= 100){
         clearInterval(engine);
       pconsole.insertAdjacentHTML('beforeend', '<br>- OMG, '+ localStorage.getItem('username') +'! 💫<br>The alien is trying to communicate!<br>'); 
-      document.querySelector('.evo').innerHTML = 'OMNI';
+      evo_el.innerHTML = 'OMNI';
 scroller();
 
 document.querySelector(".bars").style.display = "none";
@@ -791,22 +794,22 @@ levelFeed.innerHTML = ' '
 cat.style.opacity = 1;
 if (level.innerHTML < 100){
   wallet.innerHTML = parseFloat(Number(localStorage['power'])).toFixed(1);
-        var bar1_minus = (new Date().getTime() - localStorage.getItem('bar1'));
+        var bar1_minus = (Date.now() - localStorage.getItem('bar1'));
         var bar1_percentage = (100 - (bar1_minus / (1200000)));
         if(bar1_percentage >= 0){
         bar1.style.width = bar1_percentage + '%';
     } else {bar1.style.width = '0%'}
-    var bar2_minus = (new Date().getTime() - localStorage.getItem('bar2'));
+    var bar2_minus = (Date.now() - localStorage.getItem('bar2'));
         var bar2_percentage = (100 - (bar2_minus / (1250000)));
         if(bar2_percentage >= 0){
         bar2.style.width = bar2_percentage + '%';
     } else {bar2.style.width = '0%'}
-    var bar3_minus = (new Date().getTime() - localStorage.getItem('bar3'));
+    var bar3_minus = (Date.now() - localStorage.getItem('bar3'));
         var bar3_percentage = (100 - (bar3_minus / (1400000)));
         if(bar3_percentage >= 0){
         bar3.style.width = bar3_percentage + '%';
     } else {bar3.style.width = '0%'}
-    var bar4_minus = (new Date().getTime() - localStorage.getItem('bar4'));
+    var bar4_minus = (Date.now() - localStorage.getItem('bar4'));
         var bar4_percentage = (100 - (bar4_minus / (1000000)));
         if(bar4_percentage >= 0){
         bar4.style.width = bar4_percentage + '%';
@@ -826,8 +829,6 @@ if (level.innerHTML < 100){
     const pwr = wallet.innerText;
     const pwrNum = parseFloat(pwr) || 0;
     const user = (username.innerText || "USER").toUpperCase();
-    const evo = lvl >= 100 ? "OMNI" : lvl >= 80 ? "SUPER" : lvl >= 70 ? "RUFF+" : lvl >= 50 ? "RUFF" : lvl >= 20 ? "GO+" : "GO";
-    document.querySelector('.evo').innerHTML = evo;
 }
     
 
@@ -912,7 +913,6 @@ const bamglow = () => {
   if (lastClick >= (Date.now() - delay))
     return;
   lastClick = Date.now();
-                let catEmoji = ["👾","🛸","📡","🪐","🌑","🌕","🛰️","🌠","⭐","🌌","☁️","👁️‍🗨️","⚠️", "☣️", "👽","☢️","💥", "💢", "☄️", "🧬", "⚖️"];
         let randEmoji = Math.floor( Math.random() *catEmoji.length);
         cat_emoji.innerHTML = catEmoji[randEmoji];
         cat_emoji.style.top="15%";cat_emoji.style.scale="2";
