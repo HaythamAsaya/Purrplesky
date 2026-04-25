@@ -9,7 +9,7 @@
 
 =========================
 Purrple by Haytham Asaya
-V 8.0
+V 8.3
 =========================
 
 -->
@@ -181,8 +181,8 @@ V 8.0
 <!-- html -->
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:6em 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Fight the alien!</li><li>💾 Game progress is saved automatically, come back anytime, but don’t stay away too long.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by punching the alien, spend power on your cores and smashes.</li><li>🔍 You will study the alien whenever your cores are full, it helps you generate power and level up.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
-        <p style="font-size:X-small;">V 8.0</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
+    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Hit the alien and the SMASH! button.</li><li>💾 Game progress is saved automatically, come back anytime, but don’t stay away too long, resources may drain.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by punching the alien, spend power on smashes.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.5em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;">YES</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
+        <p style="font-size:X-small;">V 8.3</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
 	<line class="st0" x1="0" y1="20.5" x2="61" y2="20.5"/>
@@ -278,6 +278,7 @@ V 8.0
     let level = document.querySelector('.level');
     let levelFeed = document.querySelector('.level-feed');
     let wallet = document.querySelector('.wallet');
+    const bars = document.querySelector(".bars");
     let bar1 = document.querySelector('.bar1');
     let bar2 = document.querySelector('.bar2');
     let bar3 = document.querySelector('.bar3');
@@ -495,12 +496,12 @@ function power() {
         if (!localStorage['winner']) 
         if (!isCritical && Math.random() < 0.01) {
             isCritical = true;
-            pconsole.insertAdjacentHTML('beforeend', `<br>- <span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL: FREE_HITS [3s] ✨</span>`);
+            pconsole.insertAdjacentHTML('beforeend', `<br>- <span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL (x10) : FREE_HITS [3s] ✨</span>`);
             wallet_plus.style.scale = "2"
             // End the jackpot after 3 seconds
             setTimeout(() => { 
                 isCritical = false; 
-                pconsole.insertAdjacentHTML('beforeend', `<br>- <span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`);
+                pconsole.insertAdjacentHTML('beforeend', `<br>- <span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`);scroller();
                 wallet_plus.style.scale = "1"
             }, 3000);
         }
@@ -681,10 +682,11 @@ setTimeout(() => {
 
 
       cat.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
-      document.querySelector('.food-box').addEventListener("click", ()=>{if(localStorage['username']){food();scroller()}}) 
-      document.querySelector('.water-box').addEventListener("click", ()=>{if(localStorage['username']){water();scroller()}}) 
-      document.querySelector('.hygiene-box').addEventListener("click", ()=>{if(localStorage['username']){hygiene();scroller()}}) 
-      document.querySelector('.mood-box').addEventListener("click", ()=>{if(localStorage['username']){mood();scroller()}}) 
+      bars.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
+    //   document.querySelector('.food-box').addEventListener("click", ()=>{if(localStorage['username']){food();scroller()}}) 
+    //   document.querySelector('.water-box').addEventListener("click", ()=>{if(localStorage['username']){water();scroller()}}) 
+    //   document.querySelector('.hygiene-box').addEventListener("click", ()=>{if(localStorage['username']){hygiene();scroller()}}) 
+    //   document.querySelector('.mood-box').addEventListener("click", ()=>{if(localStorage['username']){mood();scroller()}}) 
       document.querySelector('.knock-out').addEventListener("click", ()=>{if(localStorage['username']){cash();scroller()}})
               
 // localstorage
@@ -713,10 +715,10 @@ if(!localStorage['username']) {   input.focus();
         localStorage.setItem('start', Date.now())
         localStorage.setItem('level', 1)
         localStorage.setItem('score', 0)
-        localStorage.setItem('bar1', (Date.now() - 30000000))
-        localStorage.setItem('bar2', (Date.now() - 30000000))
-        localStorage.setItem('bar3', (Date.now() - 20000000))
-        localStorage.setItem('bar4', (Date.now() - 35000000))
+        localStorage.setItem('bar1', (Date.now()))
+        localStorage.setItem('bar2', (Date.now()))
+        localStorage.setItem('bar3', (Date.now()))
+        localStorage.setItem('bar4', (Date.now()))
         localStorage.setItem('power', 0);
     }
 
@@ -728,17 +730,17 @@ if(!localStorage['username']) {   input.focus();
   return str;
 }
 
-    function autoLevelUp() {
-  let currentLevel = Number(localStorage.getItem('level')) || 0;
-  currentLevel += 1 / (30 * level.innerHTML); // 100ms tick worth of progress
-  localStorage.setItem('level', currentLevel);
-if (!localStorage['winner']){localStorage['power'] = parseFloat(Number(localStorage['power']) + (0.01 * (level.innerHTML / 2)));}
-levelFeed.innerHTML = '🔍 ' + 'Studying ';
-pconsole.insertAdjacentHTML('beforeend', ' ' + randomBits(9));scroller();
-if (pconsole.innerHTML.length > 3000) {
-            pconsole.innerHTML = '- 🔍 Studying!';
-        }
-}
+//     function autoLevelUp() {
+//   let currentLevel = Number(localStorage.getItem('level')) || 0;
+//   currentLevel += 1 / (30 * level.innerHTML); // 100ms tick worth of progress
+//   localStorage.setItem('level', currentLevel);
+// if (!localStorage['winner']){localStorage['power'] = parseFloat(Number(localStorage['power']) + (0.01 * (level.innerHTML / 2)));}
+// levelFeed.innerHTML = '🔍 ' + 'Studying ';
+// pconsole.insertAdjacentHTML('beforeend', ' ' + randomBits(9));scroller();
+// if (pconsole.innerHTML.length > 3000) {
+//             pconsole.innerHTML = '- 🔍 Studying!';
+//         }
+// }
     const levelCounter = setInterval(() => {
       if(localStorage['username']) {
         if (level.innerHTML < 100 && localStorage['gameover']){
@@ -764,7 +766,7 @@ if (localStorage['power'] > 15 || localStorage['winner']) {
       evo_el.innerHTML = 'OMNI';
 scroller();
 
-document.querySelector(".bars").style.display = "none";
+bars.style.display = "none";
 document.querySelector(".main").classList.toggle("omni")
 
 const glowinfin = setInterval(() => {
@@ -820,11 +822,11 @@ if (level.innerHTML < 100){
   location.reload();
 });}
 
-    if(bar1_percentage <= 20 || bar2_percentage <= 20 || bar3_percentage <= 20 || bar4_percentage <= 20){
-    } if(bar1_percentage >= 95 && bar2_percentage >= 95 && bar3_percentage >= 95 && bar4_percentage >= 95) {autoLevelUp();
-        
-    } else { 
-        levelFeed.innerHTML = ' ';}
+    // if(bar1_percentage <= 20 || bar2_percentage <= 20 || bar3_percentage <= 20 || bar4_percentage <= 20){
+    // } if(bar1_percentage >= 95 && bar2_percentage >= 95 && bar3_percentage >= 95 && bar4_percentage >= 95) {autoLevelUp();
+    //     } 
+    //     else { 
+    //     levelFeed.innerHTML = ' ';}
         const lvl = parseInt(level.innerText) || 0;
     const pwr = wallet.innerText;
     const pwrNum = parseFloat(pwr) || 0;
@@ -834,6 +836,9 @@ if (level.innerHTML < 100){
 
 
 const levelValue = level.innerHTML
+const evolving = () => {cat.style.scale = "2"; setTimeout(() => {
+    cat.style.scale = "1";
+  }, 1000);}
     // evolved text and cats
     if(levelValue == 100 && localStorage['evolve'] != 5){bamglow();localStorage.setItem('evolve', 5)}
     else if(levelValue == 80 && localStorage['evolve'] != 4){pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Super!'); scroller();bamglow();localStorage.setItem('evolve', 4)}
@@ -857,7 +862,7 @@ const levelValue = level.innerHTML
 
 
 const gameover = ()=> {
-pconsole.insertAdjacentHTML('beforeend', '<br>- GAME OVER! at level (' + level.innerHTML + ').<br><br>- You forgot to fill the bars.<br><div style="cursor:pointer; margin-block: 2em;" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;color: var(--main-color);width: 100%;margin: 5px auto;border: 2px solid var(--main-color);text-align: center;">NEW GAME</p></div>');
+pconsole.insertAdjacentHTML('beforeend', '<br>- GAME OVER! at level (' + level.innerHTML + ').<div style="cursor:pointer; margin-block: 1em;" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;color: var(--main-color);width: 100%;margin-inline:auto;border: 2px solid var(--main-color);text-align: center;">RESET</p></div>');
 scroller();
 cat.style.opacity = 0;
 clearInterval(engine);
@@ -984,7 +989,7 @@ const bamglow = () => {
             username.innerHTML = new_username;
             pconsole.insertAdjacentHTML('beforeend', '<br>Username updated.<br>');
         if(!localStorage['username']){
-        pconsole.insertAdjacentHTML('beforeend', '<br><br>- 🤖 OMG, it\'s an alien!<br>Hit the alien and fill the bars. The SMASH button shows up after collecting ⚡15.<br>Good luck!');
+        pconsole.insertAdjacentHTML('beforeend', '<br><br>- 🤖 OMG, it\'s an alien!<br>Hit the alien till the SMASH button shows up. Score a SMASH! to refill resources.<br>Good luck!');
             form.classList.toggle("active");
         }
         localStorage.setItem('username', new_username);
