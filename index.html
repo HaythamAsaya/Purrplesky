@@ -766,7 +766,7 @@ if(!localStorage['username']) {   input.focus();
 
     function leveler(){
 
-if (localStorage['power'] > 15 || localStorage['winner']) {
+if (localStorage['power'] >= 15 || localStorage['winner']) {
         ko.style.display = "block";
     } else { ko.style.display = "none";}
 
@@ -846,9 +846,6 @@ if (level.innerHTML < 100){
 
 
 const levelValue = level.innerHTML
-const evolving = () => {cat.style.scale = "2"; setTimeout(() => {
-    cat.style.scale = "1";
-  }, 1000);}
     // evolved text and cats
     if(levelValue == 100 && localStorage['evolve'] != 5){bamglow();localStorage.setItem('evolve', 5)}
     else if(levelValue == 80 && localStorage['evolve'] != 4){pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Super!'); scroller();bamglow();localStorage.setItem('evolve', 4)}
