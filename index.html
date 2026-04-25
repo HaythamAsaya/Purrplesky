@@ -681,8 +681,18 @@ setTimeout(() => {
 
 
 
-      cat.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
-      bars.addEventListener("click", ()=>{if(localStorage['username']){power();scroller()}}) 
+cat.addEventListener("pointerdown", () => {
+  if (localStorage['username']) {
+    power();
+    scroller();
+  }
+});
+bars.addEventListener("pointerdown", () => {
+  if (localStorage['username']) {
+    power();
+    scroller();
+  }
+});
     //   document.querySelector('.food-box').addEventListener("click", ()=>{if(localStorage['username']){food();scroller()}}) 
     //   document.querySelector('.water-box').addEventListener("click", ()=>{if(localStorage['username']){water();scroller()}}) 
     //   document.querySelector('.hygiene-box').addEventListener("click", ()=>{if(localStorage['username']){hygiene();scroller()}}) 
