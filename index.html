@@ -56,9 +56,9 @@ V 8.3
             display: inline-block;}
             .lv-charge{font-size: clamp(0.9em, 2vw, 1.2em); position: relative;width: fit-content;}
         .lv-plus{font-size: 4em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; left:0;z-index: 5;}
-        .wallet-plus{font-size: 5em; position: fixed;margin: 0;animation: cloud 600ms alternate ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal;top: 50%; left:50%;z-index: 5;pointer-events: none;}
-        .knock-out{animation: cloud 400ms alternate ease-in-out infinite; position: fixed; margin: 0; padding: 1em; left: 50%; translate: -50%;bottom:40%;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: radial-gradient(rgba(255, 166, 0, 0.282), transparent 70%);display: none;font-size: clamp(2em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;} 
-        .power-bar{margin:0 0 0 -10px; position: absolute;top:0;left:0;font-size: clamp(1em, 3vw, 32px);font-family: monospace;}
+        .wallet-plus{font-size: 5em; position: fixed;margin: 0;animation: cloud 600ms alternate ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal;bottom: 39%; left:55%;z-index: 5;pointer-events: none;}
+        .knock-out{animation: cloud 400ms alternate ease-in-out infinite; position: fixed; margin: 0; padding: 1em; left: 50%; translate: -50%;bottom:35%;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: radial-gradient(rgba(255, 166, 0, 0.282), transparent 70%);display: none;font-size: clamp(2em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;} 
+        .power-bar{margin:0 0 0 -10px; position: absolute;top:-15%;left:0;font-size: clamp(1em, 3vw, 32px);font-family: monospace;}
         .level-feed{position: fixed;bottom:30px;left:50%;translate:-50%;font-size: clamp(0.9em, 2vw, 1.2em);}
         #cat-emoji{animation: cloud 2s alternate ease-in-out infinite;position: absolute;
     left: 10%;font-size: 2em;text-shadow: 0px 1px 2px var(--main-color2);transition: all 2s;} 
@@ -123,7 +123,7 @@ V 8.3
             @keyframes shadow {0% {}50% {width:10.5vh}}
             .container,.cat {display: grid;align-content:center; align-items: start;}
             .bars{display: grid;align-content:stretch}
-            .help-help{text-align: right; margin:0;font-size: clamp(12px, 2vw, 1.2em);position:absolute;right: 0;top:0; display: none;}
+            .help-help{text-align: right; margin:0;font-size: clamp(12px, 2vw, 1.2em);position:absolute;right: 0;top:64px; display: none;}
             .help-help.active {display: block;}
 
             
@@ -515,8 +515,6 @@ function power() {
         if (isCritical) {
             // JACKPOT: 10x Power, 0.0 Drain, 2x Score
             localStorage['power'] = (parseFloat(localStorage['power']) + 1.0).toFixed(1); 
-            localStorage['score'] = Number(localStorage['score']) + 2;
-            emojiAction(); bamglow()
             // No bar drain here!
         } else {
             // NORMAL: Standard behavior
@@ -525,14 +523,12 @@ function power() {
             // localStorage['bar2'] = Number(localStorage['bar2']) - 800000;
             // localStorage['bar3'] = Number(localStorage['bar3']) - 100000;
             // localStorage['bar4'] = Number(localStorage['bar4']) - 600000;
-            localStorage['score']++;
-            emojiAction(); bamglow()
         }
 
         // --- 3. THE HOUSEKEEPING & FEEDBACK ---
         pluspower(); 
-        plusflash();
         generateFortune();
+            emojiAction(); bamglow()
 
         if (pconsole.innerHTML.length > 3000) {
             pconsole.innerHTML = '- 🫧 Housekeeping!';
@@ -698,7 +694,7 @@ cat.addEventListener("pointerdown", () => {
     //   document.querySelector('.water-box').addEventListener("click", ()=>{if(localStorage['username']){water();scroller()}}) 
     //   document.querySelector('.hygiene-box').addEventListener("click", ()=>{if(localStorage['username']){hygiene();scroller()}}) 
     //   document.querySelector('.mood-box').addEventListener("click", ()=>{if(localStorage['username']){mood();scroller()}}) 
-      document.querySelector('.knock-out').addEventListener("click", ()=>{if(localStorage['username']){cash();scroller()}})
+      document.querySelector('.knock-out').addEventListener("pointerdown", ()=>{if(localStorage['username']){cash();scroller()}})
               
 // localstorage
 if(!localStorage['username']) {   input.focus();
@@ -828,7 +824,7 @@ if (level.innerHTML < 100){
     //     bar4.style.width = bar4_percentage + '%';
     // } else {bar4.style.width = '0%'}
     if((bar1.style.width === '0%') && localStorage['username'] && !localStorage['winner']){gameover(); ko.innerHTML = "SMASHED!";
-    ko.addEventListener("click", () => {
+    ko.addEventListener("pointerdown", () => {
   localStorage.clear();
   location.reload();
 });}
