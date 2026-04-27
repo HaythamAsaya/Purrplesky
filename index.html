@@ -716,10 +716,10 @@ if(!localStorage['username']) {   input.focus();
         localStorage.setItem('level', 1)
         localStorage.setItem('score', 0)
         localStorage.setItem('bar1', (Date.now()))
+        localStorage.setItem('power', 0);
         // localStorage.setItem('bar2', (Date.now()))
         // localStorage.setItem('bar3', (Date.now()))
         // localStorage.setItem('bar4', (Date.now()))
-        localStorage.setItem('power', 0);
     }
 
     function randomBits(length = 9) {
@@ -822,8 +822,7 @@ cat.style.opacity = 1;
     // } else {bar4.style.width = '0%'}
     if((bar1.style.width === '0%') && localStorage['username']){gameover(); ko.innerHTML = "SMASHED!";
     ko.addEventListener("pointerdown", () => {
-  localStorage.clear();
-  location.reload();
+  restartGame()
 });}
 
     // if(bar1_percentage <= 20 || bar2_percentage <= 20 || bar3_percentage <= 20 || bar4_percentage <= 20){
@@ -862,14 +861,24 @@ const levelValue = level.innerHTML
 }
 
 
+function restartGame() {
+const now = Date.now();
+localStorage.setItem('start', now);
+localStorage.setItem('level', 1);
+localStorage.setItem('score', 0);
+localStorage.setItem('bar1', now);
+localStorage.setItem('power', 0);
+localStorage.removeItem('gameover');
+window.location.reload(); 
+}
 const gameover = ()=> {
-pconsole.insertAdjacentHTML('beforeend', '<br>- GAME OVER! at level (' + level.innerHTML + ').<div style="cursor:pointer; margin-block: 1em;" onclick="localStorage.clear();window.location.reload(true);"><p style="padding: 0.5em 1em;color: var(--main-color);width: 100%;margin-inline:auto;border: 2px solid var(--main-color);text-align: center;">RESET</p></div>');
-scroller();
-cat.style.opacity = 0;
-clearInterval(engine);
-clearInterval(levelCounter);
-localStorage.setItem('gameover', 1);
-input.style.display = 'none'; enter.style.display = 'none';
+    cat.style.opacity = 0;
+    clearInterval(engine);
+    clearInterval(levelCounter);
+    localStorage.setItem('gameover', 1);
+    input.style.display = 'none'; enter.style.display = 'none';
+    pconsole.insertAdjacentHTML('beforeend', '<br>- GAME OVER! at level (' + level.innerHTML + ').<div style="cursor:pointer; margin-block: 1em;" onclick="restartGame()"><p style="padding: 0.5em 1em;color: var(--main-color);width: 100%;margin-inline:auto;border: 2px solid var(--main-color);text-align: center;">RESTART</p></div>');
+    scroller();
 }
 
     // animations
