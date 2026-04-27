@@ -110,7 +110,7 @@ V 9.0
             .bar1box{display: flex;flex-direction: row;width: 90%;margin: 0 auto;
             align-items: center;justify-content: space-between;}
             .bar{height: 100%;background:var(--main-color2);border-radius:50px}
-            .bar1 {width: 0%;transition: all 1s cubic-bezier(0.44, -0.01, 0, 1.03);}
+            .bar1 {width: 0%;transition: all 500ms cubic-bezier(0.44, -0.01, 0, 1.03);}
             .bar-text{margin:0 ;color:var(--main-color2);font-weight: 800;font-size: clamp(12px, 2vw, 1em);line-height: 0;}
             .icon{width:20px;margin:5px}
             .icon2{width:40px;}
@@ -507,7 +507,7 @@ if(!localStorage['username']) {   input.focus();
 
     
     const engine = setInterval(leveler
-    ,1000)
+    ,500)
     
     function leveler(){
         if(localStorage['username']) {
