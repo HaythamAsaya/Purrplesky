@@ -756,6 +756,10 @@ if(!localStorage['username']) {   input.focus();
 
     function leveler(){
 
+    const lvl = parseInt(level.innerText) || 0;
+    const evo = lvl >= 100 ? "OMNI" : lvl >= 80 ? "SUPER" : lvl >= 70 ? "RUFF+" : lvl >= 50 ? "RUFF" : lvl >= 20 ? "GO+" : "GO";
+    evo_el.innerHTML = evo;
+
 if (localStorage['power'] >= 15) {
         ko.style.display = "block";
     } else { ko.style.display = "none";}
@@ -982,7 +986,7 @@ const bamglow = () => {
             username.innerHTML = new_username;
             pconsole.insertAdjacentHTML('beforeend', '<br>Username updated.<br>');
         if(!localStorage['username']){
-        pconsole.insertAdjacentHTML('beforeend', '<br><br>- 🤖 OMG, it\'s an alien!<br>Hit the alien till the SMASH button shows up. Score a SMASH to refill resources.<br>Good luck!');
+        pconsole.insertAdjacentHTML('beforeend', '<br><br>- 🤖 OMG, it\'s an alien!<br>Hit the alien and collect ⚡15 for the SMASH button to show up. Score a SMASH to refill health and level up.<br>Good luck!');
             form.classList.toggle("active");
         }
         localStorage.setItem('username', new_username);
