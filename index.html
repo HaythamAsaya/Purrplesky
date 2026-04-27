@@ -112,7 +112,7 @@ V 9.0
             .bar{height: 100%;background:var(--main-color2);border-radius:50px}
             .bar1 {width: 0%;transition: all 1s cubic-bezier(0.44, -0.01, 0, 1.03);}
             .bar-text{margin:0 ;color:var(--main-color2);font-weight: 800;font-size: clamp(12px, 2vw, 1em);line-height: 0;}
-            .icon{width:30px;}
+            .icon{width:20px;margin:5px}
             .icon2{width:40px;}
             .icon3{width:20px;}
             .icon4{width:20px;}
@@ -187,7 +187,7 @@ V 9.0
 <!-- html -->
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Hit the alien and the SMASH! button.</li><li>💾 Game progress is saved automatically.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by hitting the alien, and you spend power on smashes to fill health and level up.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.7em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
+    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Hit the alien and the SMASH! button.</li><li>💾 Game progress is saved automatically.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by hitting the alien, and you spend power on smashes to fill stamina and level up.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.7em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
         <p style="font-size:X-small;">V 9.0</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
@@ -333,12 +333,12 @@ function power() {
         // --- 2. BRANCHING LOGIC (The Addictive Formula) ---
         if (isCritical) {
             // JACKPOT: 10x Power, 0.0 Drain, 2x Score
-            localStorage['power'] = (parseFloat(localStorage['power']) + 1.0).toFixed(1); 
+            localStorage['power'] = (parseFloat(localStorage['power']) + 10).toFixed(1); 
             // No bar drain here!
         } else {
             // NORMAL: Standard behavior
-            localStorage['power'] = (parseFloat(localStorage['power']) + 0.1).toFixed(1);
-            localStorage['bar1'] = Number(localStorage['bar1']) - 0.5;
+            localStorage['power'] = (parseFloat(localStorage['power']) + 1).toFixed(1);
+            localStorage['bar1'] = Number(localStorage['bar1']) - 5;
         }
 
         // --- 3. THE HOUSEKEEPING & FEEDBACK ---
@@ -356,7 +356,7 @@ function power() {
             if(localStorage['power'] >= 5){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar1'] = 100;
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 5;}
-        pconsole.insertAdjacentHTML('beforeend', '<br>- Health refilled.');} 
+        pconsole.insertAdjacentHTML('beforeend', '<br>- Stamina refilled.');} 
         else if(!localStorage['winner']){pconsole.insertAdjacentHTML('beforeend', '<br>- Insufficient Power (5 required)<br>');}}}
         
     
@@ -695,7 +695,7 @@ const bamglow = () => {
             username.textContent = new_username;
             pconsole.insertAdjacentHTML('beforeend', '<br>Username updated.<br>');
         if(!localStorage['username']){
-        pconsole.insertAdjacentHTML('beforeend', '<br><br>- 🤖 OMG, it\'s an alien!<br>Hit the alien and collect ⚡15 for the SMASH button to show up. Score a SMASH to refill health and level up.<br>Good luck!');
+        pconsole.insertAdjacentHTML('beforeend', '<br><br>- 🤖 OMG, it\'s an alien!<br>Hit the alien and collect ⚡15 for the SMASH button to show up. Score a SMASH to refill stamina and level up.<br>Good luck!');
             form.classList.toggle("active");
         }
         localStorage.setItem('username', new_username);
