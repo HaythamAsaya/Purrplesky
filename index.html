@@ -513,7 +513,7 @@ if(!localStorage['username']) {   input.focus();
         if(localStorage['username']) {
           if (localStorage['gameover']){
           level.innerHTML = Math.round(Number(localStorage['level']) + Number(localStorage['score'] / 1000));
-            return
+            // return
           } else { 
           level.innerHTML = Math.round(Number(localStorage['level']) + Number(localStorage['score'] / 1000));
           }}
