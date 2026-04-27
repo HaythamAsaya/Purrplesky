@@ -350,7 +350,8 @@ function power() {
             bamglow();
         }
     } 
-    leveler()
+    if(!localStorage['gameover']){leveler()}
+    
 }
 
           function food(){if(!localStorage['gameover']){
