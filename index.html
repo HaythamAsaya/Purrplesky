@@ -350,6 +350,7 @@ function power() {
             bamglow();
         }
     } 
+    leveler()
 }
 
           function food(){if(!localStorage['gameover']){
@@ -457,7 +458,7 @@ setTimeout(() => {
     overlay.style.display = 'none';
     overlay.style.opacity = "1"
 }, 500);
-
+leveler()
 }
 
 
@@ -504,10 +505,9 @@ if(!localStorage['username']) {   input.focus();
 
 
 
-
     
     const engine = setInterval(leveler
-    ,500)
+    ,1000)
     
     function leveler(){
         if(localStorage['username']) {
