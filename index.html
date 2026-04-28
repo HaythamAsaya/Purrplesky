@@ -180,6 +180,21 @@ V 9.1
             .cats{padding-block:0;padding-bottom:3em;}
     }
 
+    .cats,
+#needle,
+.resultText,
+#overlay,
+#ko,
+#lv_plus {
+  will-change: transform, opacity;
+}
+
+.cats,
+.resultText {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 @keyframes swing {
     from { left: 0%; }
     to { left: calc(100% - 6px); }
@@ -201,10 +216,10 @@ body.fever {
 }
 
 @keyframes hitShake {
-  0% { transform: translate(0, 0) scale(1); }
-  30% { transform: translate(-4px, 2px) scale(1.08); }
-  60% { transform: translate(4px, -2px) scale(0.96); }
-  100% { transform: translate(0, 0) scale(1); }
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  30% { transform: translate3d(-4px, 2px, 0) scale(1.06); }
+  60% { transform: translate3d(4px, -2px, 0) scale(0.98); }
+  100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 
 .resultText {
@@ -448,9 +463,12 @@ function activateFever() {
 
 function hitFlash() {
   document.querySelectorAll(".cats").forEach(svg => {
-    svg.classList.remove("hit");
-    void svg.offsetWidth;
     svg.classList.add("hit");
+
+    clearTimeout(svg.hitTimer);
+    svg.hitTimer = setTimeout(() => {
+      svg.classList.remove("hit");
+    }, 150);
   });
 }
 
