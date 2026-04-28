@@ -9,7 +9,7 @@
 
 =========================
 Purrple by Haytham Asaya
-V 9.0
+V 9.1
 =========================
 
 -->
@@ -185,12 +185,52 @@ V 9.0
     to { left: calc(100% - 6px); }
 
 }
+
+body.fever {
+  animation: feverPulse 0.45s infinite alternate;
+}
+
+@keyframes feverPulse {
+  from { filter: saturate(1.2) brightness(1); }
+  to { filter: saturate(2) brightness(1.15); }
+}
+
+.cats.hit {
+  animation: hitShake 0.15s ease;
+
+}
+
+@keyframes hitShake {
+  0% { transform: translate(0, 0) scale(1); }
+  30% { transform: translate(-4px, 2px) scale(1.08); }
+  60% { transform: translate(4px, -2px) scale(0.96); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.resultText {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(32px, 8vw, 72px);
+  font-weight: 900;
+  pointer-events: none;
+  animation: popText 0.7s ease forwards;
+  text-shadow: 0 0 20px currentColor;
+  z-index: 999;
+}
+
+@keyframes popText {
+  0% { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+  30% { transform: translate(-50%, -50%) scale(1.25); opacity: 1; }
+  100% { transform: translate(-50%, -90%) scale(1); opacity: 0; }
+}
     </style>
 <!-- html -->
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
     <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Hit the alien and the SMASH! button.</li><li>💾 Game progress is saved automatically.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by hitting the alien, and you spend power on smashes to fill stamina and level up.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.7em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
-        <p style="font-size:X-small;">V 9.0</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
+        <p style="font-size:X-small;">V 9.1</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
 	<line class="st0" x1="0" y1="20.5" x2="61" y2="20.5"/>
@@ -318,6 +358,8 @@ function generateAndApplyRandomColors() {
 
 function power() {
     if (!localStorage['gameover']) {
+
+    hitFlash();
         // --- 1. THE LUCK ELEMENT (1% Chance) ---
         // if (!localStorage['winner']) 
         if (!isCritical && Math.random() < 0.01) {
@@ -339,8 +381,19 @@ function power() {
             // No bar drain here!
         } else {
             // NORMAL: Standard behavior
-            localStorage['power'] = (parseFloat(localStorage['power']) + 1).toFixed(1);
-            localStorage['bar1'] = Number(localStorage['bar1']) - 5;
+            const stamina = Number(localStorage['bar1']);
+let powerGain = fever ? 3 : 1;
+let staminaDrain = fever ? 3 : 5;
+
+// risky low-stamina bonus
+if (stamina <= 30) {
+  powerGain += 2;
+  staminaDrain += 3;
+  showText("DANGER POWER", "#ff3333");
+}
+
+localStorage['power'] = (parseFloat(localStorage['power']) + powerGain).toFixed(1);
+localStorage['bar1'] = Number(localStorage['bar1']) - staminaDrain;
         }
 
         // --- 3. THE HOUSEKEEPING & FEEDBACK ---
@@ -367,6 +420,39 @@ function power() {
 
 
          let isSyncing = false;
+
+         let smashStreak = Number(localStorage.getItem("smashStreak")) || 0;
+let fever = false;
+
+function showText(text, color = "#00ffcc") {
+  const el = document.createElement("div");
+  el.className = "resultText";
+  el.textContent = text;
+  el.style.color = color;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 700);
+}
+
+function activateFever() {
+  if (fever) return;
+
+  fever = true;
+  document.body.classList.add("fever");
+  showText("FEVER MODE", "#ff4df0");
+
+  setTimeout(() => {
+    fever = false;
+    document.body.classList.remove("fever");
+  }, 8000);
+}
+
+function hitFlash() {
+  document.querySelectorAll(".cats").forEach(svg => {
+    svg.classList.remove("hit");
+    void svg.offsetWidth;
+    svg.classList.add("hit");
+  });
+}
 
 function cash() {
     if (localStorage['gameover']) return;
@@ -433,26 +519,83 @@ function strikeHandler(e) {
     const end = sweet.offsetLeft + sweet.offsetWidth;
     const isHit = needleLeft >= start && needleLeft <= end;
 
-    if (isHit) {
-    const lvl = parseInt(level.innerText) || 0;
-        needle.style.background = "#00ffcc";
-ko.style.scale = "2";
-    lv_plus.style.scale = "2";
-        localStorage['score'] = Number(localStorage['score']) + 1000;
-        
-        pconsole.insertAdjacentHTML('beforeend', `<br>- <span style="color:#00ffcc; font-weight:bold;">[!] SMASH_HIT // LEVEL_UP!</span>`);
-        bamglow(); plusflash(); pluspower(); scroller(); 
-        localStorage['bar1'] = 100;
+const targetCenter = start + ((end - start) / 2);
+const distance = Math.abs(needleLeft - targetCenter);
+const targetSize = end - start;
 
-        
+if (isHit) {
+  const lvl = parseInt(level.innerText) || 0;
 
+  smashStreak++;
+  localStorage.setItem("smashStreak", smashStreak);
 
-    } else {
-        needle.style.background = "#ff3333";
-       if (!localStorage['winner']){ localStorage['power'] = (Number(localStorage['power']) - 15).toFixed(1);
-            pconsole.insertAdjacentHTML('beforeend', '<br>- <span style="color:#ff3333;">[!] SMASH_FAILED // RECALIBRATING...</span>');
-            scroller(); 
-        }
+  let result = "GOOD";
+  let reward = fever ? 2000 : 1000;
+  let powerBonus = 0;
+
+  if (distance < targetSize * 0.12) {
+    result = "PERFECT";
+    reward = fever ? 5000 : 2500;
+    powerBonus = 10;
+  } else if (distance < targetSize * 0.28) {
+    result = "GREAT";
+    reward = fever ? 3000 : 1500;
+    powerBonus = 3;
+  }
+
+  if (smashStreak >= 3) reward *= 1.5;
+  if (smashStreak >= 5) reward *= 2;
+  if (smashStreak >= 10) reward *= 4;
+
+  needle.style.background = "#00ffcc";
+  ko.style.scale = "2";
+  lv_plus.style.scale = "2";
+
+  localStorage['score'] = Number(localStorage['score']) + Math.floor(reward);
+  localStorage['power'] = (Number(localStorage['power']) + powerBonus).toFixed(1);
+  localStorage['bar1'] = 100;
+
+  showText(result + " x" + smashStreak, result === "PERFECT" ? "#ffff00" : "#00ffcc");
+
+  pconsole.insertAdjacentHTML(
+    'beforeend',
+    `<br>- <span style="color:#00ffcc; font-weight:bold;">[!] ${result}_SMASH // +${Math.floor(reward)} SCORE // STREAK ${smashStreak}</span>`
+  );
+
+  if (smashStreak > 0 && smashStreak % 3 === 0) {
+    activateFever();
+  }
+
+  bamglow();
+  plusflash();
+  pluspower();
+  scroller();
+
+} else {
+  needle.style.background = "#ff3333";
+
+  const missDistance = Math.min(
+    Math.abs(needleLeft - start),
+    Math.abs(needleLeft - end)
+  );
+
+  let penalty = missDistance < 12 ? 5 : 15;
+
+  smashStreak = 0;
+  localStorage.setItem("smashStreak", smashStreak);
+
+  if (!localStorage['winner']) {
+    localStorage['power'] = Math.max(0, Number(localStorage['power']) - penalty).toFixed(1);
+
+    showText(penalty === 5 ? "NEAR MISS" : "MISS", "#ff3333");
+
+    pconsole.insertAdjacentHTML(
+      'beforeend',
+      `<br>- <span style="color:#ff3333;">[!] SMASH_FAILED // -${penalty} POWER // STREAK LOST</span>`
+    );
+
+    scroller();
+  }
 }
 overlay.style.opacity = "0"
 setTimeout(() => {
@@ -585,6 +728,7 @@ localStorage.setItem('level', 1);
 localStorage.setItem('score', 0);
 localStorage.setItem('bar1', 100);
 localStorage.setItem('power', 0);
+localStorage.setItem("smashStreak", 0);
 localStorage.removeItem('gameover');
 window.location.reload(); 
 }
