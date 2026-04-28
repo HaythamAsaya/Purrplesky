@@ -826,13 +826,39 @@ cat.style.opacity = 1;
     
 
 
-const levelValue = level.innerHTML
-    // evolved text and cats
-    if(levelValue >= 20 && localStorage['evolve'] != 1){pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Go+!'); scroller();bamglow();localStorage.setItem('evolve', 1)}
-    else if(levelValue >= 50 && localStorage['evolve'] != 2){pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Ruff!'); scroller();bamglow();localStorage.setItem('evolve', 2)}
-    else if(levelValue >= 70 && localStorage['evolve'] != 3){pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Ruff+!'); scroller();bamglow();localStorage.setItem('evolve', 3)}
-    else if(levelValue >= 80 && localStorage['evolve'] != 4){pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Super!'); scroller();bamglow();localStorage.setItem('evolve', 4)}
-    else if(levelValue >= 100 && localStorage['evolve'] != 5){pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Omni!'); scroller();bamglow();localStorage.setItem('evolve', 5)}
+const levelValue = Number(level.innerText);
+const evolve = Number(localStorage.getItem('evolve') || 0);
+
+if (levelValue >= 100 && evolve < 5) {
+  pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Omni!');
+  scroller();
+  bamglow();
+  localStorage.setItem('evolve', 5);
+
+} else if (levelValue >= 80 && evolve < 4) {
+  pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Super!');
+  scroller();
+  bamglow();
+  localStorage.setItem('evolve', 4);
+
+} else if (levelValue >= 70 && evolve < 3) {
+  pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Ruff+!');
+  scroller();
+  bamglow();
+  localStorage.setItem('evolve', 3);
+
+} else if (levelValue >= 50 && evolve < 2) {
+  pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Ruff!');
+  scroller();
+  bamglow();
+  localStorage.setItem('evolve', 2);
+
+} else if (levelValue >= 20 && evolve < 1) {
+  pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Go+!');
+  scroller();
+  bamglow();
+  localStorage.setItem('evolve', 1);
+}
     
     
     
