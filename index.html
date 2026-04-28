@@ -407,7 +407,7 @@ if (stamina <= 30) {
   showText("DANGER POWER", "#ff3333");
 }
 
-localStorage['power'] = (parseFloat(localStorage['power']) + powerGain).toFixed(1);
+localStorage['power'] = Number(localStorage['power']) + powerGain;
 localStorage['bar1'] = Number(localStorage['bar1']) - staminaDrain;
         }
 
@@ -698,7 +698,7 @@ if (localStorage['power'] >= 15) {
           if(localStorage['username']) {
 cat.style.opacity = 1;
 
-  wallet.innerHTML = parseFloat(Number(localStorage['power'])).toFixed(1);
+  wallet.innerText = Math.floor(localStorage['power']);
         var bar1_percentage = Number(localStorage.getItem('bar1'));
         if(bar1_percentage >= 0){
         bar1.style.width = bar1_percentage + '%';
