@@ -60,11 +60,11 @@ V 9.0
             .lv-charge{font-size: clamp(0.9em, 2vw, 1.2em); position: relative;width: fit-content;}
         .lv-plus{font-size: 4em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; left:0;z-index: 5;}
         .wallet-plus{font-size: 5em; position: fixed;margin: 0;animation: cloud 600ms alternate ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal;bottom: 39%; left:55%;z-index: 5;pointer-events: none;}
-        .knock-out{animation: cloud 400ms alternate ease-in-out infinite; position: fixed; margin: 0; padding: 1em; left: 50%; translate: -50%;bottom:0;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: radial-gradient(rgba(255, 166, 0, 0.282), transparent 70%);display: none;font-size: clamp(2em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;transition: all 1s cubic-bezier(0.44, -0.01, 0, 1.03);} 
+        .knock-out{animation: cloud 400ms alternate ease-in-out infinite; position: fixed; margin: 0; padding: 0.5em; left: 50%; translate: -50%;bottom:0;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: radial-gradient(rgba(255, 166, 0, 0.282), transparent 70%);display: none;font-size: clamp(2em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;transition: all 1s cubic-bezier(0.44, -0.01, 0, 1.03);} 
         .power-bar{margin:0 0 0 -10px; position: absolute;top:-15%;left:0;font-size: clamp(1em, 3vw, 32px);font-family: monospace;}
         .level-feed{position: fixed;bottom:30px;left:50%;translate:-50%;font-size: clamp(0.9em, 2vw, 1.2em);}
-        #cat-emoji{animation: cloud 2s alternate ease-in-out infinite;position: absolute;
-    left: 10%;font-size: 2em;text-shadow: 0px 1px 2px var(--main-color2);transition: all 2s;} 
+        #cat-emoji{animation: cloud 2s alternate ease-in-out infinite;position: absolute;top:-20%;
+    left: 30%;font-size: 2em;text-shadow: 0px 1px 2px var(--main-color2);transition: all 2s;} 
     #cat-crown{position: absolute;right: 0;top: 0;font-size: 2.5em;text-shadow: 1px 2px 4px var(--main-color2);animation: cloud 7s alternate ease-in-out infinite;} 
         .logo{width:50px;height:50px;background:#311238; margin: 0 auto 0; position:relative;top:-30px;}
         .cloud-one{position:absolute; width: 60px;top:18px; left:-20px; 
@@ -537,7 +537,7 @@ cat.style.opacity = 1;
         bar1.style.width = bar1_percentage + '%';
     } else {bar1.style.width = '0%'}
     if(bar1_percentage <= 0 && localStorage['username']){gameover(); ko.innerHTML = "SMASHED!";
-    ko.addEventListener("pointerdown", () => {
+    ko.addEventListener("click", () => {
   restartGame()
 }, { once: true });}
 
