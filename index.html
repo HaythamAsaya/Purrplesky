@@ -533,7 +533,7 @@ localStorage['bar1'] = Number(localStorage['bar1']) - staminaDrain;
             emojiAction(); bamglow()
 
         if (pconsole.innerHTML.length > 3000) {
-            pconsole.innerHTML = '- 🫧 Housekeeping!';
+            pconsole.innerHTML = 'Let\'s SMASH!';
             bamglow();
         }
     } 
@@ -609,31 +609,16 @@ function cash() {
 // Instead of Math.max, we use an inverse curve. 
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
-const baseSpeed = 0.1 + (2.1 / (1 + (lvl * 0.03)));
+let speedLvl = lvl;
 
-let tempoRoll = Math.random();
-let tempoMultiplier = 1;
-let tempoText = "";
-
-if (tempoRoll < 0.15) {
-  tempoMultiplier = 0.45; // slow old-school round
-  tempoText = "SLOW ROUND 🐢";
-} else if (tempoRoll < 0.75) {
-  tempoMultiplier = 1; // normal round
-} else if (tempoRoll < 0.93) {
-  tempoMultiplier = 1.25; // fast round
-  tempoText = "FAST ROUND ⚡";
-} else {
-  tempoMultiplier = 1.55; // rare chaos round
-  tempoText = "CHAOS ROUND 💥";
+if (Math.random() < 0.12) {
+  speedLvl = Math.floor(Math.random() * Math.max(1, lvl));
 }
+
+const baseSpeed = 0.1 + (2.1 / (1 + (speedLvl * 0.03)));
 
 const randomVariation = (Math.random() * 0.1) - 0.05;
-const finalSpeed = Math.max(0.15, (baseSpeed * tempoMultiplier) + randomVariation);
-
-if (tempoText) {
-  showText(tempoText, "#00ffff");
-}
+const finalSpeed = baseSpeed + randomVariation;
 
     // 2. MICROSCOPIC PRECISION: 
     // Starts at 50px. By level 40, it's already down to 15px (Extremely hard).
