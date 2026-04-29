@@ -85,7 +85,31 @@ V 9.1
         .console-button{width:fit-content;color:var(--main-color);font-weight: 800;padding:.1em 2em;text-align: center;font-size: clamp(12px, 4vw, 1em);line-height: 0;position:relative;display: inline-block;margin-bottom: -5px;margin-left: 19px;}
         #con-butt{width: 100%;height: 100%;position:absolute;top:0;left: 0;z-index: -1;}
         .console-container{position: relative;}
-        .console{height:100vh;max-height: 50vh;background: var(--main-color2);color: var(--main-color);padding-inline:15px;border-top:15px solid transparent;border-bottom:15px solid transparent;overflow-y:scroll;word-wrap: break-word;font-family: 'Courier New', monospace;font-size: clamp(20px, 7vw, 1.1em);font-weight: bold;word-break: break-word;overscroll-behavior: contain;position: relative;z-index: 1;}
+        .console {
+    height: 100vh;
+    max-height: 50vh;
+    background: var(--main-color2);
+    color: var(--main-color);
+    padding-inline: 15px;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+
+    overflow-y: auto; /* smoother than scroll */
+
+    font-family: 'Courier New', monospace;
+    font-size: clamp(20px, 7vw, 1.1em);
+    font-weight: bold;
+    word-break: break-word;
+
+    overscroll-behavior: contain;
+    position: relative;
+    z-index: 1;
+
+    /* 👇 NEW */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
         .console-behind {
   position: fixed;
   inset: 0;
@@ -390,7 +414,7 @@ body.fever {
 
 
 
-function scroller(){pconsole.scrollTo(0, pconsole.scrollHeight);}
+// function {pconsole.scrollTop = pconsole.scrollHeight;}
 
 
 function generateAndApplyRandomColors() {
@@ -472,12 +496,12 @@ function power() {
         // if (!localStorage['winner']) 
         if (!isCritical && Math.random() < 0.01) {
             isCritical = true;
-            pconsole.insertAdjacentHTML('beforeend', `<br>- <span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL (x10) : FREE_HITS [3s] ✨</span>`);
+            pconsole.insertAdjacentHTML('beforeend', `<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL (x10) : FREE_HITS [3s] ✨</span>`);
             wallet_plus.style.scale = "2"
             // End the jackpot after 3 seconds
             setTimeout(() => { 
                 isCritical = false; 
-                pconsole.insertAdjacentHTML('beforeend', `<br>- <span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`);scroller();
+                pconsole.insertAdjacentHTML('beforeend', `<span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`);;
                 wallet_plus.style.scale = "1"
             }, 3000);
         }
@@ -521,8 +545,8 @@ localStorage['bar1'] = Number(localStorage['bar1']) - staminaDrain;
             if(localStorage['power'] >= 5){emojiAction();bamglow();localStorage['score']++;plusflash();
           localStorage['bar1'] = 100;
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 5;}
-        pconsole.insertAdjacentHTML('beforeend', '<br>- Stamina refilled.');} 
-        else if(!localStorage['winner']){pconsole.insertAdjacentHTML('beforeend', '<br>- Insufficient Power (5 required)<br>');}}}
+        pconsole.insertAdjacentHTML('beforeend', 'Stamina refilled.');} 
+        else if(!localStorage['winner']){pconsole.insertAdjacentHTML('beforeend', 'Insufficient Power (5 required)<br>');}}}
         
     
 
@@ -573,7 +597,7 @@ function cash() {
 
     
     if (pwr < 15) {
-        pconsole.insertAdjacentHTML('beforeend', '<br>- Insufficient Power (15 required).<br>');
+        pconsole.insertAdjacentHTML('beforeend', 'Insufficient Power (15 required).<br>');
         return;
     }
 
@@ -673,17 +697,20 @@ if (isHit) {
 
   pconsole.insertAdjacentHTML(
     'beforeend',
-    `<br>- <span style="color:#00ffcc; font-weight:bold;">[!] ${result}_SMASH // +${Math.floor(reward)} SCORE // STREAK ${smashStreak}</span>`
+    `<span style="color:#00ffcc; font-weight:bold;">[!] ${result}_SMASH // +${Math.floor(reward)} SCORE // STREAK ${smashStreak}</span>`
   );
 
   if (smashStreak > 0 && smashStreak % 3 === 0) {
     activateFever();
   }
 
+setTimeout(() => {
   bamglow();
   plusflash();
   pluspower();
-  scroller();
+  
+}, 120);
+  
 
 } else {
   needle.style.background = "#ff3333";
@@ -705,10 +732,10 @@ if (isHit) {
 
     pconsole.insertAdjacentHTML(
       'beforeend',
-      `<br>- <span style="color:#ff3333;">[!] SMASH_FAILED // -${penalty} POWER // STREAK LOST</span>`
+      `<span style="color:#ff3333;">[!] SMASH_FAILED // -${penalty} POWER // STREAK LOST</span>`
     );
 
-    scroller();
+    
   }
 }
 overlay.style.opacity = "0"
@@ -727,17 +754,17 @@ leveler()
 cat.addEventListener("pointerdown", () => {
   if (localStorage['username']) {
     power();
-    scroller();
+    
   }
 });
 
-      document.querySelector('.knock-out').addEventListener("pointerdown", ()=>{if(localStorage['username']){cash();scroller()}})
+      document.querySelector('.knock-out').addEventListener("pointerdown", ()=>{if(localStorage['username']){cash();}})
               
 // localstorage
 if(!localStorage['username']) {   input.focus();
-            pconsole.insertAdjacentHTML('beforeend', '- 🤖 Welcome to Purrple Sky.');
+            pconsole.insertAdjacentHTML('beforeend', '🤖 Welcome to Purrple Sky.');
             input.value += "username: ";
-            setTimeout( () => {pconsole.insertAdjacentHTML('beforeend', '<br><br>- What is your name?<br>');} ,500)
+            setTimeout( () => {pconsole.insertAdjacentHTML('beforeend', '<br>What is your name?<br>');} ,500)
              form.classList.toggle("active");
             setTimeout( () => {input.style.background = 'rgba(255, 255, 255, 0.60)'} ,1500)
             setTimeout( () => {input.style.background = 'none'} ,3500) 
@@ -747,7 +774,7 @@ if(!localStorage['username']) {   input.focus();
         } else {
           username.innerHTML = localStorage.getItem('username');
           if(!localStorage['gameover'] && !localStorage['winner']){
-    let magicAnswers = ['- 🤖 Hello ', '- 🤖 Hi ', '- 🤖 Welcome back ', '- 🤖 Yo ', '- 🤖 It\'s '];
+    let magicAnswers = ['🤖 Hello ', '🤖 Hi ', '🤖 Welcome back ', '🤖 Yo ', '🤖 It\'s '];
     let randAnswer = Math.floor( Math.random() *magicAnswers.length)
     pconsole.insertAdjacentHTML('beforeend', magicAnswers[randAnswer] + localStorage.getItem('username') + ".<br>Let\'s SMASH!");}
 }
@@ -816,32 +843,32 @@ const levelValue = Number(level.innerText);
 const evolve = Number(localStorage.getItem('evolve') || 0);
 
 if (levelValue >= 100 && evolve < 5) {
-  pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Omni!');
-  scroller();
+  pconsole.insertAdjacentHTML('beforeend', 'Skill level is Omni!');
+  
   bamglow();
   localStorage.setItem('evolve', 5);
 
 } else if (levelValue >= 80 && evolve < 4) {
-  pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Super!');
-  scroller();
+  pconsole.insertAdjacentHTML('beforeend', 'Skill level is Super!');
+  
   bamglow();
   localStorage.setItem('evolve', 4);
 
 } else if (levelValue >= 70 && evolve < 3) {
-  pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Ruff+!');
-  scroller();
+  pconsole.insertAdjacentHTML('beforeend', 'Skill level is Ruff+!');
+  
   bamglow();
   localStorage.setItem('evolve', 3);
 
 } else if (levelValue >= 50 && evolve < 2) {
-  pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Ruff!');
-  scroller();
+  pconsole.insertAdjacentHTML('beforeend', 'Skill level is Ruff!');
+  
   bamglow();
   localStorage.setItem('evolve', 2);
 
 } else if (levelValue >= 20 && evolve < 1) {
-  pconsole.insertAdjacentHTML('beforeend', '<br>- Skill level is Go+!');
-  scroller();
+  pconsole.insertAdjacentHTML('beforeend', 'Skill level is Go+!');
+  
   bamglow();
   localStorage.setItem('evolve', 1);
 }
@@ -888,8 +915,8 @@ const gameover = ()=> {
     clearInterval(engine);
     localStorage.setItem('gameover', 1);
     input.style.display = 'none'; enter.style.display = 'none';
-    pconsole.insertAdjacentHTML('beforeend', '<br>- GAME OVER! at level (' + level.innerHTML + ').<div style="cursor:pointer; margin-block: 1em;" onclick="restartGame()"><p style="padding: 0.5em 1em;color: var(--main-color);width: 100%;margin-inline:auto;border: 2px solid var(--main-color);text-align: center;">RESTART</p></div>');
-    scroller();
+    pconsole.insertAdjacentHTML('beforeend', 'GAME OVER! at level (' + level.innerHTML + ').<div style="cursor:pointer; margin-block: 1em;" onclick="restartGame()"><p style="padding: 0.5em 1em;color: var(--main-color);width: 100%;margin-inline:auto;border: 2px solid var(--main-color);text-align: center;">RESTART</p></div>');
+    
 }
 
     // animations
@@ -955,23 +982,23 @@ const bamglow = () => {
       pconsole.insertAdjacentHTML('beforeend', '<br><span><strong>> </strong></span>' + input.value);
       if(regex_math.test(input.value.trim()) && localStorage['username']){
         let calc = eval(input.value.replaceAll(' ',''));
-        pconsole.insertAdjacentHTML('beforeend', ' = ' + calc + '<br>- Math is cool<br>');
+        pconsole.insertAdjacentHTML('beforeend', ' = ' + calc + 'Math is cool<br>');
       }else if (regex_bg_color.test(input.value.trim()) && localStorage['username']){
         if(localStorage['power'] >= 1){emojiAction();bamglow();
         let new_bg_color = input.value.replace(regex_bg_color, '');
         document.documentElement.style.setProperty('--main-color', new_bg_color);
-        pconsole.insertAdjacentHTML('beforeend', '<br>- Background color updated.<br>');
+        pconsole.insertAdjacentHTML('beforeend', 'Background color updated.<br>');
         localStorage.setItem('bg_color', new_bg_color);
         localStorage['power'] = localStorage['power'] - 1;}
-        else {pconsole.insertAdjacentHTML('beforeend', '<br>- Not enough power. You need 1 charge. You can generate power by hitting the alien.<br>');}
+        else {pconsole.insertAdjacentHTML('beforeend', 'Not enough power. You need 1 charge. You can generate power by hitting the alien.<br>');}
       }else if (regex_color.test(input.value.trim()) && localStorage['username']){
         if(localStorage['power'] >= 1){emojiAction();bamglow();
         let new_color = input.value.replace(regex_color, '');
         document.documentElement.style.setProperty('--main-color2', new_color);
-        pconsole.insertAdjacentHTML('beforeend', '<br>- Theme color updated.<br>');
+        pconsole.insertAdjacentHTML('beforeend', 'Theme color updated.<br>');
         localStorage.setItem('color', new_color);
         localStorage['power'] = localStorage['power'] - 1;}
-        else {pconsole.insertAdjacentHTML('beforeend', '<br>- Not enough power. You need 1 charge. You can generate power by hitting the alien.<br>');}
+        else {pconsole.insertAdjacentHTML('beforeend', 'Not enough power. You need 1 charge. You can generate power by hitting the alien.<br>');}
       }else if (regex_food.test(input.value.trim()) && localStorage['username']){
        food();
       }else if (regex_cash.test(input.value.trim()) && localStorage['username']){
@@ -979,7 +1006,7 @@ const bamglow = () => {
       }else if (regex_power.test(input.value.trim()) && localStorage['username']){
           power();
       }else if (regex_help.test(input.value.trim()) && localStorage['username']){
-        pconsole.insertAdjacentHTML('beforeend', '<br>- <i>W</i><br>Use this command to punch! Or tap on the alien.<br>' + 
+        pconsole.insertAdjacentHTML('beforeend', '<i>W</i><br>Use this command to punch! Or tap on the alien.<br>' + 
         '- <i>C1</i><br>Use this command to fill up health. C1 costs 5 charges.<br>'+
         '- <i>SMASH</i><br>Use this command to Smash Hit the alien, SMASH costs 15 charges.<br>'+
         '- <i>CLEAR</i><br>Use this command to clear the bot console.<br>' +
@@ -997,7 +1024,7 @@ const bamglow = () => {
             username.textContent = new_username;
             pconsole.insertAdjacentHTML('beforeend', '<br>Username updated.<br>');
         if(!localStorage['username']){
-        pconsole.insertAdjacentHTML('beforeend', '<br><br>- 🤖 OMG, it\'s an alien!<br>Hit the alien and collect ⚡15 for the SMASH button to show up. Score a SMASH to refill stamina and level up.<br>Good luck!');
+        pconsole.insertAdjacentHTML('beforeend', '<br>🤖 OMG, it\'s an alien!<br>Hit the alien and collect ⚡15 for the SMASH button to show up. Score a SMASH to refill stamina and level up.<br>Good luck!');
             form.classList.toggle("active");
         }
         localStorage.setItem('username', new_username);
@@ -1014,7 +1041,7 @@ const bamglow = () => {
     // scroll down console and clear input field
     form.reset();enter.style.animation = "slap 100ms alternate";
     setTimeout(function(){enter.style.animation = ""},100)}};
-    form.addEventListener("submit", function(e){e.preventDefault();scroller();})
+    form.addEventListener("submit", function(e){e.preventDefault();})
 
 // close details tag if click outside
 var details = [...document.querySelectorAll('details')];
