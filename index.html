@@ -413,6 +413,7 @@ function mutateAlien() {
     .find(el => Number(getComputedStyle(el).opacity) > 0.5);
 
   if (!alien) return;
+  alien.style.transition = "filter 0.4s ease";
 
   const turbulence = document.getElementById("alienTurbulence");
   const displace = document.getElementById("alienDisplace");
@@ -422,54 +423,38 @@ function mutateAlien() {
   alienDNA++;
   localStorage.setItem("alienDNA", alienDNA);
 
-  const lvl = parseInt(level.innerText) || 1;
-
-  const permanentWarp = Math.min(2 + lvl * 0.05 + alienDNA * 0.025, 9);
-  const permanentFreqX = 0.004 + (alienDNA % 7) * 0.0007;
-  const permanentFreqY = 0.008 + (alienDNA % 9) * 0.0009;
+  const lvl = Number(level.innerText) || 1;
+  const maxWarp = Math.min(14 + lvl * 0.08, 24);
 
   let frame = 0;
-  const totalFrames = 20;
+  const totalFrames = 70;
 
+  turbulence.setAttribute("seed", alienDNA);
   alien.classList.add("liquid-mutating");
 
   function animateLiquid() {
     frame++;
 
     const t = frame / totalFrames;
-    const wave = Math.sin(t * Math.PI);
 
-    const burstWarp = wave * 18;
-    const burstFreqX = wave * 0.012;
-    const burstFreqY = wave * 0.02;
+    // fast mutation burst, slow recovery
+    const burst = Math.sin(Math.min(t * 1.8, 1) * Math.PI);
+const recovery = Math.pow(1 - t, 1.2); // slower falloff
+const wave = burst * 0.7 + recovery * 0.6;
 
-    turbulence.setAttribute(
-      "baseFrequency",
-      `${permanentFreqX + burstFreqX} ${permanentFreqY + burstFreqY}`
-    );
+    const freqX = 0.005 + wave * 0.018;
+    const freqY = 0.01 + wave * 0.026;
+    const warp = Math.pow(wave, 0.8) * maxWarp;
 
-    turbulence.setAttribute(
-      "seed",
-      alienDNA
-    );
-
-    displace.setAttribute(
-      "scale",
-      permanentWarp + burstWarp
-    );
+    turbulence.setAttribute("baseFrequency", `${freqX} ${freqY}`);
+    displace.setAttribute("scale", warp);
 
     if (frame < totalFrames) {
       requestAnimationFrame(animateLiquid);
     } else {
-      turbulence.setAttribute(
-        "baseFrequency",
-        `${permanentFreqX} ${permanentFreqY}`
-      );
-
-      turbulence.setAttribute("seed", alienDNA);
-      displace.setAttribute("scale", permanentWarp);
-
-      alien.classList.add("liquid-mutating");
+      displace.setAttribute("scale", 0);
+      turbulence.setAttribute("baseFrequency", "0.005 0.01");
+      alien.classList.remove("liquid-mutating");
     }
   }
 
@@ -592,10 +577,6 @@ function cash() {
         return;
     }
 
-const activeAlien = [...document.querySelectorAll(".cats")]
-  .find(el => Number(getComputedStyle(el).opacity) > 0.5);
-
-if (activeAlien) activeAlien.classList.remove("liquid-mutating");
     // --- ELITE DIFFICULTY SCALING ---
     
     // 1. VARIABLE SPEED: We add a small random factor (+/- 10%) 
@@ -684,7 +665,9 @@ if (isHit) {
   localStorage['power'] = (Number(localStorage['power']) + powerBonus);
   localStorage['bar1'] = 100;
 
+  setTimeout(() => {
   mutateAlien();
+}, 120);
 
   showText(result + " x" + smashStreak, result === "PERFECT" ? "#ffff00" : "#00ffcc");
 
