@@ -611,8 +611,29 @@ function cash() {
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
 const baseSpeed = 0.1 + (2.1 / (1 + (lvl * 0.03)));
 
-    const randomVariation = (Math.random() * 0.1) - 0.05;
-    const finalSpeed = baseSpeed + randomVariation;
+let tempoRoll = Math.random();
+let tempoMultiplier = 1;
+let tempoText = "";
+
+if (tempoRoll < 0.15) {
+  tempoMultiplier = 0.45; // slow old-school round
+  tempoText = "SLOW ROUND 🐢";
+} else if (tempoRoll < 0.75) {
+  tempoMultiplier = 1; // normal round
+} else if (tempoRoll < 0.93) {
+  tempoMultiplier = 1.25; // fast round
+  tempoText = "FAST ROUND ⚡";
+} else {
+  tempoMultiplier = 1.55; // rare chaos round
+  tempoText = "CHAOS ROUND 💥";
+}
+
+const randomVariation = (Math.random() * 0.1) - 0.05;
+const finalSpeed = Math.max(0.15, (baseSpeed * tempoMultiplier) + randomVariation);
+
+if (tempoText) {
+  showText(tempoText, "#00ffff");
+}
 
     // 2. MICROSCOPIC PRECISION: 
     // Starts at 50px. By level 40, it's already down to 15px (Extremely hard).
@@ -772,7 +793,7 @@ if(!localStorage['username']) {   input.focus();
             
            
         } else {
-          username.innerHTML = localStorage.getItem('username');
+          username.textContent = localStorage.getItem('username');
           if(!localStorage['gameover'] && !localStorage['winner']){
     let magicAnswers = ['🤖 Hello ', '🤖 Hi ', '🤖 Welcome back ', '🤖 Yo ', '🤖 It\'s '];
     let randAnswer = Math.floor( Math.random() *magicAnswers.length)
@@ -979,10 +1000,11 @@ const bamglow = () => {
             enter.click();
             localStorage['score']++;plusflash();
             
-      pconsole.insertAdjacentHTML('beforeend', '<br><span><strong>> </strong></span>' + input.value);
+      pconsole.insertAdjacentHTML('beforeend', '<br><span><strong>> </strong></span>');
+pconsole.append(document.createTextNode(input.value));
       if(regex_math.test(input.value.trim()) && localStorage['username']){
-        let calc = eval(input.value.replaceAll(' ',''));
-        pconsole.insertAdjacentHTML('beforeend', ' = ' + calc + 'Math is cool<br>');
+        let calc = Function('"use strict"; return (' + input.value.replaceAll(' ', '') + ')')();
+        pconsole.insertAdjacentHTML('beforeend', ' = ' + calc + '<br> Math is cool<br>');
       }else if (regex_bg_color.test(input.value.trim()) && localStorage['username']){
         if(localStorage['power'] >= 1){emojiAction();bamglow();
         let new_bg_color = input.value.replace(regex_bg_color, '');
