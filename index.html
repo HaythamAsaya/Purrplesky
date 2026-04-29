@@ -592,7 +592,9 @@ function cash() {
         return;
     }
 
-
+document.querySelectorAll(".cats").forEach(cat => {
+  cat.classList.remove("liquid-mutating");
+});
     // --- ELITE DIFFICULTY SCALING ---
     
     // 1. VARIABLE SPEED: We add a small random factor (+/- 10%) 
