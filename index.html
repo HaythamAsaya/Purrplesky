@@ -592,9 +592,10 @@ function cash() {
         return;
     }
 
-document.querySelectorAll(".cats").forEach(cat => {
-  cat.classList.remove("liquid-mutating");
-});
+const activeAlien = [...document.querySelectorAll(".cats")]
+  .find(el => Number(getComputedStyle(el).opacity) > 0.5);
+
+if (activeAlien) activeAlien.classList.remove("liquid-mutating");
     // --- ELITE DIFFICULTY SCALING ---
     
     // 1. VARIABLE SPEED: We add a small random factor (+/- 10%) 
@@ -680,7 +681,7 @@ if (isHit) {
   lv_plus.style.scale = "2";
 
   localStorage['score'] = Number(localStorage['score']) + Math.floor(reward);
-  localStorage['power'] = (Number(localStorage['power']) + powerBonus).toFixed(1);
+  localStorage['power'] = (Number(localStorage['power']) + powerBonus);
   localStorage['bar1'] = 100;
 
   mutateAlien();
@@ -715,7 +716,7 @@ if (isHit) {
   localStorage.setItem("smashStreak", smashStreak);
 
   if (!localStorage['winner']) {
-    localStorage['power'] = Math.max(0, Number(localStorage['power']) - penalty).toFixed(1);
+    localStorage['power'] = Math.max(0, Number(localStorage['power']) - penalty)
 
     showText(penalty === 5 ? "NEAR MISS" : "MISS", "#ff3333");
 
