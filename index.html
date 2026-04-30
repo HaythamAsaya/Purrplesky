@@ -609,16 +609,7 @@ function cash() {
 // Instead of Math.max, we use an inverse curve. 
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
-let speedLvl = lvl;
-
-if (Math.random() < 0.12) {
-  speedLvl = Math.floor(Math.random() * Math.max(1, lvl));
-}
-
-const baseSpeed = 0.1 + (2.1 / (1 + (speedLvl * 0.03)));
-
-const randomVariation = (Math.random() * 0.1) - 0.05;
-const finalSpeed = baseSpeed + randomVariation;
+const baseSpeed = Math.max(0.25, 1.2 - (lvl * 0.01));
 
     // 2. MICROSCOPIC PRECISION: 
     // Starts at 50px. By level 40, it's already down to 15px (Extremely hard).
