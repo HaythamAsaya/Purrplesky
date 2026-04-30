@@ -253,8 +253,10 @@ body.fever {
   transform: translate(-50%, -50%);
   font-size: clamp(32px, 8vw, 72px);
   font-weight: 900;
+  line-height: 1;
   pointer-events: none;
-  animation: popText 0.7s ease forwards;
+  text-align: center;
+  animation: popText 1.5s ease forwards;
   text-shadow: 0 0 20px currentColor;
   z-index: 999;
 }
@@ -496,7 +498,7 @@ function power() {
         // if (!localStorage['winner']) 
         if (!isCritical && Math.random() < 0.01) {
             isCritical = true;
-            pconsole.insertAdjacentHTML('beforeend', `<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL (x10) : FREE_HITS [3s] ✨</span>`);
+            pconsole.insertAdjacentHTML('beforeend', `<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL [3s] : FREE_HITS (x10) ✨</span>`);
             wallet_plus.style.scale = "2"
             // End the jackpot after 3 seconds
             setTimeout(() => { 
@@ -521,7 +523,7 @@ let staminaDrain = fever ? 3 : 5;
 if (stamina <= 30) {
   powerGain += 2;
   staminaDrain += 3;
-  showText("DANGER POWER", "#ff3333");
+  showText("DANGER!!!", "#ff3333");
 }
 
 localStorage['power'] = Number(localStorage['power']) + powerGain;
@@ -562,7 +564,7 @@ function showText(text, color = "#00ffcc") {
   el.textContent = text;
   el.style.color = color;
   document.body.appendChild(el);
-  setTimeout(() => el.remove(), 700);
+  setTimeout(() => el.remove(), 1500);
 }
 
 function activateFever() {
@@ -571,11 +573,16 @@ function activateFever() {
   fever = true;
   document.body.classList.add("fever");
   showText("FEVER MODE", "#ff4df0");
+  pconsole.insertAdjacentHTML(
+    'beforeend',
+    `<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] FEVER_MODE [20s] : SCORE (x2) ✨</span>`
+  );
 
   setTimeout(() => {
     fever = false;
     document.body.classList.remove("fever");
-  }, 8000);
+    pconsole.insertAdjacentHTML('beforeend', `<span style="color: #00ff00;">:: FEVER_OVER // RESYNCING...</span>`);;
+  }, 20000);
 }
 
 function hitFlash() {
@@ -609,11 +616,13 @@ function cash() {
 // Instead of Math.max, we use an inverse curve. 
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
-const baseSpeed = Math.max(0.25, 1.2 - (lvl * 0.01));
+const baseSpeed = Math.max(0.25, 1.2 - (lvl * 0.01)); 
+    const randomVariation = (Math.random() * 0.1) - 0.05;
+    const finalSpeed = baseSpeed + randomVariation;
 
     // 2. MICROSCOPIC PRECISION: 
     // Starts at 50px. By level 40, it's already down to 15px (Extremely hard).
-    const width = Math.max(60, 80 - (lvl * 0.6));
+    const width = Math.max(20, 100 - (lvl * 0.6));
 
     // Apply scaling
     sweet.style.width = width + "px";
