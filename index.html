@@ -309,7 +309,7 @@ body.fever {
 </svg>
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Hit the alien and the SMASH! button.</li><li>💾 Game progress is saved automatically.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by hitting the alien, and you spend power on smashes to fill stamina and level up.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_20 - Go+<br>LVL_50 - Ruff<br>LVL_70 - Ruff+<br>LVL_80 - Super<br>LVL_100 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.7em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
+    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Hit the alien and the SMASH! button.</li><li>💾 Game progress is saved automatically.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by hitting the alien, and you spend power on smashes to fill stamina and level up.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_70 - Go+<br>LVL_200 - Ruff<br>LVL_350 - Ruff+<br>LVL_600 - Super<br>LVL_1000 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.7em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
         <p style="font-size:X-small;">V 9.1</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
@@ -498,7 +498,7 @@ function power() {
         // if (!localStorage['winner']) 
         if (!isCritical && Math.random() < 0.01) {
             isCritical = true;
-            pconsole.insertAdjacentHTML('beforeend', `<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL [3s] : FREE_HITS (x10) ✨</span>`);
+            pconsole.insertAdjacentHTML('beforeend', `<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL [3s] : FREE_HITS ✨</span>`);
             wallet_plus.style.scale = "2"
             // End the jackpot after 3 seconds
             setTimeout(() => { 
@@ -511,7 +511,7 @@ function power() {
         // --- 2. BRANCHING LOGIC (The Addictive Formula) ---
         if (isCritical) {
             // JACKPOT: 10x Power, 0.0 Drain, 2x Score
-            localStorage['power'] = (parseFloat(localStorage['power']) + 10).toFixed(1); 
+            localStorage['power'] = (parseFloat(localStorage['power']) + 1); 
             // No bar drain here!
         } else {
             // NORMAL: Standard behavior
@@ -616,13 +616,13 @@ function cash() {
 // Instead of Math.max, we use an inverse curve. 
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
-const baseSpeed = Math.max(0.25, 1.2 - (lvl * 0.01)); 
+const baseSpeed = Math.max(0.6, 1.2 - (lvl * 0.001)); 
     const randomVariation = (Math.random() * 0.1) - 0.05;
     const finalSpeed = baseSpeed + randomVariation;
 
     // 2. MICROSCOPIC PRECISION: 
     // Starts at 50px. By level 40, it's already down to 15px (Extremely hard).
-    const width = Math.max(60, 100 - (lvl * 0.6));
+    const width = Math.max(50, 100 - (lvl * 0.085));
 
     // Apply scaling
     sweet.style.width = width + "px";
@@ -813,7 +813,7 @@ if(!localStorage['username']) {   input.focus();
           }}
 
     const lvl = parseInt(level.innerText) || 0;
-    const evo = lvl >= 100 ? "OMNI" : lvl >= 80 ? "SUPER" : lvl >= 70 ? "RUFF+" : lvl >= 50 ? "RUFF" : lvl >= 20 ? "GO+" : "GO";
+    const evo = lvl >= 1000 ? "OMNI" : lvl >= 600 ? "SUPER" : lvl >= 350 ? "RUFF+" : lvl >= 200 ? "RUFF" : lvl >= 70 ? "GO+" : "GO";
     evo_el.innerHTML = evo;
     let savedHighscore = Number(localStorage.getItem("highscore")) || 0;
     if (localStorage['highscore'] > 1){
@@ -848,31 +848,31 @@ cat.style.opacity = 1;
 const levelValue = Number(level.innerText);
 const evolve = Number(localStorage.getItem('evolve') || 0);
 
-if (levelValue >= 100 && evolve < 5) {
+if (levelValue >= 1000 && evolve < 5) {
   pconsole.insertAdjacentHTML('beforeend', 'Skill level is Omni!');
   
   bamglow();
   localStorage.setItem('evolve', 5);
 
-} else if (levelValue >= 80 && evolve < 4) {
+} else if (levelValue >= 600 && evolve < 4) {
   pconsole.insertAdjacentHTML('beforeend', 'Skill level is Super!');
   
   bamglow();
   localStorage.setItem('evolve', 4);
 
-} else if (levelValue >= 70 && evolve < 3) {
+} else if (levelValue >= 350 && evolve < 3) {
   pconsole.insertAdjacentHTML('beforeend', 'Skill level is Ruff+!');
   
   bamglow();
   localStorage.setItem('evolve', 3);
 
-} else if (levelValue >= 50 && evolve < 2) {
+} else if (levelValue >= 200 && evolve < 2) {
   pconsole.insertAdjacentHTML('beforeend', 'Skill level is Ruff!');
   
   bamglow();
   localStorage.setItem('evolve', 2);
 
-} else if (levelValue >= 20 && evolve < 1) {
+} else if (levelValue >= 70 && evolve < 1) {
   pconsole.insertAdjacentHTML('beforeend', 'Skill level is Go+!');
   
   bamglow();
@@ -883,29 +883,29 @@ if (levelValue >= 100 && evolve < 5) {
     
     
 
-    if(levelValue < 20){cat1SVG.style.opacity = '1'}
+    if(levelValue < 70){cat1SVG.style.opacity = '1'}
     else{cat1SVG.style.opacity = '0'}
-    if(levelValue < 50 && levelValue >= 20 ){cat2SVG.style.opacity = '1';}
+    if(levelValue < 200 && levelValue >= 70 ){cat2SVG.style.opacity = '1';}
     else{cat2SVG.style.opacity = '0';}
-    if(levelValue < 70 && levelValue >= 50){cat3SVG.style.opacity = '1';}
+    if(levelValue < 350 && levelValue >= 200){cat3SVG.style.opacity = '1';}
     else{cat3SVG.style.opacity = '0';}
-    if(levelValue < 80 && levelValue >= 70){cat4SVG.style.opacity = '1';}
+    if(levelValue < 600 && levelValue >= 350){cat4SVG.style.opacity = '1';}
     else{cat4SVG.style.opacity = '0';}
-    if(levelValue >= 80){cat5SVG.style.opacity = '1';}
+    if(levelValue >= 600){cat5SVG.style.opacity = '1';}
     else{cat5SVG.style.opacity = '0';}
-    if(levelValue >= 100){catCrown.innerHTML = '💎'}
+    if(levelValue >= 1000){catCrown.innerHTML = '💎'}
 
 }
 
 
 function restartGame() {
 const now = Date.now();
-localStorage.setItem('start', now);
-localStorage.setItem('level', 1);
-localStorage.setItem('score', 0);
-localStorage.setItem('bar1', 100);
-localStorage.setItem('power', 0);
-localStorage.setItem("smashStreak", 0);
+localStorage.removeItem('start');
+localStorage.removeItem('level');
+localStorage.removeItem('score');
+localStorage.removeItem('bar1');
+localStorage.removeItem('power');
+localStorage.removeItem("smashStreak");
 localStorage.removeItem('gameover');
 localStorage.removeItem('evolve');
 window.location.reload(); 
