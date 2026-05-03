@@ -500,7 +500,7 @@ function power() {
         // if (!localStorage['winner']) 
         if (!isCritical && Math.random() < 0.01) {
             isCritical = true;
-            pconsole.insertAdjacentHTML('beforeend', `<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] LATTICE_CRITICAL [3s] : FREE_HITS ✨</span>`);
+            pconsole.insertAdjacentHTML('beforeend', `<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ LATTICE_CRITICAL [3s] : FREE_HITS ✨</span>`);
             wallet_plus.style.scale = "2"
             // End the jackpot after 3 seconds
             setTimeout(() => { 
@@ -581,7 +581,7 @@ function activateFever() {
   showText("FEVER MODE", "#ff4df0");
   pconsole.insertAdjacentHTML(
     'beforeend',
-    `<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] FEVER_MODE [20s] : SCORE (x2) ✨</span>`
+    `<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ FEVER_MODE [20s] : SCORE (x2) ✨</span>`
   );}
 
   feverTimer = setTimeout(() => {
@@ -709,7 +709,7 @@ if (isHit) {
 
   pconsole.insertAdjacentHTML(
     'beforeend',
-    `<span style="color:#00ffcc; font-weight:bold;">[!] ${result}_SMASH // +${Math.floor(reward)} SCORE // STREAK ${smashStreak}</span>`
+    `<span style="color:#00ffcc; font-weight:bold;">${result} // +${Math.floor(reward)} SCORE // STREAK ${smashStreak}</span>`
   );
 
   if (smashStreak > 0 && smashStreak % 3 === 0) {
@@ -744,7 +744,7 @@ setTimeout(() => {
 
     pconsole.insertAdjacentHTML(
       'beforeend',
-      `<span style="color:#ff3333;">[!] SMASH_FAILED // -${penalty} POWER // STREAK LOST</span>`
+      `<span style="color:#ff3333;">FAILED // -${penalty} POWER // STREAK LOST</span>`
     );
 
     
@@ -854,32 +854,32 @@ const levelValue = Number(level.innerText);
 const evolve = Number(localStorage.getItem('evolve') || 0);
 
 if (levelValue >= 1000 && evolve < 5) {
-  pconsole.insertAdjacentHTML('beforeend', 'Skill level is Omni!');
-  
+  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Skill level is Omni! ✨</span>');
+  generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 5);
 
 } else if (levelValue >= 600 && evolve < 4) {
-  pconsole.insertAdjacentHTML('beforeend', 'Skill level is Super!');
-  
+  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Skill level is Super! ✨</span>');
+  generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 4);
 
 } else if (levelValue >= 350 && evolve < 3) {
-  pconsole.insertAdjacentHTML('beforeend', 'Skill level is Ruff+!');
-  
+  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Skill level is Ruff+! ✨</span>');
+  generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 3);
 
 } else if (levelValue >= 200 && evolve < 2) {
-  pconsole.insertAdjacentHTML('beforeend', 'Skill level is Ruff!');
-  
+  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Skill level is Ruff! ✨</span>');
+  generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 2);
 
 } else if (levelValue >= 70 && evolve < 1) {
-  pconsole.insertAdjacentHTML('beforeend', 'Skill level is Go+!');
-  
+  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Skill level is Go+! ✨</span>');
+  generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 1);
 }
