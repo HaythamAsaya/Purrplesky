@@ -629,7 +629,7 @@ function cash() {
 // Instead of Math.max, we use an inverse curve. 
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
-const baseSpeed = Math.max(0.6, 1.2 - (lvl * 0.001)); 
+const baseSpeed = Math.max(0.6, 1.2 - (lvl * 0.0005)); 
     const randomVariation = (Math.random() * 0.1) - 0.05;
     const finalSpeed = baseSpeed + randomVariation;
 
@@ -724,6 +724,8 @@ if (isHit) {
   localStorage['score'] = Number(localStorage['score']) + Math.floor(reward);
   localStorage['power'] = (Number(localStorage['power']) + powerBonus);
   localStorage['bar1'] = 100;
+  let penalty = 15;
+      localStorage['power'] = Math.max(0, Number(localStorage['power']) - penalty)
 
   setTimeout(() => {
   mutateAlien();
@@ -756,7 +758,8 @@ setTimeout(() => {
     Math.abs(needleLeft - end)
   );
 
-  let penalty = missDistance < 12 ? 5 : 15;
+  let penalty = 15;
+  localStorage['bar1'] = 100;
 
   smashStreak = 0;
   localStorage.setItem("smashStreak", smashStreak);
@@ -1057,7 +1060,7 @@ pconsole.append(document.createTextNode(input.value));
             username.textContent = new_username;
             pconsole.insertAdjacentHTML('beforeend', '<br>Username updated.<br>');
         if(!localStorage['username']){
-        pconsole.insertAdjacentHTML('beforeend', '<br>🤖 OMG, it\'s an alien!<br>Hit the alien and collect ⚡15 for the SMASH button. How many streaks can you smash?');
+        pconsole.insertAdjacentHTML('beforeend', '<br>🤖 OMG, it\'s an alien!<br>Hit the alien for the SMASH button. How many streaks can you smash?');
             form.classList.toggle("active");
         }
         localStorage.setItem('username', new_username);
