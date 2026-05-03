@@ -795,7 +795,7 @@ if(!localStorage['username']) {   input.focus();
     if (localStorage['color']){
         document.documentElement.style.setProperty('--main-color2', localStorage.getItem('color'));}
     if(!localStorage['start']){
-        // localStorage.setItem('start', Date.now())
+        localStorage.setItem('start', Date.now())
         localStorage.setItem('level', 1)
         localStorage.setItem('score', 0)
         localStorage.setItem('bar1', 100)
