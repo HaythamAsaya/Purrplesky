@@ -9,7 +9,7 @@
 
 =========================
 Purrple by Haytham Asaya
-V 9.1
+V 9.5
 =========================
 
 -->
@@ -309,8 +309,8 @@ body.fever {
 </svg>
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Hit the alien and the SMASH! button.</li><li>💾 Game progress is saved automatically.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by hitting the alien, and you spend power on smashes to fill stamina and level up.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_70 - Go+<br>LVL_200 - Ruff<br>LVL_350 - Ruff+<br>LVL_600 - Super<br>LVL_1000 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.7em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
-        <p style="font-size:X-small;">V 9.1</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
+    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>Hit the alien and the SMASH! button.</li><li>💾 Game progress is saved automatically.</li><li>Your skill level is displayed in the top-left corner of the screen.</li><li>Your power is displayed by the ⚡ icon. You gain power by hitting the alien, and you spend power on smashes to fill stamina and level up.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Skill levels</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">LVL_00 - Go<br>LVL_70 - Go+<br>LVL_200 - Ruff<br>LVL_350 - Ruff+<br>LVL_600 - Super<br>LVL_1000 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.75em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
+        <p style="font-size:X-small;">V 9.5</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
 	<line class="st0" x1="0" y1="20.5" x2="61" y2="20.5"/>
@@ -567,18 +567,22 @@ function showText(text, color = "#00ffcc") {
   setTimeout(() => el.remove(), 1500);
 }
 
-function activateFever() {
-  if (fever) return;
+let feverTimer; // Variable to hold the reset handle
 
+function activateFever() {
+  // Clear any existing timer so they don't stack/clash
+  clearTimeout(feverTimer);
+
+  if (!fever) {
   fever = true;
   document.body.classList.add("fever");
   showText("FEVER MODE", "#ff4df0");
   pconsole.insertAdjacentHTML(
     'beforeend',
     `<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ [!] FEVER_MODE [20s] : SCORE (x2) ✨</span>`
-  );
+  );}
 
-  setTimeout(() => {
+  feverTimer = setTimeout(() => {
     fever = false;
     document.body.classList.remove("fever");
     pconsole.insertAdjacentHTML('beforeend', `<span style="color: #00ff00;">:: FEVER_OVER // RESYNCING...</span>`);;
@@ -622,7 +626,7 @@ const baseSpeed = Math.max(0.6, 1.2 - (lvl * 0.001));
 
     // 2. MICROSCOPIC PRECISION: 
     // Starts at 50px. By level 40, it's already down to 15px (Extremely hard).
-    const width = Math.max(50, 100 - (lvl * 0.085));
+    const width = Math.max(70, 100 - (lvl * 0.085));
 
     // Apply scaling
     sweet.style.width = width + "px";
@@ -789,12 +793,11 @@ if(!localStorage['username']) {   input.focus();
     if (localStorage['color']){
         document.documentElement.style.setProperty('--main-color2', localStorage.getItem('color'));}
     if(!localStorage['start']){
-        localStorage.setItem('start', Date.now())
+        // localStorage.setItem('start', Date.now())
         localStorage.setItem('level', 1)
         localStorage.setItem('score', 0)
         localStorage.setItem('bar1', 100)
         localStorage.setItem('power', 0);
-        localStorage.setItem("highscore", 1);
     }
 
 
@@ -817,7 +820,7 @@ if(!localStorage['username']) {   input.focus();
     evo_el.innerHTML = evo;
     let savedHighscore = Number(localStorage.getItem("highscore")) || 0;
     if (localStorage['highscore'] > 1){
-    levelFeed.innerHTML = `Highscore: LVL ${savedHighscore}`;}
+    levelFeed.innerHTML = `Highscore: ${savedHighscore}`;}
 
 if (localStorage['power'] >= 15) {
         ko.style.display = "block";
@@ -908,6 +911,7 @@ localStorage.removeItem('power');
 localStorage.removeItem("smashStreak");
 localStorage.removeItem('gameover');
 localStorage.removeItem('evolve');
+localStorage.removeItem('alienDNA');
 window.location.reload(); 
 }
 const gameover = ()=> {
@@ -915,7 +919,7 @@ const gameover = ()=> {
           const savedHighscore = Number(localStorage.getItem("highscore")) || 0;
     if (lvl > savedHighscore) {
   localStorage.setItem("highscore", lvl);
-  highscore.innerHTML = `Highscore: LVL ${lvl}`;
+  highscore.innerHTML = `Highscore: ${lvl}`;
 }
     cat.style.opacity = 0;
     clearInterval(engine);
