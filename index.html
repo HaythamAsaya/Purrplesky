@@ -428,7 +428,9 @@ function generateAndApplyRandomColors() {
 
   localStorage.setItem("bg_color", bg);
   localStorage.setItem("color", fg);
-  location.reload();
+  document.documentElement.style.setProperty('--main-color', localStorage.getItem('bg_color'))
+  document.documentElement.style.setProperty('--main-color2', localStorage.getItem('color'))
+  // location.reload();
 }
 
     
