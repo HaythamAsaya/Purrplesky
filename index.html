@@ -178,11 +178,11 @@ V 9.5
 }
 
 #metro-needle {
-    position: absolute; width: 6px; height: 100%; background: var(--main-color2);
-    left: 0; 
-    /* This bezier curve makes the needle "snap" through the center */
-    animation: swing 0.8s infinite alternate cubic-bezier(0.85, 0, 0.15, 1);
-    will-change: left;
+ position: absolute; width: 6px; height: 100%; background: var(--main-color2);
+ left: 0;
+ transform: translate3d(0, 0, 0);
+animation: swing 0.8s infinite alternate cubic-bezier(0.85, 0, 0.15, 1);
+ will-change: transform;
 }
 
 @media (orientation: portrait) {
@@ -220,9 +220,8 @@ V 9.5
 }
 
 @keyframes swing {
-    from { left: 0%; }
-    to { left: calc(100% - 6px); }
-
+ from { transform: translate3d(0, 0, 0); }
+ to { transform: translate3d(294px, 0, 0); }
 }
 
 body.fever {
@@ -411,9 +410,17 @@ body.fever {
     const needle = document.getElementById('metro-needle');
     const sweet = document.getElementById('sweet-spot');
     const overlay = document.getElementById('metro-overlay');
+    let currentSmashSpeed = 0.8;
+    let smashStartedAt = 0;
+    const NEEDLE_MAX_X = 294;
 
 
 
+    function easeInOut(t) {
+  return t < 0.5
+    ? 4 * t * t * t
+    : 1 - Math.pow(-2 * t + 2, 3) / 2;
+}
 
 
 // function {pconsole.scrollTop = pconsole.scrollHeight;}
@@ -637,14 +644,20 @@ const baseSpeed = Math.max(0.6, 1.2 - (lvl * 0.001));
     // Reset Needle
     needle.style.background = "var(--main-color2)"; 
     needle.style.animation = 'none';
-    
-    setTimeout(() => {
-        // Force the new "Snap" animation
-        needle.style.animation = `swing ${finalSpeed}s infinite alternate cubic-bezier(0.85, 0, 0.15, 1)`;
-        overlay.style.display = 'flex';
-        isSyncing = true;
-        window.addEventListener('pointerdown', strikeHandler);
-    }, 20);
+needle.style.transform = 'translate3d(0, 0, 0)';
+needle.style.background = "var(--main-color2)";
+
+overlay.style.display = 'flex';
+overlay.style.opacity = '1';
+
+currentSmashSpeed = finalSpeed;
+smashStartedAt = performance.now();
+
+requestAnimationFrame(() => {
+needle.style.animation = `swing ${finalSpeed}s infinite alternate cubic-bezier(0.85, 0, 0.15, 1)`;
+ isSyncing = true;
+ window.addEventListener('pointerdown', strikeHandler);
+});
 }
 
 function strikeHandler(e) {
@@ -652,10 +665,16 @@ function strikeHandler(e) {
     
     
     // Capture the "Live" GPU position
-    const needleLeft = parseFloat(window.getComputedStyle(needle).left);
-    
-    needle.style.animation = "none";
-    needle.style.left = needleLeft + "px";
+    const elapsed = (performance.now() - smashStartedAt) / 1000;
+const cycle = currentSmashSpeed;
+const raw = (elapsed % (cycle * 2)) / cycle;
+
+const linearProgress = raw <= 1 ? raw : 2 - raw;
+const progress = easeInOut(linearProgress);
+const needleLeft = progress * NEEDLE_MAX_X;
+
+// needle.style.animation = "none";
+// needle.style.transform = `translate3d(${needleLeft}px, 0, 0)`;
     
     window.removeEventListener('pointerdown', strikeHandler);
     isSyncing = false;
@@ -756,8 +775,8 @@ setTimeout(() => {
     lv_plus.style.scale = "1";
     overlay.style.display = 'none';
     overlay.style.opacity = "1"
-}, 500);
-setTimeout(leveler, 520);
+}, 80);
+setTimeout(leveler, 100);
 }
 
 
