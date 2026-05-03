@@ -308,7 +308,7 @@ body.fever {
 </svg>
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>💾 Game progress is saved automatically.</li><li>Your score is displayed in the top-left corner of the screen.</li><li>Hit the alien and use SMASH! to build your streak. Keep going to beat your best streak.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Streak ranks</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">STREAK_00 - Go<br>STREAK_10 - Go+<br>STREAK_20 - Ruff<br>STREAK_30 - Ruff+<br>STREAK_40 - Super<br>STREAK_50 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.75em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
+    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>💾 Game progress is saved automatically.</li><li>Your score is displayed in the top-left corner of the screen.</li><li>Hit the alien and use SMASH! to build your streak. Keep going to beat your best streak.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Alien ranks</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">STREAK_00 - Go<br>STREAK_10 - Go+<br>STREAK_20 - Ruff<br>STREAK_30 - Ruff+<br>STREAK_40 - Super<br>STREAK_50 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.75em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
         <p style="font-size:X-small;">V 9.5</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
@@ -815,7 +815,7 @@ if(!localStorage['username']) {   input.focus();
           if(!localStorage['gameover'] && !localStorage['winner']){
     let magicAnswers = ['🤖 Hello ', '🤖 Hi ', '🤖 Welcome back ', '🤖 Yo ', '🤖 It\'s '];
     let randAnswer = Math.floor( Math.random() *magicAnswers.length)
-    pconsole.insertAdjacentHTML('beforeend', magicAnswers[randAnswer] + localStorage.getItem('username') + ".<br>Let\'s SMASH!");}
+    pconsole.insertAdjacentHTML('beforeend', magicAnswers[randAnswer] + localStorage.getItem('username') + ".<br>Let\'s SMASH the alien!");}
 }
     if (localStorage['bg_color']){
         document.documentElement.style.setProperty('--main-color', localStorage.getItem('bg_color'))}
@@ -881,31 +881,31 @@ const levelValue = Number(localStorage.getItem('highscore') || 0);
 const evolve = Number(localStorage.getItem('evolve') || 0);
 
 if (levelValue >= 50 && evolve < 5) {
-  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Streak rank is Omni! ✨</span>');
+  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien is Omni! ✨</span>');
   generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 5);
 
 } else if (levelValue >= 40 && evolve < 4) {
-  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Streak rank is Super! ✨</span>');
+  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien is Super! ✨</span>');
   generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 4);
 
 } else if (levelValue >= 30 && evolve < 3) {
-  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Streak rank is Ruff+! ✨</span>');
+  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien is Ruff+! ✨</span>');
   generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 3);
 
 } else if (levelValue >= 20 && evolve < 2) {
-  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Streak rank is Ruff! ✨</span>');
+  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien is Ruff! ✨</span>');
   generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 2);
 
 } else if (levelValue >= 10 && evolve < 1) {
-  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Streak rank is Go+! ✨</span>');
+  pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien is Go+! ✨</span>');
   generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 1);
