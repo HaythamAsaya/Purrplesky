@@ -629,13 +629,13 @@ function cash() {
 // Instead of Math.max, we use an inverse curve. 
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
-const baseSpeed = Math.max(0.6, 1.2 - (lvl * 0.0005)); 
+const baseSpeed = Math.max(0.8, 1.2 - (lvl * 0.0005)); 
     const randomVariation = (Math.random() * 0.1) - 0.05;
     const finalSpeed = baseSpeed + randomVariation;
 
     // 2. MICROSCOPIC PRECISION: 
     // Starts at 50px. By level 40, it's already down to 15px (Extremely hard).
-    const width = Math.max(70, 100 - (lvl * 0.085));
+    const width = Math.max(80, 100 - (lvl * 0.085));
 
     // Apply scaling
     sweet.style.width = width + "px";
