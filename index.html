@@ -308,7 +308,7 @@ body.fever {
 </svg>
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>💾 Game progress is saved automatically.</li><li>Your score is displayed in the top-left corner of the screen.</li><li>Hit the alien and use SMASH! to build your streak. Keep going to beat your best streak.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Alien ranks</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">STREAK_00 - Go<br>STREAK_10 - Go+<br>STREAK_20 - Ruff<br>STREAK_30 - Ruff+<br>STREAK_40 - Super<br>STREAK_50 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.75em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
+    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>💾 Game progress is saved automatically.</li><li>Your score is displayed in the top-left corner of the screen.</li><li>Hit the alien and use SMASH! to build your streak. Keep going to beat your best streak.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Alien ranks</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">STREAK_00 - Go<br>STREAK_20 - Go+<br>STREAK_40 - Ruff<br>STREAK_60 - Ruff+<br>STREAK_80 - Super<br>STREAK_100 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.75em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
         <p style="font-size:X-small;">V 9.5</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
@@ -880,31 +880,31 @@ cat.style.opacity = 1;
 const levelValue = Number(localStorage.getItem('highscore') || 0);
 const evolve = Number(localStorage.getItem('evolve') || 0);
 
-if (levelValue >= 50 && evolve < 5) {
+if (levelValue >= 100 && evolve < 5) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien is Omni! ✨</span>');
   generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 5);
 
-} else if (levelValue >= 40 && evolve < 4) {
+} else if (levelValue >= 80 && evolve < 4) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien is Super! ✨</span>');
   generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 4);
 
-} else if (levelValue >= 30 && evolve < 3) {
+} else if (levelValue >= 60 && evolve < 3) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien is Ruff+! ✨</span>');
   generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 3);
 
-} else if (levelValue >= 20 && evolve < 2) {
+} else if (levelValue >= 40 && evolve < 2) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien is Ruff! ✨</span>');
   generateAndApplyRandomColors()
   bamglow();
   localStorage.setItem('evolve', 2);
 
-} else if (levelValue >= 10 && evolve < 1) {
+} else if (levelValue >= 20 && evolve < 1) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien is Go+! ✨</span>');
   generateAndApplyRandomColors()
   bamglow();
@@ -915,17 +915,17 @@ if (levelValue >= 50 && evolve < 5) {
     
     
 
-    if(levelValue < 10){cat1SVG.style.opacity = '1'}
+    if(levelValue < 20){cat1SVG.style.opacity = '1'}
     else{cat1SVG.style.opacity = '0'}
-    if(levelValue < 20 && levelValue >= 10 ){cat2SVG.style.opacity = '1';}
+    if(levelValue < 40 && levelValue >= 20 ){cat2SVG.style.opacity = '1';}
     else{cat2SVG.style.opacity = '0';}
-    if(levelValue < 30 && levelValue >= 20){cat3SVG.style.opacity = '1';}
+    if(levelValue < 60 && levelValue >= 40){cat3SVG.style.opacity = '1';}
     else{cat3SVG.style.opacity = '0';}
-    if(levelValue < 40 && levelValue >= 30){cat4SVG.style.opacity = '1';}
+    if(levelValue < 80 && levelValue >= 60){cat4SVG.style.opacity = '1';}
     else{cat4SVG.style.opacity = '0';}
-    if(levelValue >= 50){cat5SVG.style.opacity = '1';}
+    if(levelValue >= 80){cat5SVG.style.opacity = '1';}
     else{cat5SVG.style.opacity = '0';}
-    if(levelValue >= 60){catCrown.innerHTML = '💎'}
+    if(levelValue >= 100){catCrown.innerHTML = '💎'}
 
 }
 
