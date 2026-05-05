@@ -116,12 +116,12 @@ V 10
   z-index: -2;
   background: linear-gradient(-45deg, #e73c3c, #f10fc4,#3498db, #2ecc71);
   background-size: 400% 400%;
-  opacity: 0.02;
+  opacity: .5;
   transition: opacity 0.8s ease-out;
-  animation: glow 12s linear infinite;
+  animation: glow 20s linear infinite;
   will-change: opacity, background-position;
 }
-        .form {position: relative;top:-100%;z-index: 0;opacity:0}
+        .form {position: relative;top:-100%;z-index: 0;opacity:0; transition: all 300ms ease-in-out;}
         .form.active {top:0%;opacity:1}
         .form input[type=text] {width: 65%;display: inline;margin:0; border: 0;background: transparent;padding: 1em; color: var(--main-color2);font-size: clamp(12px, 4vw, 1.2em);    border-radius: 50px; transition:all 700ms}
         .form input[type=text]::placeholder{color: var(--main-color2);}
@@ -149,9 +149,10 @@ V 10
             .cat1-color{fill:var(--main-color2);}
             @keyframes cat-float {0% {}50% {transform: translateY(5px);scale:0.97}}
             @keyframes shadow {0% {}50% {width:10.5vh}}
-            .container,.cat {display: grid;align-content:center; align-items: start;}
+            .container,.cat {display: grid;align-content:center; align-items: center;}
             .bars{display: grid;align-content:stretch}
-            .help-help{text-align: right; margin:0;font-size: clamp(12px, 2vw, 1.2em);position:absolute;right: 0;top:64px; display: none;}
+            .food-box{position:absolute;bottom:60px}
+            .help-help{text-align: right; margin:0;font-size: clamp(12px, 2vw, 1.2em);position:absolute;right: 0;top:0; display: none;}
             .help-help.active {display: block;}
 
             
@@ -199,7 +200,7 @@ animation: swing 0.8s infinite alternate cubic-bezier(0.85, 0, 0.15, 1);
         .console-button{margin-left: 0px;}
         .main.omni {grid-template-columns:4fr 6fr;grid-template-rows: 1fr 3fr 3fr;
             grid-template-areas: "navbar navbar""container container""cat cat";}
-            .food-box{padding-right: 30px;}
+            .food-box{padding-right: 30px;bottom:30px}
             .cats{padding-block:0;padding-bottom:3em;}
     }
 
@@ -320,13 +321,7 @@ body.fever {
         </div>
         <div class="container" style="grid-area:container"> 
             <div class="console-header" style="position: relative">
-                <div class="food-box"><div class="bar1box">
-            <span class="evo" style="font-weight: 900;line-height: 0;"></span>
-            <div class="icon"><svg viewBox="0 0 31.9 29.02"><defs></defs><path class="cat1-color fp " d="M31.89,9.24c.09,3.54-1.42,6.74-4.18,9.32-3.7,3.46-7.52,6.8-11.26,10.21-.42,.38-.64,.27-1-.05-3.46-3.12-6.95-6.21-10.41-9.33C1.85,16.52-.04,13.07,0,8.63,.04,4.89,1.85,1.88,5.1,.59c3.29-1.3,7.07-.4,9.5,2.27,.47,.52,.87,1.46,1.36,1.5,.57,.05,.88-.96,1.35-1.48C19.77,.18,23.57-.73,26.9,.62c3.31,1.34,5.13,4.35,5,8.62Z"/></svg></div>
-        </div>
-            <div class="bar-box">
-                <div class="bar bar1"></div>
-    </div></div>
+                
     <div class="console-button"><p>🤖</p>
     <svg id="con-butt" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 461.02 90" preserveAspectRatio="none"><defs><style>.con-butt{fill:var(--main-color2);}</style></defs><polygon class="con-butt" points="461.02 90 405.92 0 55.1 0 0 90 461.02 90"/></svg></div><p class="help-help">Type "help" for commands list ↵</p></div><div class="console-container"><div class="console"></div>
         <div class="console-behind"></div></div>
@@ -363,6 +358,13 @@ body.fever {
 </svg>
     <span id="cat-emoji"></span><span id="cat-crown"></span>
     <p class="knock-out">PLAY!</p>
+    <div class="food-box"><div class="bar1box">
+            <span class="evo" style="font-weight: 900;line-height: 0;"></span>
+            <div class="icon"><svg viewBox="0 0 31.9 29.02"><defs></defs><path class="cat1-color fp " d="M31.89,9.24c.09,3.54-1.42,6.74-4.18,9.32-3.7,3.46-7.52,6.8-11.26,10.21-.42,.38-.64,.27-1-.05-3.46-3.12-6.95-6.21-10.41-9.33C1.85,16.52-.04,13.07,0,8.63,.04,4.89,1.85,1.88,5.1,.59c3.29-1.3,7.07-.4,9.5,2.27,.47,.52,.87,1.46,1.36,1.5,.57,.05,.88-.96,1.35-1.48C19.77,.18,23.57-.73,26.9,.62c3.31,1.34,5.13,4.35,5,8.62Z"/></svg></div>
+        </div>
+            <div class="bar-box">
+                <div class="bar bar1"></div>
+    </div></div>
   </div>
     
     <div id="metro-overlay">
@@ -541,11 +543,10 @@ localStorage['power'] = Number(localStorage['power']) + powerGain;
 
         // --- 3. THE HOUSEKEEPING & FEEDBACK ---
         pluspower(); 
-            emojiAction(); bamglow()
+            emojiAction(); 
 
         if (pconsole.innerHTML.length > 3000) {
             pconsole.innerHTML = 'Let\'s PLAY!';
-            bamglow();
         }
     } 
     if(!localStorage['gameover']){leveler()}
@@ -553,7 +554,7 @@ localStorage['power'] = Number(localStorage['power']) + powerGain;
 }
 
           function food(){if(!localStorage['gameover']){
-            if(localStorage['power'] >= 5){emojiAction();bamglow();localStorage['score']++;plusflash();
+            if(localStorage['power'] >= 5){emojiAction();localStorage['score']++;plusflash();
           localStorage['bar1'] = 100;
           if(!localStorage['winner']){localStorage['power'] = localStorage['power'] - 5;}
         pconsole.insertAdjacentHTML('beforeend', 'Stamina refilled.');} 
@@ -746,7 +747,7 @@ if (isHit) {
   }
 
 setTimeout(() => {
-  bamglow();
+  
   plusflash();
   pluspower();
   
@@ -892,31 +893,31 @@ const evolve = Number(localStorage.getItem('evolve') || 0);
 if (levelValue >= 100 && evolve < 5) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien evolved to Omni! ✨</span>');
   generateAndApplyRandomColors()
-  bamglow();
+  
   localStorage.setItem('evolve', 5);
 
 } else if (levelValue >= 80 && evolve < 4) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien evolved to Super! ✨</span>');
   generateAndApplyRandomColors()
-  bamglow();
+  
   localStorage.setItem('evolve', 4);
 
 } else if (levelValue >= 60 && evolve < 3) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien evolved to Ruff+! ✨</span>');
   generateAndApplyRandomColors()
-  bamglow();
+  
   localStorage.setItem('evolve', 3);
 
 } else if (levelValue >= 40 && evolve < 2) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien evolved to Ruff! ✨</span>');
   generateAndApplyRandomColors()
-  bamglow();
+  
   localStorage.setItem('evolve', 2);
 
 } else if (levelValue >= 20 && evolve < 1) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien evolved to Go+! ✨</span>');
   generateAndApplyRandomColors()
-  bamglow();
+  
   localStorage.setItem('evolve', 1);
 }
     
@@ -963,23 +964,6 @@ const gameover = ()=> {
     
 }
 
-    // animations
-    const glow = document.querySelector(".console-behind");
-    window.addEventListener("input", () => {
-        glow.style.transition = 'opacity 0s ease-out';
-        glow.style.opacity = ".5";})
-    window.addEventListener("keyup",()=>{
-        setTimeout(()=>{  glow.style.transition = 'opacity 1s ease-out';
-    glow.style.opacity = "0.02";}, 200)
-    })
-
-    let glowTimeout;
-
-const bamglow = () => {
-
-  glow.style.opacity = "0.6";
-
-};
     
 
 
@@ -1025,7 +1009,7 @@ pconsole.append(document.createTextNode(input.value));
         let calc = Function('"use strict"; return (' + input.value.replaceAll(' ', '') + ')')();
         pconsole.insertAdjacentHTML('beforeend', ' = ' + calc + '<br> Math is cool<br>');
       }else if (regex_bg_color.test(input.value.trim()) && localStorage['username']){
-        if(localStorage['power'] >= 1){bamglow();
+        if(localStorage['power'] >= 1){
         let new_bg_color = input.value.replace(regex_bg_color, '');
         document.documentElement.style.setProperty('--main-color', new_bg_color);
         pconsole.insertAdjacentHTML('beforeend', 'Background color updated.<br>');
@@ -1033,7 +1017,7 @@ pconsole.append(document.createTextNode(input.value));
         localStorage['power'] = localStorage['power'] - 1;}
         else {pconsole.insertAdjacentHTML('beforeend', 'Not enough power. You need 1 charge. You can generate power by hitting the alien.<br>');}
       }else if (regex_color.test(input.value.trim()) && localStorage['username']){
-        if(localStorage['power'] >= 1){bamglow();
+        if(localStorage['power'] >= 1){
         let new_color = input.value.replace(regex_color, '');
         document.documentElement.style.setProperty('--main-color2', new_color);
         pconsole.insertAdjacentHTML('beforeend', 'Theme color updated.<br>');
@@ -1073,7 +1057,7 @@ pconsole.append(document.createTextNode(input.value));
         let cleanAnswers = ["Fresh!","Clean console!","Clear as the sky ...","Voila!","All's gone!"]; let randAnswer = Math.floor(Math.random()*5)
         pconsole.innerHTML = cleanAnswers[randAnswer] + '<br>';
       } else if (localStorage['username']) {if(pconsole.innerHTML.length > 3000){
-          pconsole.innerHTML= '⚡Shazam!';bamglow()}} 
+          pconsole.innerHTML= '⚡Shazam!';}} 
           else {pconsole.insertAdjacentHTML('beforeend', '<br>Type "username:" followed by your name.<br>');}
 
 
