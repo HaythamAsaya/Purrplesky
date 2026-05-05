@@ -307,7 +307,7 @@ body.fever {
 </svg>
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>💾 Game progress is saved automatically.</li><li>Your score and streak are displayed in the top-left corner of the screen.</li><li>Feed and PLAY! to build your streak. Get higher streaks to rank up!</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Alien ranks</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">STREAK_00 - Go<br>STREAK_20 - Go+<br>STREAK_40 - Ruff<br>STREAK_60 - Ruff+<br>STREAK_80 - Super<br>STREAK_100 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.75em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
+    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>💾 Game progress is saved automatically on your device.</li><li>Your score and best streak are displayed in the top-left corner of the screen.</li><li>Feed and PLAY! Get higher streaks to rank up your alien!</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Alien ranks</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">STREAK_00 - Go<br>STREAK_20 - Go+<br>STREAK_40 - Ruff<br>STREAK_60 - Ruff+<br>STREAK_80 - Super<br>STREAK_100 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.75em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
         <p style="font-size:X-small;">V 9.8</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
@@ -819,7 +819,7 @@ if(!localStorage['username']) {   input.focus();
           if(!localStorage['gameover'] && !localStorage['winner']){
     let magicAnswers = ['🤖 Hello ', '🤖 Hi ', '🤖 Welcome back ', '🤖 Yo ', '🤖 It\'s '];
     let randAnswer = Math.floor( Math.random() *magicAnswers.length)
-    pconsole.insertAdjacentHTML('beforeend', magicAnswers[randAnswer] + localStorage.getItem('username') + ".<br>Feed and play!");}
+    pconsole.insertAdjacentHTML('beforeend', magicAnswers[randAnswer] + localStorage.getItem('username') + ".<br>Feed and PLAY!");}
 }
     if (localStorage['bg_color']){
         document.documentElement.style.setProperty('--main-color', localStorage.getItem('bg_color'))}
@@ -1065,7 +1065,7 @@ pconsole.append(document.createTextNode(input.value));
             username.textContent = new_username;
             pconsole.insertAdjacentHTML('beforeend', '<br>Username updated.<br>');
         if(!localStorage['username']){
-        pconsole.insertAdjacentHTML('beforeend', '<br>🤖 OMG, we found an alien!<br>Train the alien for the PLAY button. Streaks will rank the alien up 🔥');
+        pconsole.insertAdjacentHTML('beforeend', '<br>🤖 You found the alien GO.<br>Tap on it several times to feed it and make it strong for PLAY!');
             form.classList.toggle("active");
         }
         localStorage.setItem('username', new_username);
