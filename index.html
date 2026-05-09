@@ -895,7 +895,7 @@ const levelValue = Number(localStorage.getItem('highscore') || 0);
 const evolve = Number(localStorage.getItem('evolve') || 0);
 
 if (evolve < 5){
-  // localStorage['bar1'] = localStorage['bar1'] -0.5;
+  localStorage['bar1'] = localStorage['bar1'] -0.5;
 }
 
 if (levelValue >= 100 && evolve < 5) {
