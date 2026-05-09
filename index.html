@@ -897,15 +897,7 @@ cat.style.opacity = 1;
 const levelValue = Number(localStorage.getItem('highscore') || 0);
 const evolve = Number(localStorage.getItem('evolve') || 0);
 
-if (evolve < 5){
-    localStorage.bar1DecayTime ??= Date.now();
 
-localStorage.bar1 = Math.max(
-  0,
-  (+localStorage.bar1 || 0) - (Date.now() - localStorage.bar1DecayTime) / 36e5 * 10000
-);
-
-localStorage.bar1DecayTime = Date.now();}
 
 if (levelValue >= 100 && evolve < 5) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien evolved to Omni! ✨</span>');
@@ -953,6 +945,10 @@ if (levelValue >= 100 && evolve < 5) {
     if(levelValue >= 80){cat5SVG.style.opacity = '1';}
     else{cat5SVG.style.opacity = '0';}
     if(levelValue >= 100){catCrown.innerHTML = '💎'}
+
+    if (evolve < 5){
+  localStorage['bar1'] = localStorage['bar1'] -1;
+}
 
 }
 
