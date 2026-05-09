@@ -897,7 +897,9 @@ cat.style.opacity = 1;
 const levelValue = Number(localStorage.getItem('highscore') || 0);
 const evolve = Number(localStorage.getItem('evolve') || 0);
 
-
+if (evolve < 5){
+  localStorage['bar1'] = localStorage['bar1'] -0.5;
+}
 
 if (levelValue >= 100 && evolve < 5) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien evolved to Omni! ✨</span>');
@@ -946,9 +948,7 @@ if (levelValue >= 100 && evolve < 5) {
     else{cat5SVG.style.opacity = '0';}
     if(levelValue >= 100){catCrown.innerHTML = '💎'}
 
-    if (evolve < 5){
-  localStorage['bar1'] = localStorage['bar1'] -1;
-}
+    
 
 }
 
@@ -965,7 +965,7 @@ localStorage.removeItem("smashStreak");
 localStorage.removeItem('gameover');
 localStorage.removeItem('evolve');
 localStorage.removeItem('alienDNA');
-localStorage.removeItem('bar1DecayTime');
+// localStorage.removeItem('bar1DecayTime');
 window.location.reload(); 
 }
 const gameover = ()=> {
