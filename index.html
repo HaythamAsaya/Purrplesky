@@ -844,7 +844,7 @@ if(!localStorage['username']) {   input.focus();
         localStorage.setItem('start', Date.now())
         localStorage.setItem('level', 0)
         localStorage.setItem('score', 0)
-        localStorage.setItem('bar1', 50)
+        localStorage.setItem('bar1', 70)
         localStorage.setItem('power', 0);
     }
 
@@ -866,14 +866,7 @@ if(!localStorage['username']) {   input.focus();
     if (localStorage['highscore'] > 1){
     levelFeed.innerHTML = `Streak 🔥 ${savedHighscore}`;}
     
-    localStorage.bar1DecayTime ??= Date.now();
-
-localStorage.bar1 = Math.max(
-  0,
-  (+localStorage.bar1 || 0) - (Date.now() - localStorage.bar1DecayTime) / 36e5 * 7
-);
-
-localStorage.bar1DecayTime = Date.now();
+    
 
 if (localStorage['power'] >= 15) {
         ko.style.display = "block";
@@ -903,6 +896,16 @@ cat.style.opacity = 1;
 
 const levelValue = Number(localStorage.getItem('highscore') || 0);
 const evolve = Number(localStorage.getItem('evolve') || 0);
+
+if (evolve < 5){
+    localStorage.bar1DecayTime ??= Date.now();
+
+localStorage.bar1 = Math.max(
+  0,
+  (+localStorage.bar1 || 0) - (Date.now() - localStorage.bar1DecayTime) / 36e5 * 10000
+);
+
+localStorage.bar1DecayTime = Date.now();}
 
 if (levelValue >= 100 && evolve < 5) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien evolved to Omni! ✨</span>');
@@ -962,10 +965,11 @@ localStorage.removeItem('score');
 localStorage.removeItem('bar1');
 localStorage.removeItem('power');
 localStorage.removeItem("smashStreak");
-localStorage.removeItem("highscore");
+// localStorage.removeItem("highscore");
 localStorage.removeItem('gameover');
 localStorage.removeItem('evolve');
 localStorage.removeItem('alienDNA');
+localStorage.removeItem('bar1DecayTime');
 window.location.reload(); 
 }
 const gameover = ()=> {
@@ -974,7 +978,7 @@ const gameover = ()=> {
     clearInterval(engine);
     localStorage.setItem('gameover', 1);
     input.style.display = 'none'; enter.style.display = 'none';
-    pconsole.insertAdjacentHTML('beforeend', '<br>BACK TO THE VOID!<div style="cursor:pointer; " onclick="restartGame()"><p style="padding: 0.5em 1em;color: var(--main-color);width: 100%;margin-inline:auto;border: 2px solid var(--main-color);text-align: center;">RETRY</p></div>');
+    pconsole.insertAdjacentHTML('beforeend', '<br>BACK TO THE VOID!<div style="cursor:pointer; " onclick="restartGame()"><p style="padding: 0.5em 1em;color: var(--main-color);width: 100%;margin-inline:auto;border: 2px solid var(--main-color);text-align: center;">LET\'S FEED</p></div>');
     
 }
 
@@ -1063,7 +1067,7 @@ pconsole.append(document.createTextNode(input.value));
             username.textContent = new_username;
             pconsole.insertAdjacentHTML('beforeend', '<br>Username updated.<br>');
         if(!localStorage['username']){
-        pconsole.insertAdjacentHTML('beforeend', '<br>🤖 You found the alien GO.<br>Tap on it several times to charge then feed.');
+        pconsole.insertAdjacentHTML('beforeend', '<br>🤖 You found a hangry alien.<br>Tap on it several times to charge then feed!');
             form.classList.toggle("active");
         }
         localStorage.setItem('username', new_username);
