@@ -723,9 +723,23 @@ if (isHit) {
 
   localStorage['score'] = Number(localStorage['score']) + Math.floor(reward);
   localStorage['power'] = (Number(localStorage['power']) + powerBonus);
-  if (localStorage['bar1'] < 99) {
-    localStorage['bar1']++
-  }
+  let bar1 = Number(localStorage['bar1']) || 0;
+
+if (smashStreak >= 10) {
+  bar1 += 15;
+
+} else if (smashStreak >= 5) {
+  bar1 += 10;
+
+} else if (smashStreak >= 3) {
+  bar1 += 5;
+}
+
+if (bar1 > 100) {
+  bar1 = 100;
+}
+
+localStorage['bar1'] = bar1;
   let penalty = 15;
       localStorage['power'] = Math.max(0, Number(localStorage['power']) - penalty)
 
@@ -763,7 +777,7 @@ setTimeout(() => {
   );
 
   let penalty = 15;
-  localStorage['bar1']--
+  localStorage['bar1'] = localStorage['bar1'] - 25;
 
   smashStreak = 0;
   localStorage.setItem("smashStreak", smashStreak);
