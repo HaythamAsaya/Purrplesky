@@ -61,7 +61,7 @@ V 10
         .lv-plus{font-size: 4em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; left:0;z-index: 5;}
         .wallet-plus{font-size: 5em; position: fixed;margin: 0;animation: cloud 600ms alternate ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal;bottom: 39%; left:25%;z-index: 5;pointer-events: none;}
         .knock-out{animation: cloud 1000ms alternate ease-in-out infinite; position: absolute; margin: 0; padding: 0.5em; left: 50%; translate: -50%;bottom:0;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: radial-gradient(rgba(0, 255, 251, 0.282), transparent 70%);display: none;font-size: clamp(4em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;transition: all 1s cubic-bezier(0.44, -0.01, 0, 1.03);z-index:5} 
-        .power-bar{margin:0 0 0 -10px; position: absolute;top:-15%;left:0;font-size: clamp(2em, 3vw, 32px);font-family: monospace;}
+        .power-bar{margin:0 0 0 -10px; position: absolute;top:-15%;left:0;font-size: clamp(1.5em, 3vw, 32px);font-family: monospace;}
         .level-feed{
             /* position: fixed;top:90px;left:50%;translate:-50%; */
             font-size: clamp(0.9em, 2vw, 1.2em);}
@@ -861,7 +861,13 @@ if(!localStorage['username']) {   input.focus();
     ,1000)
     
     function leveler(){
-        
+
+        wallet.innerText = Math.floor(localStorage['power']);
+        var bar1_percentage = Number(localStorage.getItem('bar1'));
+        if(bar1_percentage >= 0){
+        bar1.style.width = bar1_percentage + '%';
+    } else {bar1.style.width = '0%'}
+    if(bar1_percentage <= 0 && localStorage['username']){gameover(); ko.innerHTML = "OOPS!"}
           level.innerHTML = Math.round(Number(localStorage['level']) + Number(localStorage['score'] / 1000));
           
 
@@ -882,17 +888,12 @@ if (localStorage['power'] >= 15) {
           if(localStorage['username']) {
 cat.style.opacity = 1;
 
-  wallet.innerText = Math.floor(localStorage['power']);
-        var bar1_percentage = Number(localStorage.getItem('bar1'));
-        if(bar1_percentage >= 0){
-        bar1.style.width = bar1_percentage + '%';
-    } else {bar1.style.width = '0%'}
-    if(bar1_percentage <= 0 && localStorage['username']){gameover(); ko.innerHTML = "OOPS!"}
+  
 
-        const lvl = parseInt(level.innerText) || 0;
-    const pwr = wallet.innerText;
-    const pwrNum = parseFloat(pwr) || 0;
-    const user = (username.innerText || "USER").toUpperCase();
+    //     const lvl = parseInt(level.innerText) || 0;
+    // const pwr = wallet.innerText;
+    // const pwrNum = parseFloat(pwr) || 0;
+    // const user = (username.innerText || "USER").toUpperCase();
 }
     
 
@@ -973,10 +974,8 @@ const gameover = ()=> {
     cat.style.height = 0;
     localStorage.setItem('gameover', 1);
     // input.style.display = 'none'; enter.style.display = 'none';
-    setTimeout(() => {
       
       pconsole.insertAdjacentHTML('beforeend', '<br>BACK TO THE VOID!<div style="cursor:pointer; " onclick="restartGame()"><p style="padding: 0.5em 1em;color: var(--main-color);width: 100%;margin-inline:auto;border: 2px solid var(--main-color);text-align: center;">Restart run</p></div>');
-    }, 150);
     
 }
 
