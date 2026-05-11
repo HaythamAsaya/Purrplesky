@@ -61,7 +61,7 @@ V 10
         .lv-plus{font-size: 4em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; left:0;z-index: 5;}
         .wallet-plus{font-size: 5em; position: fixed;margin: 0;animation: cloud 600ms alternate ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal;bottom: 39%; left:25%;z-index: 5;pointer-events: none;}
         .knock-out{animation: cloud 1000ms alternate ease-in-out infinite; position: absolute; margin: 0; padding: 0.5em; left: 50%; translate: -50%;bottom:40%;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: radial-gradient(rgba(0, 255, 251, 0.282), transparent 70%);display: none;font-size: clamp(4em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;transition: all 1s cubic-bezier(0.44, -0.01, 0, 1.03);z-index:5} 
-        .power-bar{margin:0 0 0 -10px; position: absolute;top:-15%;left:0;font-size: clamp(1.5em, 3vw, 32px);font-family: monospace;}
+        .power-bar{position: absolute;bottom:0;left:0;font-size: clamp(1.5em, 3vw, 32px);font-family: monospace;}
         .level-feed{
             /* position: fixed;top:90px;left:50%;translate:-50%; */
             font-size: clamp(0.9em, 2vw, 1.2em);}
@@ -151,7 +151,7 @@ V 10
             @keyframes shadow {0% {}50% {width:10.5vh}}
             .container,.cat {display: grid;align-content:center; align-items: center;}
             .bars{display: grid;align-content:stretch}
-            .food-box{position:absolute;right:0;top:-15%}
+            .food-box{position:absolute;right:0;bottom:0}
             .help-help{text-align: right; margin:0;font-size: clamp(12px, 2vw, 1.2em);position:absolute;right: 0;top:0; display: none;}
             .help-help.active {display: block;}
 
@@ -179,7 +179,8 @@ V 10
 }
 
 #metro-needle {
- position: absolute; width: 20px; height: 20px; background: var(--main-color2);
+ position: absolute; width: 20px; height: 20px; background: var(--main-color2); 
+    outline: 4px solid var(--main-color);
  left: 0; top: 47%; border-radius: 50%;
  transform: translate3d(0, 0, 0);
 animation: swing 0.8s infinite alternate cubic-bezier(0.85, 0, 0.15, 1);
@@ -631,7 +632,7 @@ function cash() {
 // Instead of Math.max, we use an inverse curve. 
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
-const baseSpeed = Math.max(0.8, 1.2 - (lvl * 0.005)); 
+const baseSpeed = Math.max(0.8, 2.2 - (lvl * 0.005)); 
     const randomVariation = (Math.random() * 0.1) - 0.05;
     const finalSpeed = baseSpeed + randomVariation;
 
@@ -662,18 +663,11 @@ needle.style.animation = `swing ${finalSpeed}s infinite alternate cubic-bezier(0
 });
 }
 
-function strikeHandler(e) {
-    if (!isSyncing) return;
+function strikeHandler(e)  {
+if (!isSyncing) return;
     
     
-    // Capture the "Live" GPU position
-    const elapsed = (performance.now() - smashStartedAt) / 1000;
-const cycle = currentSmashSpeed;
-const raw = (elapsed % (cycle * 2)) / cycle;
 
-const linearProgress = raw <= 1 ? raw : 2 - raw;
-const progress = easeInOut(linearProgress);
-const needleLeft = progress * NEEDLE_MAX_X;
 
 // needle.style.animation = "none";
 // needle.style.transform = `translate3d(${needleLeft}px, 0, 0)`;
@@ -681,14 +675,23 @@ const needleLeft = progress * NEEDLE_MAX_X;
     window.removeEventListener('pointerdown', strikeHandler);
     isSyncing = false;
 
-    // PIXEL-PERFECT HIT TEST (No buffers, no mercy)
-    const start = sweet.offsetLeft;
-    const end = sweet.offsetLeft + sweet.offsetWidth;
-    const isHit = needleLeft >= start && needleLeft <= end;
+// REAL visual hit test
+const needleRect = needle.getBoundingClientRect();
+const sweetRect = sweet.getBoundingClientRect();
 
-const targetCenter = start + ((end - start) / 2);
-const distance = Math.abs(needleLeft - targetCenter);
-const targetSize = end - start;
+needle.style.animationPlayState = "paused";
+
+// Hit if any part of the 6px needle overlaps the sweet spot
+const isHit =
+  needleRect.right >= sweetRect.left &&
+  needleRect.left <= sweetRect.right;
+
+const needleCenter = needleRect.left + (needleRect.width / 2);
+const targetCenter = sweetRect.left + (sweetRect.width / 2);
+
+const distance = Math.abs(needleCenter - targetCenter);
+const targetSize = sweetRect.width;
+
 
 if (isHit) {
   const lvl = parseInt(level.innerText) || 0;
@@ -751,7 +754,7 @@ localStorage['bar1'] = bar1;
   mutateAlien();
 }, 120);
 
-  showText(result + " x" + smashStreak, result === "PERFECT" ? "#ffff00" : "#00ffcc");
+  showText(result + " x" + smashStreak, result === "PERFECT MEAL" ? "#ffff00" : "#00ffcc");
 
   pconsole.insertAdjacentHTML(
     'beforeend',
@@ -805,6 +808,7 @@ setTimeout(() => {
     //   localStorage['bar1'] = 0
     // }, 120);
   gameover(); ko.innerHTML = "OOPS!"
+  localStorage.bar1 = 0
   }
 // setTimeout(() => {
   overlay.style.opacity = "0"
@@ -906,7 +910,7 @@ cat.style.opacity = 1;
 const levelValue = Number(localStorage.getItem('highscore') || 0);
 
 if (evolve < 5){
-  localStorage['bar1'] = localStorage['bar1'] -1;
+  localStorage['bar1'] = localStorage['bar1'] -2;
 }
 
 if (levelValue >= 100 && evolve < 5) {
@@ -976,7 +980,7 @@ window.location.reload();
 const gameover = ()=> {
   clearInterval(engine);
     // if (localStorage.gameover) {return}
-    cat.style.height = 0;
+    // cat.style.height = 0;
     localStorage.setItem('gameover', 1);
     // input.style.display = 'none'; enter.style.display = 'none';
       
