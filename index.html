@@ -804,12 +804,10 @@ setTimeout(() => {
       'beforeend',
       `<span style="color:#ff3333;">MISSED MEAL // STREAK LOST</span>`
     );
-    // setTimeout(() => {
-    //   localStorage['bar1'] = 0
-    // }, 120);
-  gameover(); ko.innerHTML = "OOPS!"
-  localStorage.bar1 = 0
-  }
+    setTimeout(() => {
+    gameover(); ko.innerHTML = "OOPS!"
+    localStorage.bar1 = 0
+  }, 110);}
 // setTimeout(() => {
   overlay.style.opacity = "0"
     ko.style.scale = "1";
