@@ -65,7 +65,7 @@ V 10
         .level-feed{
             /* position: fixed;top:90px;left:50%;translate:-50%; */
             font-size: clamp(0.9em, 2vw, 1.2em);}
-        #cat-emoji{animation: cloud 2s alternate ease-in-out infinite;position: absolute;top:-20%;
+        #cat-emoji{animation: cloud 2s alternate ease-in-out infinite;position: absolute;top:100%;
     left: 0%;font-size: 2em;text-shadow: 0px 1px 2px var(--main-color2);transition: all 2s;} 
     #cat-crown{position: absolute;right: 0;top: 0;font-size: 2.5em;text-shadow: 1px 2px 4px var(--main-color2);animation: cloud 7s alternate ease-in-out infinite;} 
         .logo{width:50px;height:50px;background:#311238; margin: 0 auto 0; position:relative;top:-30px;}
@@ -1012,8 +1012,8 @@ const gameover = ()=> {
         let randEmoji = Math.floor( Math.random() *catEmoji.length);
         cat_emoji.innerHTML = catEmoji[randEmoji];
         cat_emoji.style.top="15%";cat_emoji.style.scale="2";
-    setTimeout(()=> { cat_emoji.style.top="0%";cat_emoji.style.opacity = "0";cat_emoji.style.scale="1";}, 1000)
-    setTimeout(()=> { cat_emoji.style.top="15%";cat_emoji.innerHTML = "";cat_emoji.style.opacity = "1";}, 2500)
+    setTimeout(()=> { cat_emoji.style.top="30%";cat_emoji.style.opacity = "0";cat_emoji.style.scale="1";}, 1000)
+    setTimeout(()=> { cat_emoji.style.top="45%";cat_emoji.innerHTML = "";cat_emoji.style.opacity = "1";}, 2500)
 }
 
 
