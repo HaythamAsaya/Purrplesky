@@ -60,7 +60,7 @@ V 10
             .lv-charge{font-size: clamp(0.9em, 2vw, 1.2em); position: relative;width: fit-content;}
         .lv-plus{font-size: 4em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; left:0;z-index: 5;}
         .wallet-plus{font-size: 5em; position: fixed;margin: 0;animation: cloud 600ms alternate ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal;bottom: 39%; left:25%;z-index: 5;pointer-events: none;}
-        .knock-out{animation: cloud 1000ms alternate ease-in-out infinite; position: absolute; margin: 0; padding: 0.5em; left: 50%; translate: -50%;bottom:0;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: radial-gradient(rgba(0, 255, 251, 0.282), transparent 70%);display: none;font-size: clamp(4em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;transition: all 1s cubic-bezier(0.44, -0.01, 0, 1.03);z-index:5} 
+        .knock-out{animation: cloud 1000ms alternate ease-in-out infinite; position: absolute; margin: 0; padding: 0.5em; left: 50%; translate: -50%;bottom:40%;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: radial-gradient(rgba(0, 255, 251, 0.282), transparent 70%);display: none;font-size: clamp(4em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;transition: all 1s cubic-bezier(0.44, -0.01, 0, 1.03);z-index:5} 
         .power-bar{margin:0 0 0 -10px; position: absolute;top:-15%;left:0;font-size: clamp(1.5em, 3vw, 32px);font-family: monospace;}
         .level-feed{
             /* position: fixed;top:90px;left:50%;translate:-50%; */
@@ -549,7 +549,8 @@ localStorage['power'] = Number(localStorage['power']) + powerGain;
             pconsole.innerHTML = 'Let\'s EAT!';
         }
     } 
-    if(!localStorage['gameover']){leveler()}
+        wallet.innerText = Math.floor(localStorage['power']);
+
     
 }
 
@@ -719,8 +720,8 @@ if (isHit) {
   if (smashStreak >= 10) reward *= 4;
 
   needle.style.background = "#00ffcc";
-  ko.style.transform = "scale 2";
-  lv_plus.style.scale = "2";
+  // ko.style.transform = "scale 2";
+  // lv_plus.style.scale = "2";
 
 
   localStorage['score'] = Number(localStorage['score']) + Math.floor(reward);
@@ -800,15 +801,19 @@ setTimeout(() => {
       'beforeend',
       `<span style="color:#ff3333;">MISSED MEAL // STREAK LOST</span>`
     );
-  localStorage['bar1'] = 0}
-setTimeout(() => {
+    // setTimeout(() => {
+    //   localStorage['bar1'] = 0
+    // }, 120);
+  gameover(); ko.innerHTML = "OOPS!"
+  }
+// setTimeout(() => {
   overlay.style.opacity = "0"
     ko.style.scale = "1";
     lv_plus.style.scale = "1";
     overlay.style.display = 'none';
     overlay.style.opacity = "1"
-}, 120);
-setTimeout(leveler, 200);
+// }, 0);
+setTimeout(leveler, 100);
 }
 
 
@@ -901,7 +906,7 @@ cat.style.opacity = 1;
 const levelValue = Number(localStorage.getItem('highscore') || 0);
 
 if (evolve < 5){
-  localStorage['bar1'] = localStorage['bar1'] -0.5;
+  localStorage['bar1'] = localStorage['bar1'] -1;
 }
 
 if (levelValue >= 100 && evolve < 5) {
