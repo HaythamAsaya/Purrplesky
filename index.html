@@ -637,7 +637,7 @@ function cash() {
 // Instead of Math.max, we use an inverse curve. 
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
-const baseSpeed = Math.max(1.5, 2.2 - (lvl * 0.001)); 
+const baseSpeed = Math.max(1.8, 2.2 - (lvl * 0.0001)); 
     const randomVariation = (Math.random() * 0.1) - 0.05;
     const finalSpeed = baseSpeed + randomVariation;
 
