@@ -52,7 +52,7 @@ V 10
             .main.omni {grid-template-rows: 1fr 3fr;
     grid-template-areas:         "navbar navbar"        "container cat"        "container cat";}
             /* header */
-        .container{width:100%;margin:0 auto;position: relative}
+        .container{width:100%;margin:0 auto;position: relative; height: 70%;}
         .profile{position:absolute; top: 30px; left:30px;z-index: 2;color: var(--main-color2);}
         a:active, a:visited, a:hover {text-decoration: none;color:var(--main-color2)}
         .username{margin: 0;font-size: clamp(1.2em, 4vw, 32px); 
@@ -60,7 +60,8 @@ V 10
             .lv-charge{font-size: clamp(0.9em, 2vw, 1.2em); position: relative;width: fit-content;}
         .lv-plus{font-size: 4em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; left:0;z-index: 5;}
         .wallet-plus{font-size: 5em; position: fixed;margin: 0;animation: cloud 600ms alternate ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal;bottom: 39%; left:25%;z-index: 5;pointer-events: none;}
-        .knock-out{animation: cloud 1000ms alternate ease-in-out infinite; position: absolute; margin: 0; padding: 0.5em; left: 50%; translate: -50%;bottom:0%;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: radial-gradient(rgba(0, 255, 251, 0.282), transparent 70%);font-size: clamp(4em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;transition: all 1s cubic-bezier(0.44, -0.01, 0, 1.03)} 
+        .knock-out{animation: cloud 1000ms alternate ease-in-out infinite; position: absolute; margin: 0; padding: 0.5em; left: 50%; translate: -50%;bottom:0%;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: var(--main-color2);border-radius: 30px; border: 3px solid var(--main-color);font-size: clamp(4em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;transition: all 0s cubic-bezier(0.44, -0.01, 0, 1.03)} 
+        .knock-out:active {filter: invert();}
         .power-bar{position: absolute;top:0;left:0;font-size: clamp(1.5em, 3vw, 32px);font-family: monospace;margin: 0;}
         .level-feed{
             /* position: fixed;top:90px;left:50%;translate:-50%; */
@@ -202,7 +203,8 @@ animation: swing 0.8s infinite alternate cubic-bezier(0.85, 0, 0.15, 1);
         .console-button{margin-left: 0px;}
         .main.omni {grid-template-columns:4fr 6fr;grid-template-rows: 1fr 3fr 3fr;
             grid-template-areas: "navbar navbar""container container""cat cat";}
-            .cats{padding:2em;}
+            .cats{padding:2em 2em 7em 2em;}
+            .container {height: 100%;}
     }
 
     .cats,
@@ -545,6 +547,9 @@ localStorage['power'] = Number(localStorage['power']) + powerGain;
 
         // --- 3. THE HOUSEKEEPING & FEEDBACK ---
         pluspower(); 
+        setTimeout(() => {
+  mutateAlien();
+}, 120);
 
         if (pconsole.innerHTML.length > 3000) {
             pconsole.innerHTML = 'Let\'s EAT!';
@@ -632,13 +637,13 @@ function cash() {
 // Instead of Math.max, we use an inverse curve. 
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
-const baseSpeed = Math.max(1.0, 2.2 - (lvl * 0.001)); 
+const baseSpeed = Math.max(1.5, 2.2 - (lvl * 0.001)); 
     const randomVariation = (Math.random() * 0.1) - 0.05;
     const finalSpeed = baseSpeed + randomVariation;
 
     // 2. MICROSCOPIC PRECISION: 
     // Starts at 50px. By level 40, it's already down to 15px (Extremely hard).
-    const width = Math.max(60, 100 - (lvl * 0.0085));
+    const width = Math.max(60, 100 - (lvl * 0.01));
 
     // Apply scaling
     sweet.style.width = width + "px";
@@ -750,9 +755,7 @@ localStorage['bar1'] = bar1;
       localStorage['power'] = Math.max(0, Number(localStorage['power']) - penalty)
 
 
-  setTimeout(() => {
-  mutateAlien();
-}, 120);
+  
 
   showText(result + " x" + smashStreak, result === "PERFECT MEAL" ? "#ffff00" : "#00ffcc");
 
@@ -768,7 +771,7 @@ localStorage['bar1'] = bar1;
 setTimeout(() => {
   
   plusflash();
-  pluspower();
+  // pluspower();
   emojiAction(); 
   
 }, 120);
