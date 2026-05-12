@@ -908,9 +908,9 @@ cat.style.opacity = 1;
 
 const levelValue = Number(localStorage.getItem('highscore') || 0);
 
-// if (evolve < 5){
-//   localStorage['bar1'] = localStorage['bar1'] -2;
-// }
+ if (evolve < 5){
+   localStorage['bar1'] = localStorage['bar1'] -2;
+}
 
 if (levelValue >= 100 && evolve < 5) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien evolved to Omni! ✨</span>');
