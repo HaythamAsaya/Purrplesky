@@ -777,13 +777,13 @@ setTimeout(() => {
 }, 120);
   
 
-} else if (evolve >= 5) {
+} else {
   needle.style.background = "#ff3333";
 
-  const missDistance = Math.min(
-    Math.abs(needleLeft - start),
-    Math.abs(needleLeft - end)
-  );
+  // const missDistance = Math.min(
+  //   Math.abs(needleLeft - start),
+  //   Math.abs(needleLeft - end)
+  // );
 
   let penalty = 15;
   localStorage['bar1'] = localStorage['bar1'] - 20;
@@ -803,14 +803,7 @@ setTimeout(() => {
 
     
   }
-} else {pconsole.insertAdjacentHTML(
-      'beforeend',
-      `<span style="color:#ff3333;">MISSED MEAL // STREAK LOST</span>`
-    );
-    setTimeout(() => {
-    gameover(); ko.innerHTML = "OOPS!"
-    localStorage.bar1 = 0
-  }, 110);}
+} 
 // setTimeout(() => {
   overlay.style.opacity = "0"
     ko.style.scale = "1";
@@ -874,10 +867,11 @@ if(!localStorage['username']) {   input.focus();
 
         wallet.innerText = Math.floor(localStorage['power']);
         var bar1_percentage = Number(localStorage.getItem('bar1'));
-        if(bar1_percentage >= 0){
+        if(bar1_percentage > 0){
         bar1.style.width = bar1_percentage + '%';
-    } else {bar1.style.width = '0%'}
-    if(bar1_percentage <= 0 && localStorage['username']){gameover(); ko.innerHTML = "OOPS!"}
+    } else {bar1.style.width = '0%';
+gameover(); ko.innerHTML = "OOPS!"
+    }
           level.innerHTML = Math.round(Number(localStorage['level']) + Number(localStorage['score'] / 1000));
           
 
