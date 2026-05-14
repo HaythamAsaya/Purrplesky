@@ -519,8 +519,9 @@ function power() {
             // End the jackpot after 3 seconds
             setTimeout(() => { 
                 isCritical = false; 
-                pconsole.insertAdjacentHTML('beforeend', `<span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`);;
-                wallet_plus.style.scale = "1"
+    if (!localStorage.gameover){
+                pconsole.insertAdjacentHTML('beforeend', `<span style="color: #00ff00;">:: CRITICAL_OVER // RESYNCING...</span>`);}
+                // wallet_plus.style.scale = "1"
             }, 3000);
         }
 
@@ -603,7 +604,8 @@ function activateFever() {
   feverTimer = setTimeout(() => {
     fever = false;
     document.body.classList.remove("fever");
-    pconsole.insertAdjacentHTML('beforeend', `<span style="color: #00ff00;">:: FEVER_OVER // RESYNCING...</span>`);;
+    if (!localStorage.gameover){
+    pconsole.insertAdjacentHTML('beforeend', `<span style="color: #00ff00;">:: FEVER_OVER // RESYNCING...</span>`);}
   }, 20000);
 }
 
@@ -907,7 +909,7 @@ cat.style.opacity = 1;
 const levelValue = Number(localStorage.getItem('highscore') || 0);
 
  if (evolve < 5){
-   localStorage['bar1'] = localStorage['bar1'] -2;
+   localStorage['bar1'] = localStorage['bar1'] -3;
 }
 
 if (levelValue >= 100 && evolve < 5) {
