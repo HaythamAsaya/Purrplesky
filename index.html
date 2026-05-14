@@ -60,9 +60,10 @@ V 10
             .lv-charge{font-size: clamp(0.9em, 2vw, 1.2em); position: relative;width: fit-content;}
         .lv-plus{font-size: 4em; position: absolute;margin: 0;animation: cloud 500ms alternate-reverse ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal; top: 150%; left:0;z-index: 5;}
         .wallet-plus{font-size: 5em; position: fixed;margin: 0;animation: cloud 600ms alternate ease-in-out infinite;opacity: 0;transition:all 500ms;line-height: 0.5;font-style: normal;bottom: 39%; left:25%;z-index: 5;pointer-events: none;}
-        .knock-out{animation: cloud 1000ms alternate ease-in-out infinite; position: absolute; margin: 0; padding: 0.5em; left: 50%; translate: -50%;bottom:0%;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: var(--main-color2);border-radius: 30px; border: 3px solid var(--main-color);font-size: clamp(4em, 9vw, 62px);text-shadow: -1px -1px 0 var(--main-color), 1px -1px 0 var(--main-color), -1px 1px 0 var(--main-color), 1px 1px 0 var(--main-color);z-index: 6;transition: all 0s cubic-bezier(0.44, -0.01, 0, 1.03)} 
-        .knock-out:active {filter: invert();}
-        .power-bar{position: absolute;top:0;left:0;font-size: clamp(1.5em, 3vw, 32px);font-family: monospace;margin: 0;}
+        .wallet{display: none;}
+        .knock-out{animation: cloud 3000ms alternate ease-in-out infinite; position: absolute; margin-bottom: 0.2em; padding: 0.4em; left: 50%; translate: -50%;bottom:0%;font-weight: 900; font-style: italic;  line-height: 1; text-align: center; background: var(--main-color);border-radius: 30px; font-size: clamp(4em, 9vw, 62px);z-index: 6;transition: all 0s cubic-bezier(0.44, -0.01, 0, 1.03)} 
+        .knock-out:active, .knock-out:focus {filter: invert();}
+        .power-bar{position: absolute;top:0;left:0;font-size: clamp(1em, 3vw, 25px);font-family: monospace;margin: 0;}
         .level-feed{
             /* position: fixed;top:90px;left:50%;translate:-50%; */
             font-size: clamp(0.9em, 2vw, 1.2em);}
@@ -311,13 +312,13 @@ body.fever {
 </svg>
 <main class="main" id="main"> 
     <div class="navbar" style="grid-area:navbar">
-    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>💾 Game progress is saved automatically on your device.</li><li>Your score and best streak are displayed in the top-left corner of the screen.</li><li>Charge and FEED! Get higher streaks to evolve your alien!</li><li>Your alien will feel lonely and hungry if you leave for a long time.</li><li>Tap on the clouds for more beautiful colors!</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Alien ranks</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">STREAK_00 - Go<br>STREAK_20 - Go+<br>STREAK_40 - Ruff<br>STREAK_60 - Ruff+<br>STREAK_80 - Super<br>STREAK_100 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.75em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
+    <details class="menu"><details style="padding:6em 2.2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>How to play</strong></summary><ul style="text-align: left;padding:0"><li>💾 Game progress is saved automatically on your device.</li><li>Feed the alien, and get higher streaks to evolve it before health runs low.</li></ul></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary style="padding:.5em; cursor: pointer"><strong>Alien ranks</strong></summary><div style="text-align: left;margin-inline: auto;width: fit-content;">STREAK_00 - Go<br>STREAK_20 - Go+<br>STREAK_40 - Ruff<br>STREAK_60 - Ruff+<br>STREAK_80 - Super<br>STREAK_100 - Omni</div></details><details style="padding:0 2em 2em;margin:0 auto;width:100%;max-width: 400px;"><summary class="reset" style="padding:.5em; cursor: pointer"><strong>↺ Reset Purrple Sky</strong></summary><span style="font-size:small;">Your data and progress will be deleted!</span><br><br>Are you sure?<br><div style="cursor:pointer" onclick="localStorage.clear();location.reload();"><p style="padding: 0.75em 1em;background: var(--main-color2);color: var(--main-color);width: fit-content;margin: 5px auto 0;border-radius: 50%;">↺</p></div></details><div id="developer">Developed by:<br><strong>Telegram</strong> Rdslayr<br><strong>Snapchat</strong> R3dslayer</a>
         <p style="font-size:X-small;">V 10</p></div><summary> <div class="menu-icon"><svg viewBox="0 0 61 41" preserveAspectRatio="none"><style type="text/css">
 	.st0{fill:none;stroke:var(--main-color2);stroke-width:5;stroke-miterlimit:10;}</style><g>
 	<line class="st0" x1="0" y1="2.5" x2="61" y2="2.5"/>
 	<line class="st0" x1="0" y1="20.5" x2="61" y2="20.5"/>
     <line class="st0" x1="0" y1="38.5" x2="61" y2="38.5"/></g></svg></div></summary></details>
-    <div class="profile"><div class="lv-charge"><p class="bar-text username">Username</p><p style="margin:5px 0; position: relative">Score<span class="level" style="padding-left: 7px;">0</span><span class="lv-plus">➕</span><br><span class="level-feed"></span></p></div></div><div class="logo"><div style="cursor:pointer" onclick="generateAndApplyRandomColors()"><div class="cloud-one"><svg viewBox="0 0 129.7 57.8">
+    <div class="profile"><div class="lv-charge"><p class="bar-text username">Username</p><p style="margin:5px 0; position: relative">Score<span class="level" style="padding-left: 7px;">0</span><span class="lv-plus">➕</span><br></p></div></div><div class="logo"><div style="cursor:pointer" onclick="generateAndApplyRandomColors()"><div class="cloud-one"><svg viewBox="0 0 129.7 57.8">
     <style type="text/css">.st{fill:#FFFFFF;}</style><path class="st" d="M129.7,57.8c0-1.9-0.1-3.8-0.1-5.7c0-4.5-2-8.1-5.2-11.1c-2.7-2.5-5.7-4.2-9.4-4.4c-3.3-0.2-6.6-0.3-9.9-0.4
         c-1.6-0.1-3.3,0-5,0c0-1.3,0-2.3,0-3.4c-0.1-2.8-0.3-5.5-1.6-8.1c-1.8-3.7-4.3-6.5-8.6-7.1c-2.6-0.4-5.1-0.1-7.6,0.7 c-2.5,0.8-4.4,2.4-6.6,3.8c-0.3,0.2-0.6,0.4-1,0.6c-0.3-0.8-0.6-1.4-0.8-2c-1.3-3.3-2.6-6.6-4.8-9.5c-8-10.7-21.8-14.2-33.9-8.7 c-10.3,4.7-16.8,15.6-16,26.3c0.2,2.4,0.5,4.7,0.8,7.2c-1.9,0.2-3.7,0.3-5.5,0.7c-7,1.4-11.8,5.5-13.8,12.4C0,52-0.1,54.9,0.1,57.8 H129.7z"/></svg></div>
         <div class="cloud-two"><svg viewBox="0 0 129.7 57.8"><style type="text/css"></style><path class="st" d="M129.7,57.8c0-1.9-0.1-3.8-0.1-5.7c0-4.5-2-8.1-5.2-11.1c-2.7-2.5-5.7-4.2-9.4-4.4c-3.3-0.2-6.6-0.3-9.9-0.4 c-1.6-0.1-3.3,0-5,0c0-1.3,0-2.3,0-3.4c-0.1-2.8-0.3-5.5-1.6-8.1c-1.8-3.7-4.3-6.5-8.6-7.1c-2.6-0.4-5.1-0.1-7.6,0.7c-2.5,0.8-4.4,2.4-6.6,3.8c-0.3,0.2-0.6,0.4-1,0.6c-0.3-0.8-0.6-1.4-0.8-2c-1.3-3.3-2.6-6.6-4.8-9.5c-8-10.7-21.8-14.2-33.9-8.7 c-10.3,4.7-16.8,15.6-16,26.3c0.2,2.4,0.5,4.7,0.8,7.2c-1.9,0.2-3.7,0.3-5.5,0.7c-7,1.4-11.8,5.5-13.8,12.4C0,52-0.1,54.9,0.1,57.8 H129.7z"/></svg></div></div></div>
@@ -335,7 +336,7 @@ body.fever {
 </div>
       
 <div class="cat" style="grid-area:cat">
-    <p class="power-bar">⚡<span class="wallet">0</span><span class="wallet-plus">⚡</span></p>
+    <p class="power-bar">Streak<br>🔥<span class="level-feed"></span><span class="wallet">0</span><span class="wallet-plus">⚡</span></p>
     <svg class="cats" id="cat1-svg" viewBox="0 0 174.77 147.63">
       <path class="cat1-color" d="M167.29,36.04l-40.73-25.06c-22.95-14.12-51.76-14.65-75.21-1.38L7.98,34.13c-4.93,2.79-7.98,8.02-7.98,13.68v26.08c2.56.35,4.53,2.35,4.53,4.79s-1.97,4.43-4.53,4.79v14.71c0,5.5,2.87,10.6,7.58,13.44l41.14,24.92c24.9,15.08,56.2,14.77,80.79-.82l37.97-24.06c4.55-2.88,7.3-7.89,7.3-13.28v-48.95c0-5.46-2.83-10.53-7.48-13.39ZM34.81,104.28c-.2,1.15-.82,1.94-1.64,2.27l-6.42,3.67-4.16-9.28h.01c-.57-1.06-.83-2.32-.63-3.47.37-2.08,2.1-3,3.87-2.06s2.91,3.39,2.55,5.47c.37-2.08,2.1-3,3.87-2.06,1.77.94,2.91,3.39,2.55,5.47ZM71.14,115.07c-4.14,0-7.5-2.33-7.5-5.2s3.36-5.2,7.5-5.2,7.5,2.33,7.5,5.2-3.36,5.2-7.5,5.2Z"/>
 </svg>
@@ -624,10 +625,10 @@ function cash() {
     const pwr = Number(localStorage['power']);
 
     
-    if (pwr < 15) {
-        pconsole.insertAdjacentHTML('beforeend', 'Insufficient Power (15 required).<br>');
-        return;
-    }
+    // if (pwr < 15) {
+    //     pconsole.insertAdjacentHTML('beforeend', 'Insufficient Power (15 required).<br>');
+    //     return;
+    // }
 
     // --- ELITE DIFFICULTY SCALING ---
     
@@ -637,7 +638,7 @@ function cash() {
 // Instead of Math.max, we use an inverse curve. 
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
-const baseSpeed = Math.max(1.8, 2.2 - (lvl * 0.0001)); 
+const baseSpeed = Math.max(1.6, 2 - (lvl * 0.0001)); 
     const randomVariation = (Math.random() * 0.1) - 0.05;
     const finalSpeed = baseSpeed + randomVariation;
 
@@ -706,7 +707,7 @@ if (isHit) {
           const savedHighscore = Number(localStorage.getItem("highscore")) || 0;
     if (smashStreak > savedHighscore) {
   localStorage.setItem("highscore", smashStreak);
-  levelFeed.innerHTML = `Streak 🔥 ${smashStreak}`;
+  levelFeed.innerHTML = `${smashStreak}`;
 }
 
   let result = "SNACK";
@@ -733,7 +734,7 @@ if (isHit) {
 
 
   localStorage['score'] = Number(localStorage['score']) + Math.floor(reward);
-  localStorage['power'] = (Number(localStorage['power']) + powerBonus);
+  // localStorage['power'] = (Number(localStorage['power']) + powerBonus);
   let bar1 = Number(localStorage['bar1']) || 0;
 
 if (smashStreak >= 10) {
@@ -751,8 +752,8 @@ if (bar1 > 100) {
 }
 
 localStorage['bar1'] = bar1;
-  let penalty = 15;
-      localStorage['power'] = Math.max(0, Number(localStorage['power']) - penalty)
+  // let penalty = 15;
+  //     localStorage['power'] = Math.max(0, Number(localStorage['power']) - penalty)
 
 
   
@@ -792,7 +793,7 @@ setTimeout(() => {
   localStorage.setItem("smashStreak", smashStreak);
 
   if (!localStorage['winner']) {
-    localStorage['power'] = Math.max(0, Number(localStorage['power']) - penalty)
+    // localStorage['power'] = Math.max(0, Number(localStorage['power']) - penalty)
 
     showText(penalty === 5 ? "NEAR MISS" : "MISS", "#ff3333");
 
@@ -843,7 +844,7 @@ if(!localStorage['username']) {   input.focus();
           if(!localStorage['gameover'] && !localStorage['winner']){
     let magicAnswers = ['🤖 Hello ', '🤖 Hi ', '🤖 Welcome back ', '🤖 Yo ', '🤖 It\'s '];
     let randAnswer = Math.floor( Math.random() *magicAnswers.length)
-    pconsole.insertAdjacentHTML('beforeend', magicAnswers[randAnswer] + localStorage.getItem('username') + ".<br>Charge and FEED!<br>");}
+    pconsole.insertAdjacentHTML('beforeend', magicAnswers[randAnswer] + localStorage.getItem('username') + ".<br>Feed the alien!<br>");}
 }
     if (localStorage['bg_color']){
         document.documentElement.style.setProperty('--main-color', localStorage.getItem('bg_color'))}
@@ -880,7 +881,7 @@ gameover(); ko.innerHTML = "OOPS!"
     evo_el.innerHTML = evo;
     let savedHighscore = Number(localStorage.getItem("highscore")) || 0;
     if (localStorage['highscore'] > 1){
-    levelFeed.innerHTML = `Streak 🔥 ${savedHighscore}`;}
+    levelFeed.innerHTML = `${savedHighscore}`;}
     
     
 
@@ -1072,7 +1073,7 @@ pconsole.append(document.createTextNode(input.value));
             username.textContent = new_username;
             pconsole.insertAdjacentHTML('beforeend', '<br>Username updated.<br>');
         if(!localStorage['username']){
-        pconsole.insertAdjacentHTML('beforeend', '<br>🤖 You found a hangry alien.<br>Tap on it several times to charge then feed!');
+        pconsole.insertAdjacentHTML('beforeend', '<br>🤖 You found a hangry alien.<br>Press on the feed button!');
             form.classList.toggle("active");
         }
         localStorage.setItem('username', new_username);
