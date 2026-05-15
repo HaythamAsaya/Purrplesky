@@ -640,7 +640,11 @@ function cash() {
 // Instead of Math.max, we use an inverse curve. 
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
-const baseSpeed = Math.max(1.6, 2 - (lvl * 0.0001)); 
+// const baseSpeed = Math.max(1.6, 2 - (lvl * 0.0001)); 
+const minSpeed = Math.max(1.2, 1.8 - lvl * 0.00005);
+const maxSpeed = Math.max(1.6, 2.2 - lvl * 0.00002);
+
+const baseSpeed = minSpeed + Math.random() * (maxSpeed - minSpeed);
     const randomVariation = (Math.random() * 0.1) - 0.05;
     const finalSpeed = baseSpeed + randomVariation;
 
@@ -827,7 +831,7 @@ cat.addEventListener("pointerdown", () => {
   }
 });
 
-      document.querySelector('.knock-out').addEventListener("pointerdown", ()=>{if(!localStorage['gameover'] && localStorage['username']){cash();}})
+      ko.addEventListener("pointerdown", ()=>{if(!localStorage['gameover'] && localStorage['username']){cash();}})
               
 // localstorage
 if(!localStorage['username']) {   input.focus();
@@ -873,7 +877,8 @@ if(!localStorage['username']) {   input.focus();
         if(bar1_percentage > 0){
         bar1.style.width = bar1_percentage + '%';
     } else {bar1.style.width = '0%';
-gameover(); ko.innerHTML = "OOPS!"
+gameover(); ko.innerHTML = "RETRY!";
+ko.addEventListener("pointerdown", ()=>{restartGame()})
     }
           level.innerHTML = Math.round(Number(localStorage['level']) + Number(localStorage['score'] / 1000));
           
@@ -908,9 +913,9 @@ cat.style.opacity = 1;
 
 const levelValue = Number(localStorage.getItem('highscore') || 0);
 
- if (evolve < 5){
+
    localStorage['bar1'] = localStorage['bar1'] -3;
-}
+
 
 if (levelValue >= 100 && evolve < 5) {
   pconsole.insertAdjacentHTML('beforeend', '<span style="color: #ffff00; font-weight: bold; text-shadow: 0 0 10px #ff0;">✨ Alien evolved to Omni! ✨</span>');
@@ -983,7 +988,7 @@ const gameover = ()=> {
     localStorage.setItem('gameover', 1);
     // input.style.display = 'none'; enter.style.display = 'none';
       
-      pconsole.insertAdjacentHTML('beforeend', '<br>BACK TO THE VOID!<div style="cursor:pointer; " onclick="restartGame()"><p style="padding: 0.5em 1em;color: var(--main-color);width: 100%;margin-inline:auto;border: 2px solid var(--main-color);text-align: center;">Restart run</p></div>');
+      pconsole.insertAdjacentHTML('beforeend', '<br>BACK TO THE VOID!');
     
 }
 
