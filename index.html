@@ -171,7 +171,7 @@ V 10
     width: 300px; height: 300px; background: var(--main-color); position: relative; 
     /* border: 4px solid var(--main-color2); */
     border-radius: 50%; overflow: hidden;
-    animation: cloud 2s alternate ease-in-out infinite;
+    animation: cloud 4s alternate ease-in-out infinite;
     scale:2;cursor: crosshair; 
 }
 
@@ -641,10 +641,7 @@ function cash() {
 // It will get closer and closer to 0.1s but never quite reach it.
 // At Level 100: ~0.25s | At Level 500: ~0.15s | At Level 1000: ~0.11s
 // const baseSpeed = Math.max(1.6, 2 - (lvl * 0.0001)); 
-const minSpeed = Math.max(1.2, 1.8 - lvl * 0.00005);
-const maxSpeed = Math.max(1.6, 2.2 - lvl * 0.00002);
-
-const baseSpeed = minSpeed + Math.random() * (maxSpeed - minSpeed);
+const baseSpeed = 1.6 + Math.random() * 0.4;
     const randomVariation = (Math.random() * 0.1) - 0.05;
     const finalSpeed = baseSpeed + randomVariation;
 
@@ -793,7 +790,7 @@ setTimeout(() => {
   // );
 
   let penalty = 15;
-  localStorage['bar1'] = localStorage['bar1'] - 20;
+  localStorage['bar1'] = localStorage['bar1'] - 30;
 
   smashStreak = 0;
   localStorage.setItem("smashStreak", smashStreak);
@@ -818,7 +815,7 @@ setTimeout(() => {
     overlay.style.display = 'none';
     overlay.style.opacity = "1"
 // }, 0);
-setTimeout(leveler, 100);
+// setTimeout(leveler, 100);
 }
 
 
